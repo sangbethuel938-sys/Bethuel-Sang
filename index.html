@@ -182,12 +182,7 @@ dl.facts{grid-template-columns:1fr 1fr}dl.facts div:nth-child(2){border-right:0}
 </main>
 </div>
 
-<script>
-window.PORTFOLIO_CONFIG = {
-  url: "https://ckszylkbhafwtyycprlv.supabase.co",
-  key: "sb_publishable_3BQC4UnMu4X0yQGl3OioUw_aSdlixn1"
-};
-</script>
+<script src="config.js"></script>
 <script>
 let projects=[
 {t:"Tea Auction Power BI Dashboard",c:"Business Intelligence",d:"Interactive dashboard for analysing tea auction performance, pricing trends, volumes, buyer activity and key market indicators.",tools:["Power BI","Power Query","Excel"],ch:"Auction and market data needed to be consolidated and presented so management could use it quickly.",s:"Built a repeatable Power BI reporting workflow with cleaned and transformed auction data.",i:"Better visibility of auction performance and faster interpretation of pricing and market trends.",link:"https://app.powerbi.com/groups/me/reports/fb294c02-d7da-4a86-8c39-00805b5a7adf/aa1b40e6591389ee7c67?experience=power-bi"},
@@ -252,8 +247,8 @@ const link=(u,l)=>u?`<a href="${esc(u)}" target="_blank" rel="noopener">${l}</a>
 function renderProfile(){
  const p=profile;
  document.title=(p.name||"Portfolio")+" | Business & Data Analyst";
- $("pName").textContent=p.name\vert{}\vert{}"";$("pBrand").textContent=p.name||"";
- $("pLead").textContent=p.hero_title\vert{}\vert{}"";$("pSummary").textContent=p.summary||"";
+ $("pName").textContent=p.name||"";$("pBrand").textContent=p.name||"";
+ $("pLead").textContent=p.hero_title||"";$("pSummary").textContent=p.summary||"";
  if(/^https?:/.test(p.profile_image||""))$("pImg").src=p.profile_image;
  $("cAvail").textContent=p.availability||"";
  const em=$("cEmail");em.textContent=p.email||"";em.href=p.email?"mailto:"+p.email:"#";
