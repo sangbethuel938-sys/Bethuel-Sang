@@ -7,6 +7,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<!-- Supabase JS Client -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 :root{
   --primary:#0f172a;
@@ -332,27 +334,31 @@ h1 span{color:var(--accent)}
       <div>
         <div class="section-tag" style="color:#2dd4bf">Management Portal</div>
         <h2>Portfolio Admin Dashboard</h2>
-        <p>Edit your profile info and upload project screenshots directly from your computer.</p>
+        <p>Edit your profile info and upload project screenshots. Syncs directly to Supabase.</p>
       </div>
       <a class="btn outline" href="#home" style="color:white;border-color:#334155">← Back to Portfolio</a>
     </div>
 
     <!-- Login Box -->
     <div id="adminLoginBox" class="admin-card">
-      <h3>Admin Sign In</h3>
-      <p style="color:#94a3b8;font-size:0.9rem;margin-bottom:15px">Default password: <code>admin123</code></p>
+      <h3>Supabase Admin Sign In</h3>
+      <p style="color:#94a3b8;font-size:0.9rem;margin-bottom:15px">Sign in with your Supabase account email and password.</p>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" id="adminEmailInput" placeholder="sangbethuel938@gmail.com">
+      </div>
       <div class="form-group">
         <label>Password</label>
         <input type="password" id="adminPassInput" placeholder="Enter password">
       </div>
       <button class="btn primary" id="loginBtn" style="background:var(--accent)">Sign In</button>
-      <p id="loginError" style="color:#ef4444;font-size:0.85rem;margin-top:10px;display:none;">Incorrect password. Try 'admin123'.</p>
+      <p id="loginError" style="color:#ef4444;font-size:0.85rem;margin-top:10px;display:none;"></p>
     </div>
 
     <!-- Workspace -->
     <div id="adminWorkspace" style="display:none;">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px">
-        <span style="color:#2dd4bf;font-weight:700">🟢 Authenticated Administrator</span>
+        <span style="color:#2dd4bf;font-weight:700">🟢 Connected via Supabase RLS</span>
         <button class="btn outline" id="logoutBtn" style="color:white;border-color:#334155">Sign Out</button>
       </div>
 
@@ -374,18 +380,13 @@ h1 span{color:var(--accent)}
           <label>Current Organization</label>
           <input type="text" id="editCompany">
         </div>
-        <button class="btn primary" id="saveProfileBtn" style="background:var(--accent)">Save Profile Changes</button>
+        <button class="btn primary" id="saveProfileBtn" style="background:var(--accent)">Save Profile to Supabase</button>
       </div>
 
       <div class="admin-card">
         <h3>Manage Projects & Upload Screenshots</h3>
         <div id="adminProjectsList"></div>
         <button class="btn outline" id="addProjectBtn" style="margin-top:10px;color:white;border-color:#334155">+ Add New Project</button>
-      </div>
-
-      <div class="admin-card">
-        <h3>Data Control</h3>
-        <button class="btn danger" id="resetDataBtn">Reset to Default Data</button>
       </div>
     </div>
   </div>
@@ -397,6 +398,11 @@ h1 span{color:var(--accent)}
 <div class="admin-bar"><a href="#admin">⚙ Administrator Login & Edit Panel</a></div>
 
 <script>
+// ---------- Supabase Configuration ----------
+const SUPABASE_URL = "https://ckszylkbhafwtyycprlv.supabase.co";
+const SUPABASE_KEY = "sb_publishable_3BQC4UnMu4X0yQGl3OioUw_aSdlixn1";
+const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
 const defaultData = {
   profile: {
     lead: "Turning data, trade intelligence and business processes into better decisions.",
@@ -410,263 +416,4 @@ const defaultData = {
     {t:'EATTA Sports Day QR Registration', c:'Automation', icon:'⌗', img:'', d:'QR-enabled registration and verification for participant tracking, attendance, teams and item distribution.', tools:['QR Codes','Excel','Digital Forms'], ch:'Manual registration and verification were slow and prone to duplication.', s:'Designed a QR-based workflow linked to structured participant records.', i:'Faster verification and more organised event administration.'},
     {t:'QR Asset Check-In / Check-Out', c:'Automation', icon:'▣', img:'', d:'Mobile QR workflow for recording asset check-in and check-out transactions.', tools:['Power Apps','QR Codes','Excel'], ch:'Asset movements needed a simple mobile tracking process.', s:'Designed a QR scanning workflow linked to structured records.', i:'Improved traceability of asset movements.'},
     {t:'Automated Email Complaint Register', c:'Automation', icon:'✉', img:'', d:'Workflow to collect complaint emails and structure them in an ISO-aligned Excel register.', tools:['Python','Gmail / IMAP','Excel'], ch:'Complaint emails required manual consolidation and tracking.', s:'Built a workflow to retrieve and structure complaint details in one register.', i:'Less repetitive entry and better complaint traceability.'},
-    {t:'Meeting Transcription Automation', c:'Automation', icon:'≋', img:'', d:'A watched-folder workflow that turns recorded meetings into text transcripts and organises files.', tools:['Python','Whisper'], ch:'Recorded meetings needed manual transcription and file handling.', s:'Created a transcription workflow using Whisper.', i:'Reduced manual transcription effort and consistent file handling.'},
-    {t:'Auction Data Quality Audit', c:'Data Analytics', icon:'✓', img:'', d:'Checks for duplicates, inconsistencies, reconciliation issues and reporting errors in auction-related data.', tools:['Excel','Power Query','Python'], ch:'Operational datasets contained duplicate and inconsistent records.', s:'Applied validation, reconciliation and duplicate-review checks.', i:'Improved reporting accuracy and data integrity.'},
-    {t:'Handwritten Document Digitization', c:'Automation', icon:'▤', img:'', d:'OCR and AI-assisted workflow converting handwritten images and PDFs into structured documents.', tools:['Python','OCR','AI Extraction'], ch:'Handwritten information was difficult to digitise and reuse.', s:'Combined OCR and AI extraction with structured output.', i:'Less manual retyping and easier access to records.'},
-    {t:'Football Match Prediction Dashboard', c:'Data Analytics', icon:'◎', img:'', d:'Streamlit dashboard using historical football data to show model-based match predictions.', tools:['Python','Streamlit','Statistics'], ch:'Historical match data needed to be structured and presented accessibly.', s:'Built a Python workflow for analysis and dashboard presentation.', i:'An end-to-end analytics project covering preparation, statistics and visualisation.'}
-  ],
-  jobs: [
-    {r:'Trade Development Assistant', o:'East African Tea Trade Association (EATTA)', p:'June 2023 – Present', b:[
-      'Analyse tea auction, pricing and market data to identify trends and commercial insights for management.',
-      'Build Power BI and Excel dashboards on auction performance, buyer activity and market trends.',
-      'Monitor regional and international tea markets and prepare market intelligence briefs and management reports.',
-      'Coordinate with producers, buyers, brokers, warehouses, packers and regulators to support trade and auction operations.'
-    ]},
-    {r:'Trade Development Representative', o:'Twiga Foods', p:'January 2020 – May 2023', b:[
-      'Supported vendor acquisition and contracting.',
-      'Maintained accurate vendor and route information in the Data Management System.',
-      'Supported adoption of the Twiga m-commerce platform and monitored order accuracy and timeliness.'
-    ]},
-    {r:'Demand Planner', o:'China Construction Third Engineering Bureau Co., Ltd.', p:'January 2017 – September 2019', b:[
-      'Forecast material requirements from project schedules and consumption trends.',
-      'Developed material plans aligned with project timelines, contributing to a 15% reduction in delays.'
-    ]}
-  ],
-  skills: {
-    'Data & Business Intelligence': ['Power BI','Microsoft Excel','Power Query','Dashboard Development','Data Analysis','Business Intelligence'],
-    'Programming & Data': ['Python','SQL','PostgreSQL','Pandas','NumPy','Data Cleaning','Statistical Analysis'],
-    'Trade & Commercial': ['Market Intelligence','Trade Development','Commercial Analysis','Business Analysis','Stakeholder Management']
-  },
-  certs: [
-    {issuer:'Moringa School', title:'Introduction to Data Science', issued:'September 2026', credential_id:'a0PQ200000XpDlCMAV', skills:['Python']},
-    {issuer:'Cisco', title:'Introduction to Cybersecurity', issued:'August 2026', credential_url:'https://www.credly.com/badges/80c9ab53-1cf8-4e9a-9a38-c3cfad61f4f8/linked_in_profile', skills:['Cybersecurity']},
-    {issuer:'Office of the Data Protection Commissioner', title:'Data Protection Workshop', issued:'August 2025', credential_id:'DP/0825-287/004', credential_url:'https://www.odpc.go.ke/wp-content/uploads/2025/10/ODPC-DP-WORKSHOP-287-EATTA.pdf', skills:['Data Protection']},
-    {issuer:'ICT Authority', title:'Data Analytics Training', issued:'July 2026', credential_id:'ICTA-1784318933-7855-45397', credential_url:'https://training.smartacademy.go.ke/certificate-verification/?certificate_id=ICTA-1784318933-7855-45397', skills:['Data Analysis']},
-    {issuer:'The Open University of Kenya', title:'Strategic Pause for Leaders', issued:'May 2026', credential_url:'https://www.linkedin.com/in/bethuel-sang/overlay/Certifications/1334580857/treasury/?profileId=ACoAADtaRHcBAI7CnG3nKfpwYNDt8BdcU1cSDnY'},
-    {issuer:'The Open University of Kenya', title:'Business Modeling for Entrepreneurs', issued:'May 2026', credential_url:'https://www.linkedin.com/in/bethuel-sang/overlay/Certifications/1235652180/treasury/?profileId=ACoAADtaRHcBAI7CnG3nKfpwYNDt8BdcU1cSDnY'},
-    {issuer:'The Open University of Kenya', title:'Mental Health Awareness', issued:'May 2026', credential_url:'https://www.linkedin.com/in/bethuel-sang/overlay/Certifications/1152873046/treasury/?profileId=ACoAADtaRHcBAI7CnG3nKfpwYNDt8BdcU1cSDnY'},
-    {issuer:'SGS', title:'Quality Management Systems Internal Auditor Training Course', issued:'April 2026', credential_url:'https://learning.sgs.com/lmt/!clmscertificate.prVerify?site=sgsssc&in_region=ke&in_token=ODRBQkQxODQ5MzI4NzJGNURGNTI2QjkzRDA5MkNDOEUwMkRENjk2QTdBNUNEMjM3MjdDMzcwMDNGNTJENUFEMA=='},
-    {issuer:'Coursera', title:'Microsoft Office Specialist: Excel Certification', issued:'September 2025', credential_url:'https://coursera.org/share/a1bbc83ea9367381a3fe092997b32d91'},
-    {issuer:'Coursera', title:'Marketing Channel Benefits', issued:'September 2025', credential_url:'https://coursera.org/share/c9f3b3bc40d9ef16e18e2dc2d0f74cc5'},
-    {issuer:'Coursera', title:'Automation for Everyone: Tech Benefits Unleashed', issued:'September 2025', credential_url:'https://coursera.org/share/2d842119b0ad20953f04adb2fe3cc6de'},
-    {issuer:'Unilever', title:'Supply Chain Management Analytics', credential_url:'https://coursera.org/share/588d21d964e1a3d77bf63f020ee34de1'},
-    {issuer:'LinkedIn', title:'Career Essentials in Generative AI by Microsoft and LinkedIn', issued:'September 2025', credential_url:'https://www.linkedin.com/learning/certificates/c85b8aaf5852406769adb04f2463da0cb09a656e093a5719fae3271d60ee80f6/?trk=share_certificate'},
-    {issuer:'LinkedIn', title:'Conflict Resolution Foundations', issued:'September 2025', credential_url:'https://www.linkedin.com/learning/certificates/98f4497630fb32422bb1f4432e0197cbb62ed843a0e02ba2af6a45190ec4103c/?trk=share_certificate'},
-    {issuer:'LinkedIn', title:'Client Management and Relationships', issued:'September 2025', credential_url:'https://www.linkedin.com/learning/certificates/d3795c4c8c3ba987fc18e34ad7ba3dd7c9808538eea3268b02fd2801d677c42e/?trk=share_certificate'},
-    {issuer:'LinkedIn', title:'Key Account Management', issued:'September 2025', credential_url:'https://www.linkedin.com/learning/certificates/05b6e4a5bc89e8f8d45702dfafd546cf8c926993ec5dc30a2e0c77684cb83e79/?trk=share_certificate'},
-    {issuer:'LinkedIn', title:'Account Management: Maintaining Relationships', issued:'September 2025', credential_url:'https://www.linkedin.com/learning/certificates/6b3bc28f6121e842f81a3d3fb468f26f16028013c6b9bd00ea01d173bc71daf9/?trk=share_certificate'},
-    {issuer:'LinkedIn', title:'Using Customer Surveys to Improve Service', issued:'September 2025', credential_url:'https://www.linkedin.com/learning/certificates/244b8022d747c6c368ab82f7790e3b4ebf9a9a36b9caa5712b1bb6a10e8e1e5f/?trk=share_certificate'},
-    {issuer:'LinkedIn', title:'Creating Positive Conversations with Challenging Customers', issued:'September 2025', credential_url:'https://www.linkedin.com/learning/certificates/fec4d27ec53cce46d3246443bb3531a7c3af87a7deaf809cdcfb8d49d9876bfb/?trk=share_certificate'},
-    {issuer:'LinkedIn', title:'Developing a Service Mindset', issued:'September 2025', credential_url:'https://www.linkedin.com/learning/certificates/57cc7a814d4fc0d440216b9068fb40fcc818157499ccaa3c06bbeb76be872b55/?trk=share_certificate'},
-    {issuer:'LinkedIn', title:'Problem-Solving and Troubleshooting', issued:'September 2025', credential_url:'https://www.linkedin.com/learning/certificates/885b8f45647bd2d339acc9e24c66e439c272ccd98be7aa3ccf1049071537d377/?trk=share_certificate'},
-    {issuer:'LinkedIn', title:'Managing Teams', issued:'August 2025', credential_url:'https://www.linkedin.com/learning/certificates/ff8ad1b4a0560b659b06c51f40fa1f292ab769fe2339a2774705b5f0cce9b128/?trk=share_certificate'},
-    {issuer:'LinkedIn', title:'AI in Project Management', issued:'August 2025', credential_url:'https://www.linkedin.com/learning/certificates/01355ef15a948b0ab8d34155827aee5f22df49b4591cf9b14631414a8e129f90/?trk=share_certificate'},
-    {issuer:'Computer Pride', title:'Project Management Professional (PMP)', issued:'August 2025'},
-    {issuer:'Kenya School of Revenue Administration (KESRA)', title:'Integrated Customs Management System', issued:'April 2024', credential_id:'KESRA/040487'},
-    {issuer:'Udemy', title:'Microsoft Power BI Desktop for Business Intelligence', issued:'September 2024', credential_url:'https://www.udemy.com/certificate/UC-6c61eb4c-eaec-4e4c-86f5-06a82914339c/'}
-  ]
-};
-
-let portfolioData = JSON.parse(localStorage.getItem('bethuel_portfolio_net_v4')) || defaultData;
-function saveData() { localStorage.setItem('bethuel_portfolio_net_v4', JSON.stringify(portfolioData)); }
-
-function renderAll() {
-  document.getElementById('heroLead').textContent = portfolioData.profile.lead;
-  document.getElementById('heroIntro').textContent = portfolioData.profile.intro;
-  document.getElementById('profileRole').textContent = portfolioData.profile.role;
-  document.getElementById('profileCompany').textContent = portfolioData.profile.company;
-  document.getElementById('statProjectsCount').textContent = portfolioData.projects.length;
-
-  renderProjects('All');
-  renderJobs();
-  renderSkills();
-  renderCerts();
-}
-
-function renderProjects(filter) {
-  const grid = document.getElementById('projectGrid');
-  grid.innerHTML = '';
-  portfolioData.projects.filter(p => filter === 'All' || p.c === filter).forEach(p => {
-    const card = document.createElement('article');
-    card.className = 'card';
-    card.innerHTML = `
-      ${p.img ? `<img src="${p.img}" alt="${p.t}" class="project-img">` : ''}
-      <div class="card-top"><div class="card-icon">${p.icon || '📊'}</div><span class="card-cat">${p.c}</span></div>
-      <h3>${p.t}</h3>
-      <p>${p.d}</p>
-      <div class="pills">${p.tools.map(x => `<span class="pill">${x}</span>`).join('')}</div>
-      <details class="case">
-        <summary>View case study</summary>
-        <p><b>Challenge:</b> ${p.ch}</p>
-        <p><b>Solution:</b> ${p.s}</p>
-        <p><b>Impact:</b> ${p.i}</p>
-      </details>
-      ${p.link ? `<p style="margin:15px 0 0"><a href="${p.link}" target="_blank" style="color:var(--accent);font-weight:700">Open dashboard ↗</a></p>` : ''}
-    `;
-    grid.appendChild(card);
-  });
-}
-
-function renderJobs() {
-  document.getElementById('timeline').innerHTML = portfolioData.jobs.map(j => `
-    <article class="job">
-      <div class="job-head">
-        <div><h3>${j.r}</h3><div class="company">${j.o}</div></div>
-        <div class="period">${j.p}</div>
-      </div>
-      <ul>${j.b.map(x => `<li>${x}</li>`).join('')}</ul>
-    </article>
-  `).join('');
-}
-
-function renderSkills() {
-  document.getElementById('skillGrid').innerHTML = Object.entries(portfolioData.skills).map(([g, v]) => `
-    <article class="skill-card">
-      <h3><span class="skill-dot"></span>${g}</h3>
-      <p>${v.join(' · ')}</p>
-    </article>
-  `).join('');
-}
-
-function renderCerts() {
-  document.getElementById('certGrid').innerHTML = portfolioData.certs.map(c => `
-    <article class="cert">
-      <small>${c.issuer}</small>
-      <strong>${c.title}</strong>
-      ${c.issued ? `<span>Issued ${c.issued}</span>` : ''}
-      ${c.credential_id ? `<span>ID: ${c.credential_id}</span>` : ''}
-      ${c.credential_url ? `<a href="${c.credential_url}" target="_blank" class="cert-link">Verify credential ↗</a>` : ''}
-    </article>
-  `).join('');
-}
-
-document.getElementById('filters').addEventListener('click', e => {
-  const b = e.target.closest('button[data-filter]');
-  if (!b) return;
-  document.querySelectorAll('.filters button').forEach(x => x.classList.toggle('active', x === b));
-  renderProjects(b.dataset.filter);
-});
-
-document.getElementById('year').textContent = new Date().getFullYear();
-
-// Admin Routing & Logic
-function checkRoute() {
-  const isAdmin = window.location.hash === '#admin';
-  document.getElementById('admin').hidden = !isAdmin;
-  if (isAdmin) document.getElementById('admin').scrollIntoView();
-}
-window.addEventListener('hashchange', checkRoute);
-checkRoute();
-
-document.getElementById('loginBtn').addEventListener('click', () => {
-  if (document.getElementById('adminPassInput').value === 'admin123') {
-    document.getElementById('adminLoginBox').style.display = 'none';
-    document.getElementById('adminWorkspace').style.display = 'block';
-    loadAdmin();
-  } else {
-    document.getElementById('loginError').style.display = 'block';
-  }
-});
-
-document.getElementById('logoutBtn').addEventListener('click', () => {
-  document.getElementById('adminLoginBox').style.display = 'block';
-  document.getElementById('adminWorkspace').style.display = 'none';
-  document.getElementById('adminPassInput').value = '';
-});
-
-function loadAdmin() {
-  document.getElementById('editLead').value = portfolioData.profile.lead;
-  document.getElementById('editIntro').value = portfolioData.profile.intro;
-  document.getElementById('editRole').value = portfolioData.profile.role;
-  document.getElementById('editCompany').value = portfolioData.profile.company;
-
-  const list = document.getElementById('adminProjectsList');
-  list.innerHTML = '';
-  portfolioData.projects.forEach((p, idx) => {
-    list.innerHTML += `
-      <div class="admin-row" style="flex-direction:column;align-items:flex-start;gap:10px;">
-        <div style="width:100%;display:flex;justify-content:space-between;align-items:center">
-          <span><b>${p.t}</b></span>
-          <div>
-            <button class="btn outline" style="padding:4px 10px;font-size:0.75rem;color:white;border-color:#334155" onclick="editProj(${idx})">Edit Details</button>
-            <button class="btn danger" style="padding:4px 10px;font-size:0.75rem" onclick="delProj(${idx})">Delete</button>
-          </div>
-        </div>
-        <div style="width:100%;background:#0f172a;padding:10px;border-radius:8px">
-          <label style="font-size:0.8rem;color:#2dd4bf;display:block;margin-bottom:4px">Upload / Change Project Screenshot:</label>
-          <input type="file" accept="image/*" onchange="uploadImage(event, ${idx})" style="font-size:0.8rem;color:#cbd5e1">
-          ${p.img ? `<div style="margin-top:6px;font-size:0.75rem;color:#10b981">✓ Screenshot loaded (${Math.round(p.img.length/1024)} KB)</div>` : ''}
-        </div>
-      </div>
-    `;
-  });
-}
-
-document.getElementById('saveProfileBtn').addEventListener('click', () => {
-  portfolioData.profile.lead = document.getElementById('editLead').value;
-  portfolioData.profile.intro = document.getElementById('editIntro').value;
-  portfolioData.profile.role = document.getElementById('editRole').value;
-  portfolioData.profile.company = document.getElementById('editCompany').value;
-  saveData();
-  renderAll();
-  alert('Profile saved successfully!');
-});
-
-document.getElementById('addProjectBtn').addEventListener('click', () => {
-  const t = prompt('Project Title:');
-  if (!t) return;
-  portfolioData.projects.unshift({t, c:'Data Analytics', img:'', d:'Project description here.', tools:['Python'], ch:'Challenge', s:'Solution', i:'Impact'});
-  saveData();
-  renderAll();
-  loadAdmin();
-});
-
-window.delProj = function(idx) {
-  if (confirm('Delete project?')) {
-    portfolioData.projects.splice(idx, 1);
-    saveData();
-    renderAll();
-    loadAdmin();
-  }
-};
-
-window.editProj = function(idx) {
-  const p = portfolioData.projects[idx];
-  const t = prompt('Edit Title:', p.t);
-  if (t !== null) {
-    p.t = t;
-    p.d = prompt('Edit Description:', p.d) || p.d;
-    saveData();
-    renderAll();
-    loadAdmin();
-  }
-};
-
-window.uploadImage = function(event, idx) {
-  const file = event.target.files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = function(e) {
-    portfolioData.projects[idx].img = e.target.result;
-    saveData();
-    renderAll();
-    loadAdmin();
-    alert('Screenshot uploaded successfully!');
-  };
-  reader.readAsDataURL(file);
-};
-
-document.getElementById('resetDataBtn').addEventListener('click', () => {
-  if (confirm('Reset to default?')) {
-    localStorage.removeItem('bethuel_portfolio_net_v4');
-    portfolioData = JSON.parse(JSON.stringify(defaultData));
-    renderAll();
-    loadAdmin();
-    alert('Reset complete.');
-  }
-});
-
-renderAll();
-</script>
-</body>
-</html>
+    {t:'Meeting Transcription Automation', c:'Automation', icon:'≋', img:'', d:'A watched-folder workflow that turns recorded meetings into text transcripts and organises files.', tools
