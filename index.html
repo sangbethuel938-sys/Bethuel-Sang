@@ -104,6 +104,23 @@ main p,main li{text-align:justify;text-justify:inter-word;hyphens:auto;-webkit-h
 #adminView .shots label{font-weight:400;width:110px;font-size:.8rem;margin:0}
 #adminView .shots img{width:110px;height:70px;object-fit:cover;border-radius:6px;border:1px solid var(--line);display:block}
 @media(max-width:700px){.dims{grid-template-columns:1fr}}
+#home{padding:2rem clamp(1rem,4vw,2.5rem) 2rem!important;border-radius:18px;background:linear-gradient(135deg,#102A43,#0F5E63);background-size:cover;background-position:center}
+#home .hero h1,#home .hero .lead,#home .hero .meta,#home .hero .meta a{color:#fff}
+#home .hero .role{color:#9FE3DA}
+#home .hero img{border-color:#fff}
+#home .btn{background:#fff;color:var(--leaf-d);border-color:#fff}
+#home .btn.alt{background:transparent;color:#fff;border-color:rgba(255,255,255,.75)}
+#home .btn:hover{background:#E6EEF6;color:var(--leaf-d)}#home .btn.alt:hover{background:rgba(255,255,255,.16);color:#fff}
+.list-roman .known,.list-roman .dim ul,.list-roman .job ul{list-style:lower-roman;padding-left:2.1rem}
+.list-roman .known li,.list-roman .dim li,.list-roman .job li{padding-left:.3rem;margin:.4rem 0}
+.list-roman li::marker{color:var(--brass);font-weight:700}
+.nobullets .known,.nobullets .dim ul,.nobullets .job ul{list-style:none;padding-left:0}
+.nobullets .known li,.nobullets .dim li,.nobullets .job li{padding:.45rem 0;margin:0;border-bottom:1px solid var(--line)}
+.nobullets .known li:last-child,.nobullets .dim li:last-child,.nobullets .job li:last-child{border-bottom:0}
+#home{position:relative;overflow:hidden}
+#home>.hero,#home>.dims{position:relative;z-index:1}
+.bgl{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity 1.2s ease;z-index:0}
+@media(prefers-reduced-motion:reduce){.bgl{transition:none}}
 @media(max-width:860px){
 .shell{grid-template-columns:1fr}
 aside{position:sticky;height:auto;flex-direction:row;align-items:center;gap:.6rem;padding:.6rem 1rem;border:0;border-bottom:1px solid var(--line);background:rgba(244,247,251,.95);backdrop-filter:blur(8px);z-index:10;overflow-x:auto}
@@ -124,6 +141,7 @@ dl.facts{grid-template-columns:1fr 1fr}dl.facts div:nth-child(2){border-right:0}
 </aside>
 <main>
 <section id="home" style="padding-top:0">
+ <div class="bgl" id="bgA" aria-hidden="true"></div><div class="bgl" id="bgB" aria-hidden="true"></div>
  <div class="hero">
   <div>
    <h1 id="pName">Bethuel Sang</h1>
@@ -262,7 +280,7 @@ let edu=[
 {q:"Master of Business Administration, Strategic Management",d:"The Open University of Kenya · January 2026 to December 2027 · In progress"},
 {q:"Bachelor of Applied Statistics with Computing",d:"University of Eldoret · Mathematics and Computer Science · August 2011 to November 2015"}
 ];
-let profile={name:"Bethuel Sang",title:"Trade Development Professional & Data Analyst",positioning:"I help tea-trade and commercial teams grow trade and make better decisions, by combining stakeholder-facing trade development with data analysis in Power BI, Python, SQL and Excel.",bio:"I work where trade development and data analytics meet. As Trade Development Assistant at the East African Tea Trade Association (EATTA) in Mombasa, I support the tea trade by engaging producers, buyers, brokers, warehouses, packers and regulators, and I back that work with Power BI dashboards, auction and market analysis and management reports. Earlier, I worked in demand planning, inventory management, sales operations and vendor acquisition across construction and food supply. I hold a degree in Applied Statistics with Computing and I am completing an MBA in Strategic Management. What sets me apart is that I understand the trade relationships and I can also build the data and automation that support them.",dim1_title:"Trade Development",dim1_text:"I work with producers, buyers, brokers, warehouses, packers and regulators to make trade smoother and markets easier to access.",dim1_points:"Stakeholder engagement across the East African tea trade; Market intelligence on regional and international tea markets; Digital registration, QR verification and event systems; Vendor acquisition, retention and route growth at Twiga Foods",dim2_title:"Data & Business Analytics",dim2_text:"I turn auction, pricing and operational data into dashboards, reports and automated workflows that management can act on.",dim2_points:"Power BI and Excel dashboards on auctions, buyers and prices; Data validation, reconciliation and duplicate analysis; Python, SQL and Power Query automation; Demand forecasting and inventory analysis",known_for:"Turning messy auction and market data into clear dashboards and reports; Automating repetitive workflows with Python, Power Query and QR-based tools; Improving data quality through validation, reconciliation and duplicate checks; Building working relationships with producers, buyers, brokers and regulators",email:"sangbethuel938@gmail.com",phone:"0702733260",location:"Mombasa County, Kenya",linkedin:"https://www.linkedin.com/in/bethuel-sang",github:"",cta_text:"I’m open to conversations about business analytics, business intelligence, market intelligence and trade development roles and projects. Connect with me on LinkedIn or send me an email.",profile_image:"https://qmqhtpjdhaidjeqkehqq.supabase.co/storage/v1/object/public/portfolio-assets/Profiel.jpg",case_title:"",case_context:"",case_challenge:"",case_strategy:"",case_result:"",case_lessons:""};
+let profile={name:"Bethuel Sang",title:"Trade Development Professional & Data Analyst",positioning:"I help tea-trade and commercial teams grow trade and make better decisions, by combining stakeholder-facing trade development with data analysis in Power BI, Python, SQL and Excel.",bio:"I work where trade development and data analytics meet. As Trade Development Assistant at the East African Tea Trade Association (EATTA) in Mombasa, I support the tea trade by engaging producers, buyers, brokers, warehouses, packers and regulators, and I back that work with Power BI dashboards, auction and market analysis and management reports. Earlier, I worked in demand planning, inventory management, sales operations and vendor acquisition across construction and food supply. I hold a degree in Applied Statistics with Computing and I am completing an MBA in Strategic Management. What sets me apart is that I understand the trade relationships and I can also build the data and automation that support them.",dim1_title:"Trade Development",dim1_text:"I work with producers, buyers, brokers, warehouses, packers and regulators to make trade smoother and markets easier to access.",dim1_points:"Stakeholder engagement across the East African tea trade; Market intelligence on regional and international tea markets; Digital registration, QR verification and event systems; Vendor acquisition, retention and route growth at Twiga Foods",dim2_title:"Data & Business Analytics",dim2_text:"I turn auction, pricing and operational data into dashboards, reports and automated workflows that management can act on.",dim2_points:"Power BI and Excel dashboards on auctions, buyers and prices; Data validation, reconciliation and duplicate analysis; Python, SQL and Power Query automation; Demand forecasting and inventory analysis",known_for:"Turning messy auction and market data into clear dashboards and reports; Automating repetitive workflows with Python, Power Query and QR-based tools; Improving data quality through validation, reconciliation and duplicate checks; Building working relationships with producers, buyers, brokers and regulators",email:"sangbethuel938@gmail.com",phone:"0702733260",location:"Mombasa County, Kenya",linkedin:"https://www.linkedin.com/in/bethuel-sang",github:"",cta_text:"I’m open to conversations about business analytics, business intelligence, market intelligence and trade development roles and projects. Connect with me on LinkedIn or send me an email.",profile_image:"https://qmqhtpjdhaidjeqkehqq.supabase.co/storage/v1/object/public/portfolio-assets/Profiel.jpg",hero_background:"",hero_backgrounds:[],list_style:"Roman numerals",case_title:"",case_context:"",case_challenge:"",case_strategy:"",case_result:"",case_lessons:""};
 const $=id=>document.getElementById(id);
 const clean=s=>String(s??"").replace(/\s*\u2014\s*/g,", ").replace(/\s+\u2013\s+/g," to ").replace(/\u2013/g,"-");
 const esc=s=>clean(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
@@ -272,6 +290,19 @@ let cur="All";
 const trackOf=c=>["Market Intelligence","Trade Development"].includes(c)?"Trade development":"Data analytics";
 const imgSrc=u=>/^https?:/.test(u)?u:((window.PORTFOLIO_CONFIG||{}).url||"")+"/storage/v1/object/public/"+((window.PORTFOLIO_CONFIG||{}).bucket||"portfolio-assets")+"/"+String(u).replace(/^\//,"");
 const shotImg=(u,t,cls)=>`<a href="${esc(imgSrc(u))}" target="_blank" rel="noopener"><img ${cls?`class="${cls}" `:""}loading="lazy" src="${esc(imgSrc(u))}" alt="Screenshot of ${esc(t)}"></a>`;
+const bgList=r=>Array.isArray(r.hero_backgrounds)&&r.hero_backgrounds.length?r.hero_backgrounds:(r.hero_background?[r.hero_background]:[]);
+let bgTimer=null;
+function setBackgrounds(list){
+ clearInterval(bgTimer);
+ const A=$("bgA"),B=$("bgB"),urls=list.filter(Boolean);
+ A.style.opacity=0;B.style.opacity=0;
+ if(!urls.length)return;
+ const css=u=>`linear-gradient(rgba(16,42,67,.72),rgba(16,42,67,.72)),url("${imgSrc(u).replace(/"/g,"%22")}")`;
+ let front=A,back=B,i=0;
+ front.style.backgroundImage=css(urls[0]);front.style.opacity=1;
+ if(urls.length<2||(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches))return;
+ bgTimer=setInterval(()=>{i=(i+1)%urls.length;back.style.backgroundImage=css(urls[i]);back.style.opacity=1;front.style.opacity=0;[front,back]=[back,front];},6000);
+}
 function renderProfile(){
  const p=profile,L=(u,t)=>u?`<a href="${esc(u)}" target="_blank" rel="noopener">${t}</a>`:"";
  document.title=(p.name||"Portfolio")+(p.title?" | "+p.title.split("·")[0].trim():"");
@@ -289,6 +320,9 @@ function renderProfile(){
  const g=$("cGit");g.style.display=p.github?"":"none";if(p.github)g.href=p.github;
  const pts=t=>String(t||"").split(/;\s*|\n/).map(x=>x.trim()).filter(Boolean).map(x=>`<li>${esc(x)}</li>`).join("");
  [1,2].forEach(n=>{$("d"+n+"Title").textContent=clean(p["dim"+n+"_title"]||"");$("d"+n+"Text").textContent=clean(p["dim"+n+"_text"]||"");$("d"+n+"Points").innerHTML=pts(p["dim"+n+"_points"]);});
+ setBackgrounds(bgList(p));
+ const ls=p.list_style||"Roman numerals";
+ document.body.classList.toggle("nobullets",ls==="Clean lines");document.body.classList.toggle("list-roman",ls==="Roman numerals");
  const cs=$("casestudy");
  if(p.case_title){
   cs.style.display="";$("caseTitle").textContent="Case study: "+p.case_title;
@@ -367,7 +401,7 @@ const SCHEMA={
  education:{label:"Education",title:"qualification",sub:r=>r.detail||"",
   fields:[["qualification","Qualification"],["detail","Institution, dates, status","area"]]},
  skills:{label:"Skills"},
- profile:{label:"Profile",fields:[["name","Name"],["title","Professional title / role"],["positioning","One-sentence positioning","area"],["bio","Short bio (3 to 5 sentences)","area"],["dim1_title","Dimension 1: title (e.g. Trade Development)"],["dim1_text","Dimension 1: summary","area"],["dim1_points","Dimension 1: points (one per line)","semi"],["dim2_title","Dimension 2: title (e.g. Data & Business Analytics)"],["dim2_text","Dimension 2: summary","area"],["dim2_points","Dimension 2: points (one per line)","semi"],["known_for","What I’m known for (one strength per line)","semi"],["location","Location"],["email","Email"],["phone","Phone"],["linkedin","LinkedIn URL (https://)"],["github","GitHub / other link (https://, blank to hide)"],["profile_image","Profile image URL (https://)"],["cta_text","Call to action message","area"],["case_title","Case study: project name (leave blank to hide the section)"],["case_context","Case study: context / background","area"],["case_challenge","Case study: challenge","area"],["case_strategy","Case study: strategy and steps taken","area"],["case_result","Case study: result","area"],["case_lessons","Case study: lessons learned","area"]]}
+ profile:{label:"Profile",fields:[["name","Name"],["title","Professional title / role"],["positioning","One-sentence positioning","area"],["bio","Short bio (3 to 5 sentences)","area"],["dim1_title","Dimension 1: title (e.g. Trade Development)"],["dim1_text","Dimension 1: summary","area"],["dim1_points","Dimension 1: points (one per line)","semi"],["dim2_title","Dimension 2: title (e.g. Data & Business Analytics)"],["dim2_text","Dimension 2: summary","area"],["dim2_points","Dimension 2: points (one per line)","semi"],["known_for","What I’m known for (one strength per line)","semi"],["location","Location"],["email","Email"],["phone","Phone"],["linkedin","LinkedIn URL (https://)"],["github","GitHub / other link (https://, blank to hide)"],["profile_image","Profile image URL (https://)"],["list_style","List style for points","select",["Roman numerals","Clean lines","Bullets"]],["cta_text","Call to action message","area"],["case_title","Case study: project name (leave blank to hide the section)"],["case_context","Case study: context / background","area"],["case_challenge","Case study: challenge","area"],["case_strategy","Case study: strategy and steps taken","area"],["case_result","Case study: result","area"],["case_lessons","Case study: lessons learned","area"]]}
 };
 const data={};const seeded=new Set();let tab="projects",edit=null,user=null;
 
@@ -398,6 +432,21 @@ async function collectShots(rec){
   out.push(sb.storage.from(BUCKET).getPublicUrl(path).data.publicUrl);
  }
  rec.cover_image=out[0]||"";rec.gallery=out.slice(1);
+}
+function bgUI(rec){
+ const have=bgList(rec);
+ return `<label>Background photos</label><p class="muted" style="margin:.1rem 0 .4rem">Photos fade through in the top banner. Untick one to remove it.</p>`+
+ (have.length?`<div class="shots">${have.map(u=>`<label><img src="${esc(imgSrc(u))}" alt=""><input type="checkbox" class="bgkeep" value="${esc(u)}" checked> Keep</label>`).join("")}</div>`:"")+
+ `<label for="f_bgfile">Add background photos (PNG, JPG or WEBP, up to 5 MB each)</label><input type="file" id="f_bgfile" accept="image/png,image/jpeg,image/webp" multiple>`;
+}
+async function uploadImage(f,prefix){
+ if(!/^image\//.test(f.type))throw new Error(f.name+" is not an image");
+ if(f.size>5*1024*1024)throw new Error(f.name+" is larger than 5 MB");
+ const ext=(f.name.split(".").pop()||"jpg").toLowerCase().replace(/[^a-z0-9]/g,"")||"jpg";
+ const path=`${prefix}-${Date.now()}.${ext}`;
+ const {error}=await sb.storage.from(BUCKET).upload(path,f,{contentType:f.type});
+ if(error)throw error;
+ return sb.storage.from(BUCKET).getPublicUrl(path).data.publicUrl;
 }
 const SEEDNOTE='<p class="muted" style="margin-top:0">Showing your built-in content. Edit anything, then press Save: it is stored in Supabase from then on.</p>';
 const DEF={
@@ -447,7 +496,7 @@ function field([k,l,t,opts],v){
  return `<label for="${id}">${l}</label><input id="${id}" value="${esc(v)}">`;
 }
 function drawForm(){
- if(tab==="profile"){const rec=data.profile;$("formBox").innerHTML=SCHEMA.profile.fields.map(f=>field(f,rec[f[0]])).join("")+'<p><button type="button" id="saveProfile">Save profile</button></p>';return}
+ if(tab==="profile"){const rec=data.profile;$("formBox").innerHTML=SCHEMA.profile.fields.map(f=>field(f,rec[f[0]])).join("")+bgUI(rec)+'<p><button type="button" id="saveProfile">Save profile</button></p>';return}
  if(tab==="skills"){
   const txt=Object.entries(data.skills).map(([g,v])=>`${g}: ${v.join(", ")}`).join("\n");
   $("formBox").innerHTML=`<label for="skillsTxt">Skill groups</label><textarea id="skillsTxt" style="min-height:260px">${esc(txt)}</textarea><p><button type="button" id="saveSkills">Save skills</button></p>`;return;
@@ -483,6 +532,11 @@ $("adminView").addEventListener("click",async e=>{
  }
  if(b.id==="saveProfile"){
   const rec={...data.profile};for(const [k] of SCHEMA.profile.fields)rec[k]=$("f_"+k).value.trim();
+  const keepBg=[...document.querySelectorAll("#adminView .bgkeep")].filter(c=>c.checked).map(c=>c.value);
+  const bgFiles=[...($("f_bgfile")?$("f_bgfile").files:[])];
+  try{if(bgFiles.length)msg("Uploading background photos");for(const f of bgFiles)keepBg.push(await uploadImage(f,"site/hero-background"))}
+  catch(err){msg("Upload failed: "+(err.message||err)+". Check that you ran supabase_storage.sql.",false);return}
+  rec.hero_backgrounds=keepBg;rec.hero_background=keepBg[0]||"";
   const old=data.profile;data.profile=rec;if(await save("profile"))draw();else data.profile=old;return;
  }
  if(b.id==="saveSkills"){
