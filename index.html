@@ -1,419 +1,478 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title id="pageTitle">Bethuel Sang | Business & Data Analyst</title>
+<title>Bethuel Sang | Business & Data Analyst</title>
+<meta name="description" content="Business and data analyst in trade development and market intelligence, East African Tea Trade Association (EATTA), Mombasa.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍃</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<!-- Supabase JS Client -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{
-  --primary:#0f172a;
-  --primary-light:#1e293b;
-  --accent:#0d9488;
-  --accent-light:#f0fdfa;
-  --bg:#f8fafc;
-  --card-bg:#ffffff;
-  --text:#334155;
-  --text-muted:#64748b;
-  --border:#e2e8f0;
-  --shadow:0 10px 30px -5px rgba(15, 23, 42, 0.05), 0 0 1px 1px rgba(15, 23, 42, 0.04);
-  --radius:16px;
-}
+:root{--ink:#1F2D3D;--muted:#5F6F81;--leaf:#1B3A57;--leaf-d:#102A43;--brass:#0F766E;--paper:#F4F7FB;--card:#fff;--line:#DDE5EE;--serif:"Fraunces",Georgia,serif;--sans:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:1rem}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.65 var(--sans)}
+a{color:var(--leaf-d)}a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--brass);outline-offset:2px}
+.shell{display:grid;grid-template-columns:230px minmax(0,1fr);max-width:1180px;margin:0 auto}
+aside{position:sticky;top:0;height:100vh;padding:2.2rem 1.4rem;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:1.4rem}
+aside .brand{font:700 1.35rem/1.15 var(--serif);color:var(--leaf-d);text-decoration:none}
+aside nav{display:flex;flex-direction:column;gap:.15rem}
+aside nav a{padding:.45rem .7rem;border-radius:8px;text-decoration:none;color:var(--muted);font-weight:500}
+aside nav a:hover,aside nav a.on{background:#E6EEF6;color:var(--leaf-d)}
+aside .side-cta{margin-top:auto;font-size:.9rem;color:var(--muted)}
+main{padding:2.4rem clamp(1rem,4vw,3rem) 4rem}
+section{padding:2.6rem 0 .4rem}
+h2{font:700 clamp(1.6rem,3vw,2.2rem)/1.15 var(--serif);margin:0 0 1.2rem;color:var(--leaf-d)}
+h3{font:600 1.1rem/1.3 var(--serif);margin:0 0 .3rem}
+.muted{color:var(--muted)}
+.hero{display:grid;grid-template-columns:1fr 190px;gap:2rem;align-items:center;padding-top:.4rem}
+.hero img{width:190px;height:190px;border-radius:50%;object-fit:cover;border:4px solid #fff;box-shadow:0 8px 24px rgba(16,42,67,.18)}
+.hero h1{font:700 clamp(2.6rem,6vw,4.4rem)/1 var(--serif);letter-spacing:-.03em;margin:0 0 .6rem;color:var(--leaf-d)}
+.hero .lead{font:600 clamp(1.15rem,2.2vw,1.5rem)/1.3 var(--serif);margin:0 0 .9rem;max-width:34ch}
+.hero p{max-width:62ch;margin:.2rem 0 1rem}
+.btns{display:flex;flex-wrap:wrap;gap:.6rem}
+.btn{display:inline-block;padding:.6rem 1.1rem;border-radius:8px;border:1px solid var(--leaf);background:var(--leaf);color:#fff;text-decoration:none;font-weight:600}
+.btn.alt{background:transparent;color:var(--leaf-d)}.btn:hover{background:var(--leaf-d);color:#fff}
+dl.facts{display:grid;grid-template-columns:repeat(4,1fr);margin:2rem 0 0;border:1px solid var(--line);border-radius:10px;background:var(--card);overflow:hidden}
+dl.facts div{padding:.9rem 1rem;border-right:1px solid var(--line)}dl.facts div:last-child{border:0}
+dl.facts dt{font-size:.82rem;color:var(--brass);font-weight:600}dl.facts dd{margin:.15rem 0 0;font-weight:600;line-height:1.35}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:1.1rem}
+.card .cat{font-size:.82rem;color:var(--brass);font-weight:600}
+.pills{display:flex;flex-wrap:wrap;gap:.35rem;margin:.7rem 0}
+.pill{font-size:.78rem;padding:.12rem .55rem;border:1px solid var(--line);border-radius:99px;background:#EDF2F8;color:var(--muted)}
+details{margin-top:.6rem}summary{cursor:pointer;font-weight:600;color:var(--leaf-d)}
+details p{margin:.5rem 0 0;font-size:.94rem}
+.filters{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1rem}
+.filters button{font:inherit;font-size:.9rem;padding:.3rem .8rem;border-radius:99px;border:1px solid var(--line);background:#fff;cursor:pointer}
+.filters button.on{background:var(--leaf);color:#fff;border-color:var(--leaf)}
+.timeline{border-left:2px solid var(--line);margin-left:.4rem;padding-left:1.4rem}
+.job{position:relative;padding-bottom:1.6rem}
+.job::before{content:"";position:absolute;left:-1.9rem;top:.45rem;width:.7rem;height:.7rem;border-radius:50%;background:var(--brass)}
+.job .when{font-size:.88rem;color:var(--muted)}
+.job ul{margin:.5rem 0 0;padding-left:1.1rem}.job li{margin:.2rem 0;font-size:.95rem}
+.skills{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem}
+.skills p{margin:.3rem 0 0;font-size:.95rem}
+.cert .iss{font-size:.84rem;color:var(--muted)}.cert a{font-size:.9rem;font-weight:600}
+.more li{margin:.5rem 0}
+.contact a{font-weight:600}
+footer{margin-top:3rem;padding-top:1.2rem;border-top:1px solid var(--line);color:var(--muted);font-size:.86rem}
 
-*{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:90px}
-body{margin:0;background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased}
-
-a{color:inherit;text-decoration:none}
-button,input,textarea{font:inherit;cursor:pointer}
-
-.wrap{max-width:1200px;margin:auto;padding:0 24px}
-
-/* Topbar Navigation */
-.topbar{position:sticky;top:0;z-index:100;background:rgba(255, 255, 255, 0.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
-.nav{height:80px;display:flex;align-items:center;justify-content:flex-end}
-.links{display:flex;gap:28px;align-items:center}
-.links a{color:var(--text-muted);font-size:0.92rem;font-weight:600;transition:color 0.2s}
-.links a:hover{color:var(--accent)}
-.nav-cta{background:var(--primary);color:white;padding:10px 20px;border-radius:10px;font-weight:700;font-size:0.9rem;transition:background 0.2s}
-.nav-cta:hover{background:var(--accent)}
-
-/* Hero Section */
-.hero{padding:90px 0 60px;background:radial-gradient(circle at 90% 10%, rgba(13, 148, 136, 0.08) 0%, transparent 40%), linear-gradient(180deg, #fff 0%, var(--bg) 100%)}
-.hero-grid{display:grid;grid-template-columns:1.3fr 0.7fr;gap:50px;align-items:center}
-.badge{display:inline-flex;align-items:center;gap:8px;background:var(--accent-light);color:var(--accent);padding:6px 14px;border-radius:99px;font-size:0.8rem;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:20px;border:1px solid rgba(13,148,136,0.2)}
-.badge-dot{width:7px;height:7px;background:var(--accent);border-radius:50%}
-
-h1{font-size:clamp(2.5rem, 5vw, 4.2rem);line-height:1.05;letter-spacing:-0.04em;color:var(--primary);margin:0 0 20px}
-h1 span{color:var(--accent)}
-.lead{font-size:1.25rem;color:var(--primary-light);font-weight:600;max-width:640px;margin-bottom:16px}
-.intro{color:var(--text-muted);font-size:1.05rem;max-width:640px;margin-bottom:32px}
-.actions{display:flex;gap:14px;flex-wrap:wrap}
-
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 22px;border-radius:12px;font-weight:700;font-size:0.95rem;transition:all 0.2s;border:1px solid transparent}
-.btn.primary{background:var(--primary);color:white}
-.btn.primary:hover{background:var(--accent);transform:translateY(-2px)}
-.btn.outline{background:white;color:var(--primary);border-color:var(--border)}
-.btn.outline:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
-.btn.danger{background:#ef4444;color:white}
-.btn.danger:hover{background:#dc2626}
-
-/* Profile Glass Card */
-.profile-card{background:white;border:1px solid var(--border);border-radius:var(--radius);padding:32px;box-shadow:var(--shadow);position:relative;overflow:hidden}
-.profile-card::after{content:'';position:absolute;top:0;right:0;width:120px;height:120px;background:var(--accent-light);border-radius:0 0 0 100px;z-index:1}
-.avatar-box{width:80px;height:80px;background:linear-gradient(135deg, var(--primary), var(--accent));color:white;border-radius:20px;display:grid;place-items:center;font-size:2rem;font-weight:800;margin-bottom:24px;position:relative;z-index:2}
-.profile-card h3{margin:0 0 6px;font-size:1.25rem;color:var(--primary)}
-.profile-card p{margin:0 0 20px;color:var(--text-muted);font-size:0.9rem}
-.status-badge{display:inline-flex;align-items:center;gap:8px;background:#ecfdf5;color:#047857;padding:6px 12px;border-radius:99px;font-size:0.82rem;font-weight:700}
-.status-dot{width:6px;height:6px;background:#10b981;border-radius:50%}
-
-/* Stats Row */
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:60px}
-.stat-box{background:white;border:1px solid var(--border);border-radius:14px;padding:20px;box-shadow:var(--shadow)}
-.stat-box strong{display:block;font-size:1.5rem;color:var(--primary);letter-spacing:-0.03em}
-.stat-box span{font-size:0.85rem;color:var(--text-muted);font-weight:600}
-
-/* Sections */
-.section{padding:90px 0}
-.section.white{background:white}
-.section-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:40px;gap:20px}
-.section-tag{font-size:0.78rem;text-transform:uppercase;letter-spacing:0.12em;font-weight:800;color:var(--accent);margin-bottom:8px}
-.section h2{font-size:2.25rem;color:var(--primary);letter-spacing:-0.03em;margin:0}
-.section-head p{color:var(--text-muted);max-width:540px;margin:0}
-
-/* Filters */
-.filters{display:flex;gap:10px;margin-bottom:30px;flex-wrap:wrap}
-.filters button{background:white;border:1px solid var(--border);color:var(--text-muted);padding:8px 16px;border-radius:99px;font-weight:700;font-size:0.88rem;transition:all 0.2s}
-.filters button.active,.filters button:hover{background:var(--primary);color:white;border-color:var(--primary)}
-
-/* Projects Grid */
-.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-.card{background:white;border:1px solid var(--border);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);transition:transform 0.2s, box-shadow 0.2s;display:flex;flex-direction:column}
-.card:hover{transform:translateY(-4px);box-shadow:0 20px 40px -10px rgba(15,23,42,0.08)}
-.project-img{width:100%;height:160px;object-fit:cover;border-radius:10px;margin-bottom:16px;border:1px solid var(--border)}
-.card-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
-.card-icon{width:42px;height:42px;background:var(--accent-light);color:var(--accent);border-radius:10px;display:grid;place-items:center;font-size:1.1rem}
-.card-cat{font-size:0.75rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--accent);font-weight:800}
-.card h3{color:var(--primary);font-size:1.12rem;margin:0 0 8px}
-.card p{color:var(--text-muted);font-size:0.9rem;margin:0 0 16px;flex-grow:1}
-.pills{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px}
-.pill{background:var(--bg);border:1px solid var(--border);color:var(--text-muted);padding:3px 8px;border-radius:99px;font-size:0.72rem;font-weight:700}
-.case{border-top:1px solid var(--border);padding-top:12px}
-.case summary{color:var(--primary);font-weight:750;font-size:0.84rem;cursor:pointer}
-.case p{margin:8px 0 0;font-size:0.82rem;color:var(--text-muted)}
-
-/* Experience Timeline */
-.timeline{border-left:2px solid var(--border);margin-left:10px;padding-left:32px}
-.job{position:relative;margin-bottom:40px}
-.job:last-child{margin-bottom:0}
-.job::before{content:'';position:absolute;width:14px;height:14px;background:var(--accent);border:3px solid white;border-radius:50%;left:-39px;top:4px;box-shadow:0 0 0 3px var(--accent-light)}
-.job-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px}
-.job h3{color:var(--primary);font-size:1.2rem;margin:0 0 4px}
-.company{color:var(--accent);font-weight:700;font-size:0.95rem}
-.period{background:var(--accent-light);color:var(--accent);padding:4px 12px;border-radius:99px;font-size:0.78rem;font-weight:800}
-.job ul{margin:12px 0 0;padding-left:18px;color:var(--text-muted)}
-.job li{margin-bottom:6px;font-size:0.92rem}
-
-/* Skills Grid */
-.skill-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.skill-card{background:white;border:1px solid var(--border);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow)}
-.skill-card h3{color:var(--primary);font-size:1rem;margin:0 0 12px;display:flex;align-items:center;gap:8px}
-.skill-dot{width:8px;height:8px;background:var(--accent);border-radius:2px}
-.skill-card p{margin:0;color:var(--text-muted);font-size:0.9rem}
-
-/* Certifications Grid */
-.cert-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:20px}
-.cert{background:white;border:1px solid var(--border);border-radius:12px;padding:20px;box-shadow:var(--shadow);display:flex;flex-direction:column}
-.cert small{display:block;color:var(--accent);font-weight:800;font-size:0.75rem;text-transform:uppercase;margin-bottom:6px}
-.cert strong{display:block;color:var(--primary);font-size:0.95rem;margin-bottom:6px}
-.cert span{display:block;color:var(--text-muted);font-size:0.8rem;margin-bottom:4px}
-.cert-link{margin-top:auto;padding-top:10px;color:var(--accent);font-weight:700;font-size:0.82rem;display:inline-block}
-
-/* Education */
-.edu-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
-.edu-card{background:white;border:1px solid var(--border);border-radius:var(--radius);padding:28px;box-shadow:var(--shadow)}
-.edu-tag{font-size:0.75rem;text-transform:uppercase;letter-spacing:0.1em;font-weight:800;color:var(--accent);margin-bottom:6px}
-.edu-card h3{color:var(--primary);margin:0 0 8px;font-size:1.15rem}
-.edu-card p{margin:0;color:var(--text-muted);font-size:0.92rem}
-
-/* Contact Banner & Form */
-.contact-panel{background:var(--primary);color:white;border-radius:24px;padding:50px;display:grid;grid-template-columns:1.1fr 0.9fr;gap:40px;align-items:center}
-.contact-panel h2{color:white;font-size:2.3rem;margin:0 0 12px}
-.contact-panel p{color:#94a3b8;margin:0 0 24px;font-size:0.95rem}
-.contact-form{display:flex;flex-direction:column;gap:14px}
-.contact-form input, .contact-form textarea{width:100%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);color:white;padding:12px 16px;border-radius:10px;font:inherit}
-.contact-form input::placeholder, .contact-form textarea::placeholder{color:#64748b}
-.contact-form textarea{height:100px;resize:vertical}
-.contact-details{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:14px;padding:20px;margin-top:16px}
-.contact-details div{margin-bottom:10px}
-.contact-details div:last-child{margin-bottom:0}
-.contact-details span{display:inline-block;width:75px;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.08em;color:#94a3b8}
-.contact-details a,.contact-details strong{color:white;font-weight:600;font-size:0.9rem}
-
-/* Footer & Admin Bar */
-.footer{padding:30px 0;text-align:center;color:var(--text-muted);font-size:0.85rem;border-top:1px solid var(--border)}
-.admin-bar{background:var(--primary);text-align:center;padding:14px;border-top:1px solid #1e293b}
-.admin-bar a{color:#2dd4bf;font-size:0.85rem;font-weight:700}
-
-/* Admin Section */
-.admin-section{background:#090d16;color:white;border-top:4px solid var(--accent)}
-.admin-section h2{color:white}
-.admin-section p{color:#94a3b8}
-.admin-card{background:var(--primary);border:1px solid #334155;border-radius:var(--radius);padding:28px;margin-bottom:24px}
-.admin-card h3{color:white;margin-top:0;border-bottom:1px solid #334155;padding-bottom:12px}
-.form-group{margin-bottom:16px}
-.form-group label{display:block;font-weight:700;font-size:0.85rem;color:#cbd5e1;margin-bottom:6px}
-.form-group input,.form-group textarea{width:100%;background:#090d16;border:1px solid #334155;color:white;padding:12px;border-radius:10px;font:inherit}
-.form-group textarea{height:100px}
-.admin-row{display:flex;justify-content:space-between;align-items:center;background:#090d16;padding:12px 16px;border-radius:10px;border:1px solid #334155;margin-bottom:10px}
-
-@media(max-width:900px){
-  .hero-grid,.cards,.skill-grid,.cert-grid,.edu-grid,.contact-panel,.stats{grid-template-columns:1fr}
-  .links{display:none}
-}
+/* Admin (same page, shown at #admin) */
+#adminView{display:none}body.admin-mode #adminView{display:block}
+body.admin-mode main>section,body.admin-mode main>footer{display:none}
+#adminView .hide{display:none!important}
+#adminView .ahead{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;margin-bottom:1rem}
+#adminView .card{margin-bottom:1rem}
+#adminView label{display:block;font-weight:600;font-size:.9rem;margin:.7rem 0 .2rem}
+#adminView input,#adminView select,#adminView textarea{width:100%;font:inherit;padding:.5rem .6rem;border:1px solid #C3CFDC;border-radius:8px;background:#fff;color:var(--ink)}
+#adminView textarea{min-height:90px;resize:vertical}#adminView input[type=checkbox]{width:auto;margin-right:.4rem}
+#adminView button{font:inherit;font-weight:600;padding:.5rem .9rem;border-radius:8px;border:1px solid var(--leaf);background:var(--leaf);color:#fff;cursor:pointer}
+#adminView button.alt{background:#fff;color:var(--leaf-d)}#adminView button.del{background:#fff;color:#B42318;border-color:#B42318}
+#adminView button.sm{padding:.25rem .55rem;font-size:.85rem}#adminView button:disabled{opacity:.4;cursor:default}
+#adminView input:focus-visible,#adminView select:focus-visible,#adminView textarea:focus-visible{outline:3px solid var(--brass);outline-offset:2px}
+#adminView .tabs{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1rem}
+#adminView .tabs button{background:#fff;color:var(--leaf-d);border-color:var(--line)}#adminView .tabs button.on{background:var(--leaf);color:#fff;border-color:var(--leaf)}
+#adminView .row{display:flex;align-items:center;justify-content:space-between;gap:.6rem;padding:.6rem 0;border-bottom:1px solid var(--line)}#adminView .row:last-child{border:0}
+#adminView .row .t{font-weight:600}#adminView .row .s{font-size:.85rem;color:var(--muted)}#adminView .acts{display:flex;gap:.35rem;flex-shrink:0}
+#adminView #msg{position:sticky;top:3.4rem;z-index:5;padding:.6rem .9rem;border-radius:8px;margin-bottom:1rem;display:none;font-weight:600}
+#adminView #msg.ok{display:block;background:#E3F3EA;color:#145A32}#adminView #msg.err{display:block;background:#FDE7E4;color:#B42318}
+/* Text alignment */
+main p,main li{text-align:justify;text-justify:inter-word;hyphens:auto;-webkit-hyphens:auto}
+.hero .lead,.facts dd,.facts dt,.contact p,.btns,.filters,#adminView p,#adminView li,#adminView .s,#adminView .t{text-align:left;hyphens:none;-webkit-hyphens:none}
+@media(max-width:600px){main p,main li{text-align:left;hyphens:none}}
+/* Centered hero: picture first */
+.hero{display:flex;flex-direction:column;align-items:center;gap:1.1rem;text-align:center;padding-top:.4rem}
+.hero>div{display:flex;flex-direction:column;align-items:center}
+.hero img{order:-1;width:190px;height:190px}
+.hero h1{margin-bottom:.5rem}
+.hero .lead{margin:0 auto .9rem;max-width:36ch;text-align:center;hyphens:none}
+.hero p{max-width:64ch;margin:.2rem auto 1.1rem;text-align:center;hyphens:none}
+.hero .btns{justify-content:center}
+.facts dd a{text-decoration:none}.facts dd a:hover{text-decoration:underline}
+@media(max-width:860px){
+.shell{grid-template-columns:1fr}
+aside{position:sticky;height:auto;flex-direction:row;align-items:center;gap:.6rem;padding:.6rem 1rem;border:0;border-bottom:1px solid var(--line);background:rgba(244,247,251,.95);backdrop-filter:blur(8px);z-index:10;overflow-x:auto}
+aside .brand{white-space:nowrap;font-size:1.05rem}aside nav{flex-direction:row}aside nav a{white-space:nowrap}aside .side-cta{display:none}
+.hero{grid-template-columns:1fr}.hero img{order:-1;width:140px;height:140px}
+dl.facts{grid-template-columns:1fr 1fr}dl.facts div:nth-child(2){border-right:0}dl.facts div:nth-child(-n+2){border-bottom:1px solid var(--line)}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
 </head>
 <body>
-
-<header class="topbar">
-  <div class="wrap nav">
-    <nav class="links">
-      <a href="#projects">Projects</a>
-      <a href="#experience">Experience</a>
-      <a href="#skills">Skills</a>
-      <a href="#education">Education</a>
-      <a href="#contact">Contact</a>
-    </nav>
+<div class="shell">
+<aside>
+ <a class="brand" id="pBrand" href="#home">Bethuel Sang</a>
+ <nav id="nav">
+  <a href="#home">Home</a><a href="#projects">Projects</a><a href="#experience">Experience</a><a href="#skills">Skills</a><a href="#education">Education</a><a href="#contact">Contact</a>
+ </nav>
+ <div class="side-cta">Mombasa, Kenya</div>
+</aside>
+<main>
+<section id="home" style="padding-top:0">
+ <div class="hero">
+  <div>
+   <h1 id="pName">Bethuel Sang</h1>
+   <p class="lead" id="pLead">Turning data, trade intelligence and business processes into better decisions.</p>
+   <p class="muted" id="pSummary">Business &amp; Data Analyst in trade development and market intelligence. At the East African Tea Trade Association (EATTA), I analyse tea auction and market data, build Power BI dashboards and prepare management reports. Before EATTA I worked in demand planning, inventory management and sales operations. I hold a degree in Applied Statistics with Computing and I am pursuing an MBA in Strategic Management.</p>
+   <div class="btns">
+    <a class="btn" href="assets/Bethuel_Sang_Full_Professional_CV.pdf" download="Bethuel_Sang_CV.pdf">Download CV</a>
+    <a class="btn alt" data-li href="https://www.linkedin.com/in/bethuel-sang" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="btn alt" href="#skills">View my skills</a>
+    <a class="btn alt" href="#contact">Get in touch</a>
+   </div>
   </div>
-</header>
-
-<main id="home">
-  <section class="hero">
-    <div class="wrap hero-grid">
-      <div>
-        <div class="badge"><span class="badge-dot"></span> Trade · Strategy · Analytics</div>
-        <h1 id="heroName">Bethuel <span>Sang</span></h1>
-        <p class="lead" id="heroLead">Turning data, trade intelligence and business processes into better decisions.</p>
-        <p class="intro" id="heroIntro">Business and data analyst focused on tea auction performance, market intelligence and operational improvement. At EATTA, I transform auction and market data into management insights, build reporting tools and support digital process improvement.</p>
-        <div class="actions">
-          <a class="btn primary" href="#contact">Get in touch ↗</a>
-          <a class="btn outline" href="https://www.linkedin.com/in/bethuel-sang" target="_blank" rel="noopener">LinkedIn profile ↗</a>
-        </div>
-      </div>
-      <aside class="profile-card">
-        <div class="avatar-box">BS</div>
-        <h3 id="profileRole">Trade Development Assistant</h3>
-        <p id="profileCompany">East African Tea Trade Association (EATTA)</p>
-        <div class="status-badge"><span class="status-dot"></span> Open to opportunities</div>
-      </aside>
-    </div>
-    <div class="wrap stats">
-      <div class="stat-box"><strong>3+</strong><span>Core career areas</span></div>
-      <div class="stat-box"><strong id="statProjectsCount">9</strong><span>Featured projects</span></div>
-      <div class="stat-box"><strong>Power BI</strong><span>Reporting & dashboards</span></div>
-      <div class="stat-box"><strong>Mombasa</strong><span>Kenya</span></div>
-    </div>
-  </section>
-
-  <section class="section white" id="projects">
-    <div class="wrap">
-      <div class="section-head">
-        <div>
-          <div class="section-tag">Portfolio</div>
-          <h2>Projects & case studies</h2>
-        </div>
-        <p>Practical analytics, automation and trade-development work designed to make information clearer.</p>
-      </div>
-      <div class="filters" id="filters">
-        <button class="active" data-filter="All">All projects</button>
-        <button data-filter="Business Intelligence">Business intelligence</button>
-        <button data-filter="Data Analytics">Data analytics</button>
-        <button data-filter="Automation">Automation</button>
-      </div>
-      <div class="cards" id="projectGrid"></div>
-    </div>
-  </section>
-
-  <section class="section" id="experience">
-    <div class="wrap">
-      <div class="section-head">
-        <div>
-          <div class="section-tag">Career path</div>
-          <h2>Experience</h2>
-        </div>
-        <p>Trade operations and commercial experience supported by data and planning.</p>
-      </div>
-      <div class="timeline" id="timeline"></div>
-    </div>
-  </section>
-
-  <section class="section white" id="skills">
-    <div class="wrap">
-      <div class="section-head">
-        <div>
-          <div class="section-tag">Capabilities</div>
-          <h2>Skills & tools</h2>
-        </div>
-        <p>A mix of analytical capability and commercial understanding.</p>
-      </div>
-      <div class="skill-grid" id="skillGrid"></div>
-      
-      <div style="margin-top:60px">
-        <div class="section-head">
-          <div>
-            <div class="section-tag">Continuous learning</div>
-            <h2>Licenses & certifications</h2>
-          </div>
-        </div>
-        <div class="cert-grid" id="certGrid"></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="education">
-    <div class="wrap">
-      <div class="section-head">
-        <div>
-          <div class="section-tag">Academic background</div>
-          <h2>Education</h2>
-        </div>
-      </div>
-      <div class="edu-grid">
-        <article class="edu-card">
-          <div class="edu-tag">In progress</div>
-          <h3>Master of Business Administration, Strategic Management</h3>
-          <p>The Open University of Kenya · January 2026 – December 2027</p>
-        </article>
-        <article class="edu-card">
-          <div class="edu-tag">Completed</div>
-          <h3>Bachelor of Applied Statistics with Computing</h3>
-          <p>University of Eldoret · August 2011 – November 2015</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="section white" id="contact">
-    <div class="wrap">
-      <div class="contact-panel">
-        <div>
-          <div class="section-tag" style="color:#2dd4bf">Get in touch</div>
-          <h2>Let's turn insight into action.</h2>
-          <p>Send a message directly using the form, or reach out via email and phone.</p>
-          
-          <form class="contact-form" name="portfolio-contact" method="POST" data-netlify="true">
-            <input type="hidden" name="form-name" value="portfolio-contact">
-            <input type="text" name="name" placeholder="Your Name" required>
-            <input type="email" name="email" placeholder="Your Email Address" required>
-            <textarea name="message" placeholder="Your Message..." required></textarea>
-            <button type="submit" class="btn primary" style="background:var(--accent)">Send Message ↗</button>
-          </form>
-        </div>
-
-        <div>
-          <div class="contact-details">
-            <div><span>Email</span><a href="mailto:sangbethuel938@gmail.com">sangbethuel938@gmail.com</a></div>
-            <div><span>Phone</span><a href="tel:+254702733260">+254 702 733 260</a></div>
-            <div><span>Location</span><strong>Mombasa County, Kenya</strong></div>
-            <div><span>LinkedIn</span><a href="https://www.linkedin.com/in/bethuel-sang" target="_blank">linkedin.com/in/bethuel-sang ↗</a></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-</main>
-
-<!-- Admin Management Section -->
-<section id="admin" class="section admin-section" hidden>
-  <div class="wrap">
-    <div class="section-head">
-      <div>
-        <div class="section-tag" style="color:#2dd4bf">Management Portal</div>
-        <h2>Portfolio Admin Dashboard</h2>
-        <p>Edit your profile info and upload project screenshots. Syncs directly to Supabase.</p>
-      </div>
-      <a class="btn outline" href="#home" style="color:white;border-color:#334155">← Back to Portfolio</a>
-    </div>
-
-    <!-- Login Box -->
-    <div id="adminLoginBox" class="admin-card">
-      <h3>Supabase Admin Sign In</h3>
-      <p style="color:#94a3b8;font-size:0.9rem;margin-bottom:15px">Sign in with your Supabase account email and password.</p>
-      <div class="form-group">
-        <label>Email</label>
-        <input type="email" id="adminEmailInput" placeholder="sangbethuel938@gmail.com">
-      </div>
-      <div class="form-group">
-        <label>Password</label>
-        <input type="password" id="adminPassInput" placeholder="Enter password">
-      </div>
-      <button class="btn primary" id="loginBtn" style="background:var(--accent)">Sign In</button>
-      <p id="loginError" style="color:#ef4444;font-size:0.85rem;margin-top:10px;display:none;"></p>
-    </div>
-
-    <!-- Workspace -->
-    <div id="adminWorkspace" style="display:none;">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px">
-        <span style="color:#2dd4bf;font-weight:700">🟢 Connected via Supabase RLS</span>
-        <button class="btn outline" id="logoutBtn" style="color:white;border-color:#334155">Sign Out</button>
-      </div>
-
-      <div class="admin-card">
-        <h3>Edit Profile & Bio</h3>
-        <div class="form-group">
-          <label>Hero Lead Statement</label>
-          <input type="text" id="editLead">
-        </div>
-        <div class="form-group">
-          <label>Introduction Paragraph</label>
-          <textarea id="editIntro"></textarea>
-        </div>
-        <div class="form-group">
-          <label>Current Role</label>
-          <input type="text" id="editRole">
-        </div>
-        <div class="form-group">
-          <label>Current Organization</label>
-          <input type="text" id="editCompany">
-        </div>
-        <button class="btn primary" id="saveProfileBtn" style="background:var(--accent)">Save Profile to Supabase</button>
-      </div>
-
-      <div class="admin-card">
-        <h3>Manage Projects & Upload Screenshots</h3>
-        <div id="adminProjectsList"></div>
-        <button class="btn outline" id="addProjectBtn" style="margin-top:10px;color:white;border-color:#334155">+ Add New Project</button>
-      </div>
-    </div>
-  </div>
+  <img id="pImg" src="https://qmqhtpjdhaidjeqkehqq.supabase.co/storage/v1/object/public/portfolio-assets/Profiel.jpg" alt="Bethuel Sang" width="190" height="190">
+ </div>
+ <dl class="facts">
+  <div><dt>Current role</dt><dd>Trade Development Assistant, EATTA</dd></div>
+  <div><dt>Core tools</dt><dd><a href="#skills">Power BI, Python, SQL, Excel</a></dd></div>
+  <div><dt>Projects</dt><dd id="pc"></dd></div>
+  <div><dt>Certifications &amp; training</dt><dd id="cc"></dd></div>
+ </dl>
 </section>
 
-<footer class="footer">
-  <div class="wrap">© <span id="year"></span> Bethuel Sang · Business, Trade & Data Analytics</div>
-</footer>
-<div class="admin-bar"><a href="#admin">⚙ Administrator Login & Edit Panel</a></div>
+<section id="projects">
+ <h2>Projects</h2>
+ <p class="muted">Analytics, automation and trade-development work built for better decisions.</p>
+ <div class="filters" id="filters" role="group" aria-label="Filter projects by category"></div>
+ <div class="grid" id="projectGrid"></div>
+</section>
+
+<section id="experience">
+ <h2>Experience</h2>
+ <div class="timeline" id="timeline"></div>
+</section>
+
+<section id="skills">
+ <h2>Skills</h2>
+ <div class="skills" id="skillGrid"></div>
+ <h2 style="margin-top:2.4rem">Certifications &amp; training</h2>
+ <div class="grid" id="certGrid"></div>
+ <details class="more"><summary>More certifications (<span id="moreCount"></span>)</summary><ul id="moreList"></ul></details>
+</section>
+
+<section id="education">
+ <h2>Education</h2>
+ <div class="grid" id="eduGrid"></div>
+</section>
+
+<section id="contact" class="contact">
+ <h2>Contact</h2>
+ <p id="cAvail"></p>
+ <p><strong>Email</strong><br><a id="cEmail" href="#"></a></p>
+ <p><strong>Phone</strong><br><a id="cPhone" href="#"></a></p>
+ <p><strong>Location</strong><br><span id="cLoc"></span></p>
+ <div class="btns"><a class="btn" data-li href="https://www.linkedin.com/in/bethuel-sang" target="_blank" rel="noopener">LinkedIn</a> <a class="btn alt" id="cGit" style="display:none" href="#" target="_blank" rel="noopener">GitHub</a></div>
+</section>
+<div id="adminView">
+ <div class="ahead"><h2 style="margin:0">Portfolio admin</h2><div><a href="#home">Back to site</a> <button class="alt sm hide" id="out" type="button">Log out</button></div></div>
+ <div id="msg" role="status"></div>
+ <div id="login" class="card" style="max-width:420px">
+  <h3>Sign in</h3>
+  <label for="em">Email</label><input id="em" type="email" autocomplete="username">
+  <label for="pw">Password</label><input id="pw" type="password" autocomplete="current-password">
+  <p><button id="go" type="button">Sign in</button></p>
+  <p class="muted">Create this user once in Supabase: Authentication → Users → Add user.</p>
+ </div>
+ <div id="app" class="hide"><div class="tabs" id="tabs"></div><div id="list" class="card"></div><div id="formBox" class="card"></div></div>
+</div>
+<footer>© <span id="yr"></span> Bethuel Sang · Trade Development · Data Analytics · Automation · <a href="#admin">Admin</a></footer>
+</main>
+</div>
 
 <script>
-// ---------- Supabase Configuration ----------
-const SUPABASE_URL = "https://ckszylkbhafwtyycprlv.supabase.co";
-const SUPABASE_KEY = "sb_publishable_3BQC4UnMu4X0yQGl3OioUw_aSdlixn1";
-const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+window.PORTFOLIO_CONFIG = {
+  url: "https://ckszylkbhafwtyycprlv.supabase.co",
+  key: "sb_publishable_3BQC4UnMu4X0yQGl3OioUw_aSdlixn1"
+};
+</script>
+<script>
+let projects=[
+{t:"Tea Auction Power BI Dashboard",c:"Business Intelligence",d:"Interactive dashboard for analysing tea auction performance, pricing trends, volumes, buyer activity and key market indicators.",tools:["Power BI","Power Query","Excel"],ch:"Auction and market data needed to be consolidated and presented so management could use it quickly.",s:"Built a repeatable Power BI reporting workflow with cleaned and transformed auction data.",i:"Better visibility of auction performance and faster interpretation of pricing and market trends.",link:"https://app.powerbi.com/groups/me/reports/fb294c02-d7da-4a86-8c39-00805b5a7adf/aa1b40e6591389ee7c67?experience=power-bi"},
+{t:"Weekly Tea Auction & Sale Analysis",c:"Data Analytics",d:"Weekly analysis that adds later-week outlot and private-sale activity to auction results for a more complete market view.",tools:["Excel","Power Query","Power BI"],ch:"Auction-close figures did not always show the full weekly value because sales continued later in the week.",s:"Re-analysed the weekly data after the later sales period and reconciled the results.",i:"A more complete weekly view for market and management analysis."},
+{t:"EATTA Sports Day QR Registration System",c:"Automation",d:"QR-enabled registration and verification for participant tracking, attendance, team registration and item distribution.",tools:["QR Codes","Excel","Digital Forms"],ch:"Manual registration and verification were slow and prone to duplication.",s:"Designed a QR-based workflow linked to structured participant records.",i:"Faster participant verification, tracking and event administration."},
+{t:"QR Asset Check-In / Check-Out System",c:"Automation",d:"Mobile QR workflow for recording asset check-in and check-out transactions.",tools:["Power Apps","QR Codes","Excel"],ch:"Asset movements needed a simple mobile tracking process.",s:"Designed a Power Apps QR scanning workflow linked to structured records.",i:"A more traceable and practical asset movement process."},
+{t:"Automated Email Complaint Register",c:"Automation",d:"Collects forwarded complaints and structures them into an ISO-aligned Excel complaint register.",tools:["Python","Gmail/IMAP","Excel"],ch:"Complaint emails needed manual consolidation and tracking.",s:"Built a Python workflow that retrieves and structures complaint details in one register.",i:"Less repetitive data entry and better complaint traceability."},
+{t:"Meeting Transcription Automation",c:"Automation",d:"Turns recorded meetings into text transcripts and organises the finished files.",tools:["Python","Whisper"],ch:"Recorded meetings needed manual transcription and file handling.",s:"Created a watched-folder workflow using Whisper transcription.",i:"Less manual transcription effort and consistent file handling."},
+{t:"Auction Data Quality Audit",c:"Data Analytics",d:"Finds duplicates, inconsistencies, reconciliation issues and reporting errors in auction-related data.",tools:["Excel","Power Query","Python"],ch:"Operational datasets contained duplicate and inconsistent records.",s:"Applied structured validation, reconciliation and duplicate-review checks.",i:"Improved reporting accuracy and data integrity."},
+{t:"Handwritten Document Digitization System",c:"Automation",d:"OCR and AI-assisted workflow that converts handwritten images and PDFs into structured Word or Excel files.",tools:["Python","OCR","AI Extraction"],ch:"Handwritten information was hard to digitise and reuse.",s:"Built a conversion workflow combining OCR, AI extraction and structured output.",i:"Less manual retyping and easier access to handwritten records."},
+{t:"Football Match Prediction Dashboard",c:"Data Analytics",d:"Streamlit dashboard that analyses historical football data and shows model-based match predictions.",tools:["Python","Streamlit","Statistics"],ch:"Historical match data had to be collected, structured and presented in an accessible interface.",s:"Built a Python and Streamlit workflow for analysis and dashboard presentation.",i:"An end-to-end analytics project covering data preparation, statistics and visualisation."}
+];
+let jobs=[
+{r:"Trade Development Assistant",o:"East African Tea Trade Association (EATTA)",p:"June 2023 – Present",b:["Analyse tea auction, pricing and market data to find trends, performance gaps and commercial insights for management","Build Power BI and Excel dashboards on auction performance, buyer activity and market trends","Monitor regional and international tea markets and competitor activity; prepare market intelligence briefs and management reports","Coordinate with producers, buyers, brokers, warehouses, packers and regulators to support efficient trade and auction operations","Support risk identification, mitigation and compliance as Risk Champion","Use Python, Power Query and SQL to automate data processing and reporting","Support digital registration, QR verification, event-management and data-quality projects","Validate, reconcile and de-duplicate operational data to improve accuracy and integrity"]},
+{r:"Trade Development Representative",o:"Twiga Foods",p:"January 2020 – May 2023",b:["Supported vendor acquisition and contracting","Maintained accurate vendor and route information in the Data Management System","Supported adoption of the Twiga m-commerce platform and monitored order accuracy and timeliness","Supported customer retention and route growth, and communicated pricing, promotions and product updates"]},
+{r:"Demand Planner",o:"China Construction Third Engineering Bureau Co., Ltd.",p:"January 2017 – September 2019",b:["Forecast material requirements from project schedules and consumption trends","Developed material plans aligned with project timelines, contributing to a 15% reduction in delays on the Naiberi–Dry’s Girls Road Upgrade Project","Monitored inventory and supported procurement planning with procurement, engineering and site teams"]},
+{r:"Finance Attaché",o:"National Cereals & Produce Board",p:"May 2014 – August 2014",b:["Supported financial reporting and record maintenance","Verified invoices and assisted with payables and receivables reconciliation","Maintained audit-ready financial documentation"]}
+];
+let skills={"Data & Business Intelligence":["Power BI","Microsoft Excel","Power Query","Dashboard Development","Data Analysis","Business Intelligence","Data Visualization","Business Reporting"],"Programming & Data":["Python","SQL","PostgreSQL","Pandas","NumPy","Data Cleaning","Data Validation","Data Reconciliation","Statistical Analysis"],"Trade & Commercial":["Market Intelligence","Trade Development","Commercial Analysis","Business Analysis","Stakeholder Management","Customer Relationship Management"],"Planning & Operations":["Demand Forecasting","Material Planning","Inventory Management","Procurement Planning","Process Improvement","Operational Analysis"],"Automation & Digital Tools":["Streamlit","Python Automation","QR Systems","Digital Registration","Workflow Automation","OCR","Whisper Transcription"],"Management":["Strategic Analysis","Risk Management","Compliance","Project Coordination","Cross-Functional Collaboration","Reporting"],"Languages":["Swahili (full professional)","English (professional working)"]};
+// f = featured; u = credential link (optional)
+let certs=[
+{t:"Introduction to Cybersecurity",i:"Cisco",d:"August 2026",f:1,u:"https://www.credly.com/badges/80c9ab53-1cf8-4e9a-9a38-c3cfad61f4f8/linked_in_profile"},
+{t:"Data Analytics Training",i:"ICT Authority",d:"July 2026",f:1,u:"https://training.smartacademy.go.ke/certificate-verification/?certificate_id=ICTA-1784318933-7855-45397"},
+{t:"Introduction to Data Science",i:"Moringa School",d:"July–September 2026",f:1},
+{t:"Quality Management Systems Internal Auditor Training Course",i:"SGS",d:"April 2026",f:1},
+{t:"Data Protection Workshop",i:"Office of Data Protection Commissioner",d:"August 2025",f:1,u:"https://www.odpc.go.ke/wp-content/uploads/2025/10/ODPC-DP-WORKSHOP-287-EATTA.pdf"},
+{t:"Microsoft Office Specialist: Excel Certification",i:"Coursera",d:"September 2025",f:1,u:"https://coursera.org/share/a1bbc83ea9367381a3fe092997b32d91"},
+{t:"Career Essentials in Generative AI by Microsoft and LinkedIn",i:"LinkedIn",d:"September 2025",f:1},
+{t:"Integrated Customs Management System",i:"KESRA",d:"April 2024",f:1},
+{t:"Microsoft Power BI Desktop for Business Intelligence",i:"Udemy",d:"September 2024",f:1,u:"https://www.udemy.com/certificate/UC-6c61eb4c-eaec-4e4c-86f5-06a82914339c/"},
+{t:"Strategic Pause for Leaders",i:"Open University of Kenya",d:"May 2026"},
+{t:"Business Modeling for Entrepreneurs",i:"Open University of Kenya",d:"May 2026"},
+{t:"Mental Health Awareness",i:"Open University of Kenya",d:"May 2026"},
+{t:"Marketing Channel Benefits",i:"Coursera",d:"September 2025",u:"https://coursera.org/share/c9f3b3bc40d9ef16e18e2dc2d0f74cc5"},
+{t:"Automation for Everyone: Tech Benefits Unleashed",i:"Coursera",d:"September 2025",u:"https://coursera.org/share/2d842119b0ad20953f04adb2fe3cc6de"},
+{t:"Conflict Resolution Foundations",i:"LinkedIn",d:"September 2025"},
+{t:"Client Management and Relationships",i:"LinkedIn",d:"September 2025"},
+{t:"Key Account Management",i:"LinkedIn",d:"September 2025"},
+{t:"Building Rapport with Customers",i:"LinkedIn",d:"September 2025"},
+{t:"Account Management: Maintaining Relationships",i:"LinkedIn",d:"September 2025"},
+{t:"Using Customer Surveys to Improve Service",i:"LinkedIn",d:"September 2025"},
+{t:"Creating Positive Conversations with Challenging Customers",i:"LinkedIn",d:"September 2025"},
+{t:"Developing a Service Mindset",i:"LinkedIn",d:"September 2025"},
+{t:"Problem-Solving and Troubleshooting",i:"LinkedIn",d:"September 2025"},
+{t:"Zendesk Customer Service Professional",i:"LinkedIn",d:"September 2025"},
+{t:"Social Media Marketing Strategy: TikTok and Instagram Reels",i:"LinkedIn",d:"September 2025"},
+{t:"Managing Teams",i:"LinkedIn",d:"August 2025"},
+{t:"Developing Your Emotional Intelligence",i:"LinkedIn",d:"August 2025"},
+{t:"AI in Project Management",i:"LinkedIn",d:"August 2025"},
+{t:"Project Management Professional (PMP)",i:"Computer Pride",d:"August 2025"},
+{t:"Supply Chain Management Analytics",i:"Unilever",d:"",u:"https://coursera.org/share/588d21d964e1a3d77bf63f020ee34de1"}
+];
+let edu=[
+{q:"Master of Business Administration, Strategic Management",d:"The Open University of Kenya · January 2026 – December 2027 · In progress"},
+{q:"Bachelor of Applied Statistics with Computing",d:"University of Eldoret · Mathematics and Computer Science · August 2011 – November 2015"}
+];
+let profile={name:"Bethuel Sang",hero_title:"Turning data, trade intelligence and business processes into better decisions.",summary:"Business & Data Analyst in trade development and market intelligence. At the East African Tea Trade Association (EATTA), I analyse tea auction and market data, build Power BI dashboards and prepare management reports. Before EATTA I worked in demand planning, inventory management and sales operations. I hold a degree in Applied Statistics with Computing and I am pursuing an MBA in Strategic Management.",email:"sangbethuel938@gmail.com",phone:"0702733260",location:"Mombasa County, Kenya",linkedin:"https://www.linkedin.com/in/bethuel-sang",github:"",availability:"Open to conversations about business analytics, business intelligence, market intelligence, trade development, commercial analytics and strategy.",profile_image:"https://qmqhtpjdhaidjeqkehqq.supabase.co/storage/v1/object/public/portfolio-assets/Profiel.jpg"};
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const link=(u,l)=>u?`<a href="${esc(u)}" target="_blank" rel="noopener">${l}</a>`:"";
 
-const defaultData = {
-  profile: {
-    lead: "Turning data, trade intelligence and business processes into better decisions.",
-    intro: "Business and data analyst focused on tea auction performance, market intelligence and operational improvement. At EATTA, I transform auction and market data into management insights, build reporting tools and support digital process improvement.",
-    role: "Trade Development Assistant",
-    company: "East African Tea Trade Association (EATTA)"
-  },
-  projects: [
-    {t:'Tea Auction Power BI Dashboard', c:'Business Intelligence', icon:'▥', img:'', d:'Interactive reporting for tea auction performance, pricing trends, volumes, buyer activity and key market indicators.', tools:['Power BI','Power Query','Excel'], ch:'Auction and market data needed to be consolidated into a useful management view.', s:'Built a repeatable reporting workflow using cleaned and transformed auction data.', i:'Clearer visibility of auction performance and pricing movements.', link:'https://app.powerbi.com/groups/me/reports/fb294c02-d7da-4a86-8c39-00805b5a7adf/aa1b40e6591389ee7c67?experience=power-bi'},
-    {t:'Weekly Tea Auction & Sale Analysis', c:'Data Analytics', icon:'↗', img:'', d:'Weekly analysis incorporating later-week outlot and private-sale activity for a more complete market view.', tools:['Excel','Power Query','Power BI'], ch:'Auction-close figures did not always show the full weekly value.', s:'Re-analysed weekly data after later sales and reconciled the results.', i:'A more complete weekly view for market and management analysis.'},
-    {t:'EATTA Sports Day QR Registration', c:'Automation', icon:'⌗', img:'', d:'QR-enabled registration and verification for participant tracking, attendance, teams and item distribution.', tools:['QR Codes','Excel','Digital Forms'], ch:'Manual registration and verification were slow and prone to duplication.', s:'Designed a QR-based workflow linked to structured participant records.', i:'Faster verification and more organised event administration.'},
-    {t:'QR Asset Check-In / Check-Out', c:'Automation', icon:'▣', img:'', d:'Mobile QR workflow for recording asset check-in and check-out transactions.', tools:['Power Apps','QR Codes','Excel'], ch:'Asset movements needed a simple mobile tracking process.', s:'Designed a QR scanning workflow linked to structured records.', i:'Improved traceability of asset movements.'},
-    {t:'Automated Email Complaint Register', c:'Automation', icon:'✉', img:'', d:'Workflow to collect complaint emails and structure them in an ISO-aligned Excel register.', tools:['Python','Gmail / IMAP','Excel'], ch:'Complaint emails required manual consolidation and tracking.', s:'Built a workflow to retrieve and structure complaint details in one register.', i:'Less repetitive entry and better complaint traceability.'},
-    {t:'Meeting Transcription Automation', c:'Automation', icon:'≋', img:'', d:'A watched-folder workflow that turns recorded meetings into text transcripts and organises files.', tools
+function renderProfile(){
+ const p=profile;
+ document.title=(p.name||"Portfolio")+" | Business & Data Analyst";
+ $("pName").textContent=p.name\vert{}\vert{}"";$("pBrand").textContent=p.name||"";
+ $("pLead").textContent=p.hero_title\vert{}\vert{}"";$("pSummary").textContent=p.summary||"";
+ if(/^https?:/.test(p.profile_image||""))$("pImg").src=p.profile_image;
+ $("cAvail").textContent=p.availability||"";
+ const em=$("cEmail");em.textContent=p.email||"";em.href=p.email?"mailto:"+p.email:"#";
+ const ph=$("cPhone");ph.textContent=p.phone||"";ph.href=p.phone?"tel:"+String(p.phone).replace(/[^+\d]/g,""):"#";
+ $("cLoc").textContent=p.location||"";
+ document.querySelectorAll("[data-li]").forEach(a=>{a.style.display=p.linkedin?"":"none";if(p.linkedin)a.href=p.linkedin});
+ const g=$("cGit");g.style.display=p.github?"":"none";if(p.github)g.href=p.github;
+}
+function renderAll(){
+ renderProfile();
+$("pc").textContent=projects.length+" projects";
+$("cc").textContent=certs.length+" credentials";
+$("yr").textContent=new Date().getFullYear();
+
+// Projects + filter
+const cats=["All",...new Set(projects.map(p=>p.c))];
+let cur="All";
+function drawProjects(){
+ $("filters").innerHTML=cats.map(c=>`<button type="button" class="${c===cur?"on":""}" aria-pressed="${c===cur}" data-c="${esc(c)}">${esc(c)}</button>`).join("");
+ $("projectGrid").innerHTML=projects.filter(p=>cur==="All"||p.c===cur).map(p=>`
+ <article class="card"><div class="cat">${esc(p.c)}</div><h3>${esc(p.t)}</h3><p class="muted" style="margin:.3rem 0">${esc(p.d)}</p>
+ <div class="pills">${p.tools.map(x=>`<span class="pill">${esc(x)}</span>`).join("")}</div>
+ ${link(p.link,"View project")} ${link(p.code,"Code")}
+ <details><summary>Case study</summary><p><strong>Challenge.</strong> ${esc(p.ch)}</p><p><strong>Solution.</strong> ${esc(p.s)}</p><p><strong>Impact.</strong> ${esc(p.i)}</p></details></article>`).join("");
+}
+$("filters").onclick=e=>{const b=e.target.closest("button");if(b){cur=b.dataset.c;drawProjects();}};
+drawProjects();
+
+$("timeline").innerHTML=jobs.map(j=>`<div class="job"><h3>${esc(j.r)}</h3><div>${esc(j.o)}</div><div class="when">${esc(j.p)}</div><ul>${j.b.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>`).join("");
+$("skillGrid").innerHTML=Object.entries(skills).map(([g,v])=>`<div class="card"><h3>${esc(g)}</h3><p>${v.map(esc).join(", ")}</p></div>`).join("");
+$("certGrid").innerHTML=certs.filter(c=>c.f).map(c=>`<div class="card cert"><div class="iss">${esc(c.i)}</div><h3>${esc(c.t)}</h3><div class="muted">${esc(c.d)}</div>${link(c.u,"View credential")}</div>`).join("");
+const rest=certs.filter(c=>!c.f);
+$("moreCount").textContent=rest.length;
+$("moreList").innerHTML=rest.map(c=>`<li><strong>${esc(c.t)}</strong>, ${esc(c.i)}${c.d?" · "+esc(c.d):""} ${link(c.u,"View credential")}</li>`).join("");
+$("eduGrid").innerHTML=edu.map(e=>`<div class="card"><h3>${esc(e.q)}</h3><p class="muted" style="margin:.2rem 0 0">${esc(e.d)}</p></div>`).join("");
+
+}
+renderAll();
+
+// Load live content from Supabase (falls back to the built-in content above)
+async function loadRemote(){
+ const c=window.PORTFOLIO_CONFIG; if(!c||!c.url||!c.key||c.url.includes("YOUR-PROJECT"))return;
+ try{
+  const r=await fetch(c.url+"/rest/v1/portfolio_store?select=key,value",{headers:{apikey:c.key,Authorization:"Bearer "+c.key}});
+  if(!r.ok)return;
+  const m=Object.fromEntries((await r.json()).map(x=>[x.key,x.value]));
+  const ok=a=>Array.isArray(a);
+  if(ok(m.projects))projects=m.projects.filter(p=>p.status!=="Draft").map(p=>({t:p.title||"",c:p.category||"Other",d:p.description||"",tools:p.tools||[],ch:p.challenge||"",s:p.solution||"",i:p.impact||"",link:p.project_link||"",code:p.github_link||""}));
+  if(ok(m.experience))jobs=m.experience.map(x=>({r:x.role||"",o:x.company||"",p:x.period||"",b:String(x.details||"").split(/;\s*|\n/).map(t=>t.trim()).filter(Boolean)}));
+  if(m.skills&&typeof m.skills==="object"&&!Array.isArray(m.skills))skills=m.skills;
+  if(m.profile&&typeof m.profile==="object"&&!Array.isArray(m.profile))profile={...profile,...m.profile};
+  if(ok(m.certifications))certs=m.certifications.map(x=>({t:x.title||"",i:x.issuer||"",d:x.issued||"",f:x.featured?1:0,u:x.credential_url||""}));
+  if(ok(m.education))edu=m.education.map(x=>({q:x.qualification||"",d:x.detail||""}));
+  renderAll();
+ }catch(e){console.warn("Supabase load failed, showing built-in content",e)}
+}
+loadRemote();
+
+// Highlight current section in nav
+const links=[...document.querySelectorAll("#nav a")];
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){links.forEach(a=>a.classList.toggle("on",a.getAttribute("href")==="#"+e.target.id));}}),{rootMargin:"-30% 0px -60% 0px"});
+document.querySelectorAll("main section").forEach(s=>io.observe(s));
+</script>
+<script>
+(function(){
+const C=window.PORTFOLIO_CONFIG||{};
+let sb;
+const CATS=["Data Analytics","Automation","Business Intelligence","Trade Development","Market Intelligence","Other"];
+
+// Field types: text | area | list (comma separated) | semi (one per line, stored as "a; b") | bool | select
+const SCHEMA={
+ projects:{label:"Projects",title:"title",sub:r=>`${r.category||""} · ${r.status||""}${r.featured?" · Featured":""}`,idFrom:"title",
+  fields:[["title","Title"],["category","Category","select",CATS],["status","Status","select",["Published","Draft"]],["featured","Show on featured list","bool"],["description","Short description","area"],["tools","Tools (comma separated)","list"],["challenge","Challenge","area"],["solution","Solution","area"],["impact","Impact","area"],["project_link","Project / demo link (https://)"],["github_link","GitHub / code link (https://)"]]},
+ experience:{label:"Experience",title:"role",sub:r=>`${r.company||""} · ${r.period||""}`,
+  fields:[["role","Role"],["company","Company"],["period","Period (e.g. June 2023 – Present)"],["details","Responsibilities (one per line)","semi"]]},
+ certifications:{label:"Certifications",title:"title",sub:r=>`${r.issuer||""} · ${r.issued||""}${r.featured?" · Featured":""}`,idFrom:"title",
+  fields:[["title","Certification"],["issuer","Issuer"],["issued","Issued (e.g. May 2026)"],["credential_id","Credential ID"],["credential_url","Credential link (https://)"],["featured","Featured","bool"],["skills","Skills (comma separated)","list"]]},
+ education:{label:"Education",title:"qualification",sub:r=>r.detail||"",
+  fields:[["qualification","Qualification"],["detail","Institution, dates, status","area"]]},
+ skills:{label:"Skills"},
+ profile:{label:"Profile",fields:[["name","Name"],["hero_title","Main headline","area"],["summary","Professional summary","area"],["availability","Contact text","area"],["email","Email"],["phone","Phone"],["location","Location"],["linkedin","LinkedIn link (https://)"],["github","GitHub link (https://, leave blank to hide)"],["profile_image","Profile image URL (https://)"]]}
+};
+const data={};const seeded=new Set();let tab="projects",edit=null,user=null;
+
+function msg(t,ok=true){const m=$("msg");m.textContent=t;m.className=ok?"ok":"err";clearTimeout(msg.t);msg.t=setTimeout(()=>m.className="",5000)}
+const slug=t=>t.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"")||"item-"+Date.now();
+const jp=o=>JSON.parse(JSON.stringify(o));
+const SEEDNOTE='<p class="muted" style="margin-top:0">Showing your built-in content. Edit anything, then press Save: it is stored in Supabase from then on.</p>';
+const DEF={
+ projects:projects.map((p,n)=>({id:slug(p.t),title:p.t,category:p.c,status:"Published",featured:n<3,description:p.d,tools:p.tools,challenge:p.ch,solution:p.s,impact:p.i,project_link:p.link||"",github_link:p.code||""})),
+ experience:jobs.map(j=>({role:j.r,company:j.o,period:j.p,details:j.b.join("; ")})),
+ certifications:certs.map(c=>({id:slug(c.t),title:c.t,issuer:c.i,issued:c.d,credential_id:"",credential_url:c.u||"",skills:[],featured:!!c.f})),
+ education:edu.map(e=>({qualification:e.q,detail:e.d})),
+ skills:jp(skills),profile:jp(profile)
+};
+
+async function loadAll(){
+ const {data:rows,error}=await sb.from("portfolio_store").select("key,value");
+ if(error){msg("Could not load data: "+error.message,false);return}
+ const have=new Set(rows.map(r=>r.key));seeded.clear();
+ for(const r of rows)data[r.key]=r.value;
+ for(const k of ["projects","experience","certifications","education"]){
+  if(!have.has(k)){data[k]=jp(DEF[k]);seeded.add(k)}else if(!Array.isArray(data[k]))data[k]=[];
+ }
+ if(!have.has("skills")){data.skills=jp(DEF.skills);seeded.add("skills")}else if(!data.skills||Array.isArray(data.skills))data.skills={};
+ if(!have.has("profile")||!data.profile||typeof data.profile!=="object"||Array.isArray(data.profile)){data.profile=jp(DEF.profile);seeded.add("profile")}
+ else data.profile={...DEF.profile,...data.profile};
+}
+async function save(key){
+ const {error}=await sb.from("portfolio_store").upsert({key,value:data[key]},{onConflict:"key"});
+ if(error){msg("Save failed: "+error.message+" (check you ran supabase_setup.sql and are signed in with the owner email)",false);return false}
+ seeded.delete(key);msg("Saved. The public site is updated.");if(typeof loadRemote==="function")loadRemote();return true;
+}
+
+function drawTabs(){
+ $("tabs").innerHTML=Object.entries(SCHEMA).map(([k,v])=>`<button type="button" class="${k===tab?"on":""}" data-k="${k}">${v.label}</button>`).join("");
+}
+function drawList(){
+ if(tab==="profile"){$("list").innerHTML=(seeded.has("profile")?SEEDNOTE:"")+'<h2 style="margin:0">Profile</h2><p class="muted">Your name, headline, summary and contact details shown on the site.</p>';return}
+ if(tab==="skills"){$("list").innerHTML=`<h2 style="margin-top:0">Skills</h2><p class="muted">One group per line, in the form <em>Group name: skill one, skill two</em>.</p>`;return}
+ const sc=SCHEMA[tab],arr=data[tab];
+ $("list").innerHTML=(seeded.has(tab)?SEEDNOTE:"")+`<div class="row" style="border:0;padding-top:0"><h2 style="margin:0">${sc.label} (${arr.length})</h2><button type="button" id="addNew" class="sm">Add new</button></div>`+
+ (arr.length?arr.map((r,i)=>`<div class="row"><div><div class="t">${esc(r[sc.title]||"Untitled")}</div><div class="s">${esc(sc.sub(r))}</div></div><div class="acts">
+ <button class="alt sm" data-a="up" data-i="${i}" aria-label="Move up" ${i?"":"disabled"}>↑</button><button class="alt sm" data-a="down" data-i="${i}" aria-label="Move down" ${i<arr.length-1?"":"disabled"}>↓</button>
+ <button class="alt sm" data-a="edit" data-i="${i}">Edit</button><button class="del sm" data-a="del" data-i="${i}">Delete</button></div></div>`).join(""):`<p class="muted">Nothing here yet. Use “Add new”.</p>`);
+}
+function field([k,l,t,opts],v){
+ const id="f_"+k;
+ if(t==="bool")return `<label><input type="checkbox" id="${id}" ${v?"checked":""}>${l}</label>`;
+ if(t==="select")return `<label for="${id}">${l}</label><select id="${id}">${opts.map(o=>`<option ${o===v?"selected":""}>${esc(o)}</option>`).join("")}</select>`;
+ if(t==="area"||t==="semi")return `<label for="${id}">${l}</label><textarea id="${id}">${esc(t==="semi"?String(v||"").split(/;\s*/).filter(Boolean).join("\n"):v)}</textarea>`;
+ if(t==="list")return `<label for="${id}">${l}</label><input id="${id}" value="${esc((v||[]).join(", "))}">`;
+ return `<label for="${id}">${l}</label><input id="${id}" value="${esc(v)}">`;
+}
+function drawForm(){
+ if(tab==="profile"){const rec=data.profile;$("formBox").innerHTML=SCHEMA.profile.fields.map(f=>field(f,rec[f[0]])).join("")+'<p><button type="button" id="saveProfile">Save profile</button></p>';return}
+ if(tab==="skills"){
+  const txt=Object.entries(data.skills).map(([g,v])=>`${g}: ${v.join(", ")}`).join("\n");
+  $("formBox").innerHTML=`<label for="skillsTxt">Skill groups</label><textarea id="skillsTxt" style="min-height:260px">${esc(txt)}</textarea><p><button type="button" id="saveSkills">Save skills</button></p>`;return;
+ }
+ const sc=SCHEMA[tab],rec=edit===null?{status:"Published"}:data[tab][edit];
+ $("formBox").innerHTML=`<h2 style="margin-top:0">${edit===null?"Add new":"Edit"} · ${sc.label}</h2>`+sc.fields.map(f=>field(f,rec[f[0]])).join("")+
+ `<p><button type="button" id="saveItem">${edit===null?"Add":"Save changes"}</button> ${edit!==null?'<button type="button" class="alt" id="cancel">Cancel</button>':""}</p>`;
+}
+function readForm(){
+ const rec=edit===null?{}:{...data[tab][edit]};
+ for(const [k,,t] of SCHEMA[tab].fields){
+  const el=$("f_"+k);
+  rec[k]=t==="bool"?el.checked:t==="list"?el.value.split(",").map(x=>x.trim()).filter(Boolean):t==="semi"?el.value.split("\n").map(x=>x.trim()).filter(Boolean).join("; "):el.value.trim();
+ }
+ const idf=SCHEMA[tab].idFrom;if(idf&&!rec.id)rec.id=slug(rec[idf]);
+ return rec;
+}
+function draw(){drawTabs();drawList();drawForm()}
+
+$("adminView").addEventListener("click",async e=>{
+ const b=e.target.closest("button");if(!b)return;
+ if(b.dataset.k){tab=b.dataset.k;edit=null;draw();return}
+ if(b.id==="addNew"){edit=null;drawForm();$("formBox").scrollIntoView({behavior:"smooth"});return}
+ if(b.id==="cancel"){edit=null;drawForm();return}
+ if(b.id==="saveItem"){
+  const rec=readForm(),t=SCHEMA[tab].title;
+  if(!rec[t]){msg("Please fill in "+t+".",false);return}
+  const backup=JSON.stringify(data[tab]);
+  if(edit===null)data[tab].push(rec);else data[tab][edit]=rec;
+  if(await save(tab)){edit=null;draw()}else data[tab]=JSON.parse(backup);
+  return;
+ }
+ if(b.id==="saveProfile"){
+  const rec={...data.profile};for(const [k] of SCHEMA.profile.fields)rec[k]=$("f_"+k).value.trim();
+  const old=data.profile;data.profile=rec;if(await save("profile"))draw();else data.profile=old;return;
+ }
+ if(b.id==="saveSkills"){
+  const out={};
+  for(const line of $("skillsTxt").value.split("\n")){const i=line.indexOf(":");if(i<1)continue;const g=line.slice(0,i).trim(),v=line.slice(i+1).split(",").map(x=>x.trim()).filter(Boolean);if(g)out[g]=v}
+  const old=data.skills;data.skills=out;if(!await save("skills"))data.skills=old;return;
+ }
+ const a=b.dataset.a;if(!a)return;
+ const i=+b.dataset.i,arr=data[tab],backup=JSON.stringify(arr);
+ if(a==="edit"){edit=i;drawForm();$("formBox").scrollIntoView({behavior:"smooth"});return}
+ if(a==="del"){if(!confirm("Delete “"+(arr[i][SCHEMA[tab].title]||"this item")+"”? This cannot be undone."))return;arr.splice(i,1)}
+ if(a==="up"&&i>0)[arr[i-1],arr[i]]=[arr[i],arr[i-1]];
+ if(a==="down"&&i<arr.length-1)[arr[i+1],arr[i]]=[arr[i],arr[i+1]];
+ edit=null;
+ if(!await save(tab))data[tab]=JSON.parse(backup);
+ draw();
+});
+
+async function enter(){
+ $("login").classList.add("hide");$("app").classList.remove("hide");$("out").classList.remove("hide");
+ await loadAll();draw();
+}
+$("go").onclick=async()=>{
+ const {error}=await sb.auth.signInWithPassword({email:$("em").value.trim(),password:$("pw").value});
+ if(error){msg("Sign-in failed: "+error.message,false);return}
+ await enter();
+};
+$("pw").addEventListener("keydown",e=>{if(e.key==="Enter")$("go").click()});
+$("out").onclick=async()=>{await sb.auth.signOut();location.reload()};
+let started=false;
+window.initAdmin=async function(){
+ if(started)return;
+ if(!C.url||C.url.includes("YOUR-PROJECT")){msg("Add your Supabase URL and publishable key to config.js first.",false);return}
+ started=true;
+ if(!window.supabase){
+  await new Promise((res,rej)=>{const t=document.createElement("script");t.src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js";t.onload=res;t.onerror=rej;document.head.appendChild(t)}).catch(()=>{});
+ }
+ if(!window.supabase){msg("Could not load the Supabase library. Check your connection and reload.",false);started=false;return}
+ sb=supabase.createClient(C.url,C.key);
+ const {data:{session}}=await sb.auth.getSession();if(session)await enter();
+};
+
+})();
+function route(){
+ const on=location.hash==="#admin";
+ document.body.classList.toggle("admin-mode",on);
+ if(on){window.scrollTo(0,0);window.initAdmin&&window.initAdmin();}
+}
+addEventListener("hashchange",route);route();
+</script>
+</body>
+</html>
