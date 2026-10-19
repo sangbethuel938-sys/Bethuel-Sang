@@ -13,7 +13,6 @@
   --primary-light:#1e293b;
   --accent:#0d9488;
   --accent-light:#f0fdfa;
-  --accent-hover:#0f766e;
   --bg:#f8fafc;
   --card-bg:#ffffff;
   --text:#334155;
@@ -34,9 +33,7 @@ button,input,textarea{font:inherit;cursor:pointer}
 
 /* Topbar Navigation */
 .topbar{position:sticky;top:0;z-index:100;background:rgba(255, 255, 255, 0.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
-.nav{height:80px;display:flex;align-items:center;justify-content:space-between}
-.brand{font-weight:800;font-size:1.25rem;color:var(--primary);letter-spacing:-0.03em}
-.brand span{color:var(--accent)}
+.nav{height:80px;display:flex;align-items:center;justify-content:flex-end}
 .links{display:flex;gap:28px;align-items:center}
 .links a{color:var(--text-muted);font-size:0.92rem;font-weight:600;transition:color 0.2s}
 .links a:hover{color:var(--accent)}
@@ -141,22 +138,26 @@ h1 span{color:var(--accent)}
 .edu-card h3{color:var(--primary);margin:0 0 8px;font-size:1.15rem}
 .edu-card p{margin:0;color:var(--text-muted);font-size:0.92rem}
 
-/* Contact Banner */
-.contact-panel{background:var(--primary);color:white;border-radius:24px;padding:50px;display:grid;grid-template-columns:1.2fr 0.8fr;gap:40px;align-items:center}
-.contact-panel h2{color:white;font-size:2.5rem;margin:0 0 16px}
-.contact-panel p{color:#94a3b8;margin:0 0 24px}
-.contact-details{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:24px}
-.contact-details div{margin-bottom:16px}
+/* Contact Banner & Form */
+.contact-panel{background:var(--primary);color:white;border-radius:24px;padding:50px;display:grid;grid-template-columns:1.1fr 0.9fr;gap:40px;align-items:center}
+.contact-panel h2{color:white;font-size:2.3rem;margin:0 0 12px}
+.contact-panel p{color:#94a3b8;margin:0 0 24px;font-size:0.95rem}
+.contact-form{display:flex;flex-direction:column;gap:14px}
+.contact-form input, .contact-form textarea{width:100%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);color:white;padding:12px 16px;border-radius:10px;font:inherit}
+.contact-form input::placeholder, .contact-form textarea::placeholder{color:#64748b}
+.contact-form textarea{height:100px;resize:vertical}
+.contact-details{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:14px;padding:20px;margin-top:16px}
+.contact-details div{margin-bottom:10px}
 .contact-details div:last-child{margin-bottom:0}
-.contact-details span{display:block;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.1em;color:#94a3b8;margin-bottom:4px}
-.contact-details a,.contact-details strong{color:white;font-weight:600}
+.contact-details span{display:inline-block;width:75px;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.08em;color:#94a3b8}
+.contact-details a,.contact-details strong{color:white;font-weight:600;font-size:0.9rem}
 
 /* Footer & Admin Bar */
 .footer{padding:30px 0;text-align:center;color:var(--text-muted);font-size:0.85rem;border-top:1px solid var(--border)}
 .admin-bar{background:var(--primary);text-align:center;padding:14px;border-top:1px solid #1e293b}
 .admin-bar a{color:#2dd4bf;font-size:0.85rem;font-weight:700}
 
-/* Admin Modal / Section */
+/* Admin Section */
 .admin-section{background:#090d16;color:white;border-top:4px solid var(--accent)}
 .admin-section h2{color:white}
 .admin-section p{color:#94a3b8}
@@ -178,7 +179,6 @@ h1 span{color:var(--accent)}
 
 <header class="topbar">
   <div class="wrap nav">
-    <a class="brand" href="#home">BETHUEL<span>.</span></a>
     <nav class="links">
       <a href="#projects">Projects</a>
       <a href="#experience">Experience</a>
@@ -186,7 +186,6 @@ h1 span{color:var(--accent)}
       <a href="#education">Education</a>
       <a href="#contact">Contact</a>
     </nav>
-    <a class="nav-cta" href="#contact">Let's connect ↗</a>
   </div>
 </header>
 
@@ -199,7 +198,7 @@ h1 span{color:var(--accent)}
         <p class="lead" id="heroLead">Turning data, trade intelligence and business processes into better decisions.</p>
         <p class="intro" id="heroIntro">Business and data analyst focused on tea auction performance, market intelligence and operational improvement. At EATTA, I transform auction and market data into management insights, build reporting tools and support digital process improvement.</p>
         <div class="actions">
-          <a class="btn primary" href="mailto:sangbethuel938@gmail.com">Contact me ↗</a>
+          <a class="btn primary" href="#contact">Get in touch ↗</a>
           <a class="btn outline" href="https://www.linkedin.com/in/bethuel-sang" target="_blank" rel="noopener">LinkedIn profile ↗</a>
         </div>
       </div>
@@ -302,14 +301,24 @@ h1 span{color:var(--accent)}
         <div>
           <div class="section-tag" style="color:#2dd4bf">Get in touch</div>
           <h2>Let's turn insight into action.</h2>
-          <p>Open to conversations around business intelligence, market intelligence, commercial analytics, and trade development.</p>
-          <a class="btn primary" style="background:var(--accent)" href="mailto:sangbethuel938@gmail.com">Email me ↗</a>
+          <p>Send a message directly using the form, or reach out via email and phone.</p>
+          
+          <form class="contact-form" name="portfolio-contact" method="POST" data-netlify="true">
+            <input type="hidden" name="form-name" value="portfolio-contact">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email Address" required>
+            <textarea name="message" placeholder="Your Message..." required></textarea>
+            <button type="submit" class="btn primary" style="background:var(--accent)">Send Message ↗</button>
+          </form>
         </div>
-        <div class="contact-details">
-          <div><span>Email</span><a href="mailto:sangbethuel938@gmail.com">sangbethuel938@gmail.com</a></div>
-          <div><span>Phone</span><a href="tel:+254702733260">+254 702 733 260</a></div>
-          <div><span>Location</span><strong>Mombasa County, Kenya</strong></div>
-          <div><span>LinkedIn</span><a href="https://www.linkedin.com/in/bethuel-sang" target="_blank">linkedin.com/in/bethuel-sang ↗</a></div>
+
+        <div>
+          <div class="contact-details">
+            <div><span>Email</span><a href="mailto:sangbethuel938@gmail.com">sangbethuel938@gmail.com</a></div>
+            <div><span>Phone</span><a href="tel:+254702733260">+254 702 733 260</a></div>
+            <div><span>Location</span><strong>Mombasa County, Kenya</strong></div>
+            <div><span>LinkedIn</span><a href="https://www.linkedin.com/in/bethuel-sang" target="_blank">linkedin.com/in/bethuel-sang ↗</a></div>
+          </div>
         </div>
       </div>
     </div>
@@ -323,7 +332,7 @@ h1 span{color:var(--accent)}
       <div>
         <div class="section-tag" style="color:#2dd4bf">Management Portal</div>
         <h2>Portfolio Admin Dashboard</h2>
-        <p>Edit your profile info and project screenshots directly in your browser.</p>
+        <p>Edit your profile info and upload project screenshots directly from your computer.</p>
       </div>
       <a class="btn outline" href="#home" style="color:white;border-color:#334155">← Back to Portfolio</a>
     </div>
@@ -369,7 +378,7 @@ h1 span{color:var(--accent)}
       </div>
 
       <div class="admin-card">
-        <h3>Manage Projects & Screenshots</h3>
+        <h3>Manage Projects & Upload Screenshots</h3>
         <div id="adminProjectsList"></div>
         <button class="btn outline" id="addProjectBtn" style="margin-top:10px;color:white;border-color:#334155">+ Add New Project</button>
       </div>
@@ -458,8 +467,8 @@ const defaultData = {
   ]
 };
 
-let portfolioData = JSON.parse(localStorage.getItem('bethuel_portfolio_net_v2')) || defaultData;
-function saveData() { localStorage.setItem('bethuel_portfolio_net_v2', JSON.stringify(portfolioData)); }
+let portfolioData = JSON.parse(localStorage.getItem('bethuel_portfolio_net_v4')) || defaultData;
+function saveData() { localStorage.setItem('bethuel_portfolio_net_v4', JSON.stringify(portfolioData)); }
 
 function renderAll() {
   document.getElementById('heroLead').textContent = portfolioData.profile.lead;
@@ -575,11 +584,18 @@ function loadAdmin() {
   list.innerHTML = '';
   portfolioData.projects.forEach((p, idx) => {
     list.innerHTML += `
-      <div class="admin-row">
-        <span><b>${p.t}</b></span>
-        <div>
-          <button class="btn outline" style="padding:4px 10px;font-size:0.75rem;color:white;border-color:#334155" onclick="editProj(${idx})">Edit / Screenshot</button>
-          <button class="btn danger" style="padding:4px 10px;font-size:0.75rem" onclick="delProj(${idx})">Delete</button>
+      <div class="admin-row" style="flex-direction:column;align-items:flex-start;gap:10px;">
+        <div style="width:100%;display:flex;justify-content:space-between;align-items:center">
+          <span><b>${p.t}</b></span>
+          <div>
+            <button class="btn outline" style="padding:4px 10px;font-size:0.75rem;color:white;border-color:#334155" onclick="editProj(${idx})">Edit Details</button>
+            <button class="btn danger" style="padding:4px 10px;font-size:0.75rem" onclick="delProj(${idx})">Delete</button>
+          </div>
+        </div>
+        <div style="width:100%;background:#0f172a;padding:10px;border-radius:8px">
+          <label style="font-size:0.8rem;color:#2dd4bf;display:block;margin-bottom:4px">Upload / Change Project Screenshot:</label>
+          <input type="file" accept="image/*" onchange="uploadImage(event, ${idx})" style="font-size:0.8rem;color:#cbd5e1">
+          ${p.img ? `<div style="margin-top:6px;font-size:0.75rem;color:#10b981">✓ Screenshot loaded (${Math.round(p.img.length/1024)} KB)</div>` : ''}
         </div>
       </div>
     `;
@@ -599,8 +615,7 @@ document.getElementById('saveProfileBtn').addEventListener('click', () => {
 document.getElementById('addProjectBtn').addEventListener('click', () => {
   const t = prompt('Project Title:');
   if (!t) return;
-  const img = prompt('Screenshot Image URL (optional):') || '';
-  portfolioData.projects.unshift({t, c:'Data Analytics', img, d:'Project description here.', tools:['Python'], ch:'Challenge', s:'Solution', i:'Impact'});
+  portfolioData.projects.unshift({t, c:'Data Analytics', img:'', d:'Project description here.', tools:['Python'], ch:'Challenge', s:'Solution', i:'Impact'});
   saveData();
   renderAll();
   loadAdmin();
@@ -621,16 +636,29 @@ window.editProj = function(idx) {
   if (t !== null) {
     p.t = t;
     p.d = prompt('Edit Description:', p.d) || p.d;
-    p.img = prompt('Edit Screenshot Image URL:', p.img || '') || p.img;
     saveData();
     renderAll();
     loadAdmin();
   }
 };
 
+window.uploadImage = function(event, idx) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    portfolioData.projects[idx].img = e.target.result;
+    saveData();
+    renderAll();
+    loadAdmin();
+    alert('Screenshot uploaded successfully!');
+  };
+  reader.readAsDataURL(file);
+};
+
 document.getElementById('resetDataBtn').addEventListener('click', () => {
   if (confirm('Reset to default?')) {
-    localStorage.removeItem('bethuel_portfolio_net_v2');
+    localStorage.removeItem('bethuel_portfolio_net_v4');
     portfolioData = JSON.parse(JSON.stringify(defaultData));
     renderAll();
     loadAdmin();
