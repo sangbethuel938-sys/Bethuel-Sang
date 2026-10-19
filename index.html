@@ -78,6 +78,10 @@ body.admin-mode main>section,body.admin-mode main>footer{display:none}
 #adminView .row .t{font-weight:600}#adminView .row .s{font-size:.85rem;color:var(--muted)}#adminView .acts{display:flex;gap:.35rem;flex-shrink:0}
 #adminView #msg{position:sticky;top:3.4rem;z-index:5;padding:.6rem .9rem;border-radius:8px;margin-bottom:1rem;display:none;font-weight:600}
 #adminView #msg.ok{display:block;background:#E3F3EA;color:#145A32}#adminView #msg.err{display:block;background:#FDE7E4;color:#B42318}
+/* Text alignment */
+main p,main li{text-align:justify;text-justify:inter-word;hyphens:auto;-webkit-hyphens:auto}
+.hero .lead,.facts dd,.facts dt,.contact p,.btns,.filters,#adminView p,#adminView li,#adminView .s,#adminView .t{text-align:left;hyphens:none;-webkit-hyphens:none}
+@media(max-width:600px){main p,main li{text-align:left;hyphens:none}}
 @media(max-width:860px){
 .shell{grid-template-columns:1fr}
 aside{position:sticky;height:auto;flex-direction:row;align-items:center;gap:.6rem;padding:.6rem 1rem;border:0;border-bottom:1px solid var(--line);background:rgba(245,247,246,.95);backdrop-filter:blur(8px);z-index:10;overflow-x:auto}
@@ -90,7 +94,7 @@ dl.facts{grid-template-columns:1fr 1fr}dl.facts div:nth-child(2){border-right:0}
 <body>
 <div class="shell">
 <aside>
- <a class="brand" href="#home">Bethuel Sang</a>
+ <a class="brand" id="pBrand" href="#home">Bethuel Sang</a>
  <nav id="nav">
   <a href="#home">Home</a><a href="#projects">Projects</a><a href="#experience">Experience</a><a href="#skills">Skills</a><a href="#education">Education</a><a href="#contact">Contact</a>
  </nav>
@@ -100,16 +104,16 @@ dl.facts{grid-template-columns:1fr 1fr}dl.facts div:nth-child(2){border-right:0}
 <section id="home" style="padding-top:0">
  <div class="hero">
   <div>
-   <h1>Bethuel Sang</h1>
-   <p class="lead">Turning data, trade intelligence and business processes into better decisions.</p>
-   <p class="muted">Business &amp; Data Analyst in trade development and market intelligence. At the East African Tea Trade Association (EATTA), I analyse tea auction and market data, build Power BI dashboards and prepare management reports. Before EATTA I worked in demand planning, inventory management and sales operations. I hold a degree in Applied Statistics with Computing and I am pursuing an MBA in Strategic Management.</p>
+   <h1 id="pName">Bethuel Sang</h1>
+   <p class="lead" id="pLead">Turning data, trade intelligence and business processes into better decisions.</p>
+   <p class="muted" id="pSummary">Business &amp; Data Analyst in trade development and market intelligence. At the East African Tea Trade Association (EATTA), I analyse tea auction and market data, build Power BI dashboards and prepare management reports. Before EATTA I worked in demand planning, inventory management and sales operations. I hold a degree in Applied Statistics with Computing and I am pursuing an MBA in Strategic Management.</p>
    <div class="btns">
     <a class="btn" href="assets/Bethuel_Sang_Full_Professional_CV.pdf" download="Bethuel_Sang_CV.pdf">Download CV</a>
-    <a class="btn alt" href="https://www.linkedin.com/in/bethuel-sang" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="btn alt" data-li href="https://www.linkedin.com/in/bethuel-sang" target="_blank" rel="noopener">LinkedIn</a>
     <a class="btn alt" href="#contact">Get in touch</a>
    </div>
   </div>
-  <img src="https://qmqhtpjdhaidjeqkehqq.supabase.co/storage/v1/object/public/portfolio-assets/Profiel.jpg" alt="Bethuel Sang" width="190" height="190">
+  <img id="pImg" src="https://qmqhtpjdhaidjeqkehqq.supabase.co/storage/v1/object/public/portfolio-assets/Profiel.jpg" alt="Bethuel Sang" width="190" height="190">
  </div>
  <dl class="facts">
   <div><dt>Current role</dt><dd>Trade Development Assistant, EATTA</dd></div>
@@ -146,11 +150,11 @@ dl.facts{grid-template-columns:1fr 1fr}dl.facts div:nth-child(2){border-right:0}
 
 <section id="contact" class="contact">
  <h2>Contact</h2>
- <p>Open to conversations about business analytics, business intelligence, market intelligence, trade development, commercial analytics and strategy.</p>
- <p><strong>Email</strong><br><a href="mailto:sangbethuel938@gmail.com">sangbethuel938@gmail.com</a></p>
- <p><strong>Phone</strong><br><a href="tel:+254702733260">0702733260</a></p>
- <p><strong>Location</strong><br>Mombasa County, Kenya</p>
- <div class="btns"><a class="btn" href="https://www.linkedin.com/in/bethuel-sang" target="_blank" rel="noopener">LinkedIn</a></div>
+ <p id="cAvail"></p>
+ <p><strong>Email</strong><br><a id="cEmail" href="#"></a></p>
+ <p><strong>Phone</strong><br><a id="cPhone" href="#"></a></p>
+ <p><strong>Location</strong><br><span id="cLoc"></span></p>
+ <div class="btns"><a class="btn" data-li href="https://www.linkedin.com/in/bethuel-sang" target="_blank" rel="noopener">LinkedIn</a> <a class="btn alt" id="cGit" style="display:none" href="#" target="_blank" rel="noopener">GitHub</a></div>
 </section>
 <div id="adminView">
  <div class="ahead"><h2 style="margin:0">Portfolio admin</h2><div><a href="#home">Back to site</a> <button class="alt sm hide" id="out" type="button">Log out</button></div></div>
@@ -225,11 +229,26 @@ let edu=[
 {q:"Master of Business Administration, Strategic Management",d:"The Open University of Kenya · January 2026 – December 2027 · In progress"},
 {q:"Bachelor of Applied Statistics with Computing",d:"University of Eldoret · Mathematics and Computer Science · August 2011 – November 2015"}
 ];
+let profile={name:"Bethuel Sang",hero_title:"Turning data, trade intelligence and business processes into better decisions.",summary:"Business & Data Analyst in trade development and market intelligence. At the East African Tea Trade Association (EATTA), I analyse tea auction and market data, build Power BI dashboards and prepare management reports. Before EATTA I worked in demand planning, inventory management and sales operations. I hold a degree in Applied Statistics with Computing and I am pursuing an MBA in Strategic Management.",email:"sangbethuel938@gmail.com",phone:"0702733260",location:"Mombasa County, Kenya",linkedin:"https://www.linkedin.com/in/bethuel-sang",github:"",availability:"Open to conversations about business analytics, business intelligence, market intelligence, trade development, commercial analytics and strategy.",profile_image:"https://qmqhtpjdhaidjeqkehqq.supabase.co/storage/v1/object/public/portfolio-assets/Profiel.jpg"};
 const $=id=>document.getElementById(id);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const link=(u,l)=>u?`<a href="${esc(u)}" target="_blank" rel="noopener">${l}</a>`:"";
 
+function renderProfile(){
+ const p=profile;
+ document.title=(p.name||"Portfolio")+" | Business & Data Analyst";
+ $("pName").textContent=p.name||"";$("pBrand").textContent=p.name||"";
+ $("pLead").textContent=p.hero_title||"";$("pSummary").textContent=p.summary||"";
+ if(/^https?:/.test(p.profile_image||""))$("pImg").src=p.profile_image;
+ $("cAvail").textContent=p.availability||"";
+ const em=$("cEmail");em.textContent=p.email||"";em.href=p.email?"mailto:"+p.email:"#";
+ const ph=$("cPhone");ph.textContent=p.phone||"";ph.href=p.phone?"tel:"+String(p.phone).replace(/[^+\d]/g,""):"#";
+ $("cLoc").textContent=p.location||"";
+ document.querySelectorAll("[data-li]").forEach(a=>{a.style.display=p.linkedin?"":"none";if(p.linkedin)a.href=p.linkedin});
+ const g=$("cGit");g.style.display=p.github?"":"none";if(p.github)g.href=p.github;
+}
 function renderAll(){
+ renderProfile();
 $("pc").textContent=projects.length+" projects";
 $("cc").textContent=certs.length+" credentials";
 $("yr").textContent=new Date().getFullYear();
@@ -266,10 +285,11 @@ async function loadRemote(){
   const r=await fetch(c.url+"/rest/v1/portfolio_store?select=key,value",{headers:{apikey:c.key,Authorization:"Bearer "+c.key}});
   if(!r.ok)return;
   const m=Object.fromEntries((await r.json()).map(x=>[x.key,x.value]));
-  const ok=a=>Array.isArray(a)&&a.length;
+  const ok=a=>Array.isArray(a);
   if(ok(m.projects))projects=m.projects.filter(p=>p.status!=="Draft").map(p=>({t:p.title||"",c:p.category||"Other",d:p.description||"",tools:p.tools||[],ch:p.challenge||"",s:p.solution||"",i:p.impact||"",link:p.project_link||"",code:p.github_link||""}));
   if(ok(m.experience))jobs=m.experience.map(x=>({r:x.role||"",o:x.company||"",p:x.period||"",b:String(x.details||"").split(/;\s*|\n/).map(t=>t.trim()).filter(Boolean)}));
-  if(m.skills&&Object.keys(m.skills).length)skills=m.skills;
+  if(m.skills&&typeof m.skills==="object"&&!Array.isArray(m.skills))skills=m.skills;
+  if(m.profile&&typeof m.profile==="object"&&!Array.isArray(m.profile))profile={...profile,...m.profile};
   if(ok(m.certifications))certs=m.certifications.map(x=>({t:x.title||"",i:x.issuer||"",d:x.issued||"",f:x.featured?1:0,u:x.credential_url||""}));
   if(ok(m.education))edu=m.education.map(x=>({q:x.qualification||"",d:x.detail||""}));
   renderAll();
@@ -298,33 +318,49 @@ const SCHEMA={
   fields:[["title","Certification"],["issuer","Issuer"],["issued","Issued (e.g. May 2026)"],["credential_id","Credential ID"],["credential_url","Credential link (https://)"],["featured","Featured","bool"],["skills","Skills (comma separated)","list"]]},
  education:{label:"Education",title:"qualification",sub:r=>r.detail||"",
   fields:[["qualification","Qualification"],["detail","Institution, dates, status","area"]]},
- skills:{label:"Skills"}
+ skills:{label:"Skills"},
+ profile:{label:"Profile",fields:[["name","Name"],["hero_title","Main headline","area"],["summary","Professional summary","area"],["availability","Contact text","area"],["email","Email"],["phone","Phone"],["location","Location"],["linkedin","LinkedIn link (https://)"],["github","GitHub link (https://, leave blank to hide)"],["profile_image","Profile image URL (https://)"]]}
 };
-const data={};let tab="projects",edit=null,user=null;
+const data={};const seeded=new Set();let tab="projects",edit=null,user=null;
 
 function msg(t,ok=true){const m=$("msg");m.textContent=t;m.className=ok?"ok":"err";clearTimeout(msg.t);msg.t=setTimeout(()=>m.className="",5000)}
 const slug=t=>t.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"")||"item-"+Date.now();
+const jp=o=>JSON.parse(JSON.stringify(o));
+const SEEDNOTE='<p class="muted" style="margin-top:0">Showing your built-in content. Edit anything, then press Save: it is stored in Supabase from then on.</p>';
+const DEF={
+ projects:projects.map((p,n)=>({id:slug(p.t),title:p.t,category:p.c,status:"Published",featured:n<3,description:p.d,tools:p.tools,challenge:p.ch,solution:p.s,impact:p.i,project_link:p.link||"",github_link:p.code||""})),
+ experience:jobs.map(j=>({role:j.r,company:j.o,period:j.p,details:j.b.join("; ")})),
+ certifications:certs.map(c=>({id:slug(c.t),title:c.t,issuer:c.i,issued:c.d,credential_id:"",credential_url:c.u||"",skills:[],featured:!!c.f})),
+ education:edu.map(e=>({qualification:e.q,detail:e.d})),
+ skills:jp(skills),profile:jp(profile)
+};
 
 async function loadAll(){
  const {data:rows,error}=await sb.from("portfolio_store").select("key,value");
  if(error){msg("Could not load data: "+error.message,false);return}
+ const have=new Set(rows.map(r=>r.key));seeded.clear();
  for(const r of rows)data[r.key]=r.value;
- for(const k of ["projects","experience","certifications","education"])if(!Array.isArray(data[k]))data[k]=[];
- if(!data.skills||Array.isArray(data.skills))data.skills={};
+ for(const k of ["projects","experience","certifications","education"]){
+  if(!have.has(k)){data[k]=jp(DEF[k]);seeded.add(k)}else if(!Array.isArray(data[k]))data[k]=[];
+ }
+ if(!have.has("skills")){data.skills=jp(DEF.skills);seeded.add("skills")}else if(!data.skills||Array.isArray(data.skills))data.skills={};
+ if(!have.has("profile")||!data.profile||typeof data.profile!=="object"||Array.isArray(data.profile)){data.profile=jp(DEF.profile);seeded.add("profile")}
+ else data.profile={...DEF.profile,...data.profile};
 }
 async function save(key){
  const {error}=await sb.from("portfolio_store").upsert({key,value:data[key]},{onConflict:"key"});
  if(error){msg("Save failed: "+error.message+" (check you ran supabase_setup.sql and are signed in with the owner email)",false);return false}
- msg("Saved. The public site is updated.");if(typeof loadRemote==="function")loadRemote();return true;
+ seeded.delete(key);msg("Saved. The public site is updated.");if(typeof loadRemote==="function")loadRemote();return true;
 }
 
 function drawTabs(){
  $("tabs").innerHTML=Object.entries(SCHEMA).map(([k,v])=>`<button type="button" class="${k===tab?"on":""}" data-k="${k}">${v.label}</button>`).join("");
 }
 function drawList(){
+ if(tab==="profile"){$("list").innerHTML=(seeded.has("profile")?SEEDNOTE:"")+'<h2 style="margin:0">Profile</h2><p class="muted">Your name, headline, summary and contact details shown on the site.</p>';return}
  if(tab==="skills"){$("list").innerHTML=`<h2 style="margin-top:0">Skills</h2><p class="muted">One group per line, in the form <em>Group name: skill one, skill two</em>.</p>`;return}
  const sc=SCHEMA[tab],arr=data[tab];
- $("list").innerHTML=`<div class="row" style="border:0;padding-top:0"><h2 style="margin:0">${sc.label} (${arr.length})</h2><button type="button" id="addNew" class="sm">Add new</button></div>`+
+ $("list").innerHTML=(seeded.has(tab)?SEEDNOTE:"")+`<div class="row" style="border:0;padding-top:0"><h2 style="margin:0">${sc.label} (${arr.length})</h2><button type="button" id="addNew" class="sm">Add new</button></div>`+
  (arr.length?arr.map((r,i)=>`<div class="row"><div><div class="t">${esc(r[sc.title]||"Untitled")}</div><div class="s">${esc(sc.sub(r))}</div></div><div class="acts">
  <button class="alt sm" data-a="up" data-i="${i}" aria-label="Move up" ${i?"":"disabled"}>↑</button><button class="alt sm" data-a="down" data-i="${i}" aria-label="Move down" ${i<arr.length-1?"":"disabled"}>↓</button>
  <button class="alt sm" data-a="edit" data-i="${i}">Edit</button><button class="del sm" data-a="del" data-i="${i}">Delete</button></div></div>`).join(""):`<p class="muted">Nothing here yet. Use “Add new”.</p>`);
@@ -338,6 +374,7 @@ function field([k,l,t,opts],v){
  return `<label for="${id}">${l}</label><input id="${id}" value="${esc(v)}">`;
 }
 function drawForm(){
+ if(tab==="profile"){const rec=data.profile;$("formBox").innerHTML=SCHEMA.profile.fields.map(f=>field(f,rec[f[0]])).join("")+'<p><button type="button" id="saveProfile">Save profile</button></p>';return}
  if(tab==="skills"){
   const txt=Object.entries(data.skills).map(([g,v])=>`${g}: ${v.join(", ")}`).join("\n");
   $("formBox").innerHTML=`<label for="skillsTxt">Skill groups</label><textarea id="skillsTxt" style="min-height:260px">${esc(txt)}</textarea><p><button type="button" id="saveSkills">Save skills</button></p>`;return;
@@ -369,6 +406,10 @@ $("adminView").addEventListener("click",async e=>{
   if(edit===null)data[tab].push(rec);else data[tab][edit]=rec;
   if(await save(tab)){edit=null;draw()}else data[tab]=JSON.parse(backup);
   return;
+ }
+ if(b.id==="saveProfile"){
+  const rec={...data.profile};for(const [k] of SCHEMA.profile.fields)rec[k]=$("f_"+k).value.trim();
+  const old=data.profile;data.profile=rec;if(await save("profile"))draw();else data.profile=old;return;
  }
  if(b.id==="saveSkills"){
   const out={};
