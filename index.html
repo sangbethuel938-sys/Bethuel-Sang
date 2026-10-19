@@ -87,10 +87,23 @@ main p,main li{text-align:justify;text-justify:inter-word;hyphens:auto;-webkit-h
 .hero>div{display:flex;flex-direction:column;align-items:center}
 .hero img{order:-1;width:190px;height:190px}
 .hero h1{margin-bottom:.5rem}
-.hero .lead{margin:0 auto .9rem;max-width:36ch;text-align:center;hyphens:none}
+.hero .lead{margin:0 auto .9rem;max-width:48ch;text-align:center;hyphens:none}
 .hero p{max-width:64ch;margin:.2rem auto 1.1rem;text-align:center;hyphens:none}
 .hero .btns{justify-content:center}
 .facts dd a{text-decoration:none}.facts dd a:hover{text-decoration:underline}
+.hero .role{font:600 clamp(1.05rem,2.2vw,1.3rem)/1.3 var(--serif);color:var(--brass);margin:0 0 .4rem}
+.hero .meta{color:var(--muted);font-size:.95rem;margin:0 0 1rem}
+.known{padding-left:1.1rem;margin:.4rem 0}.known li{margin:.35rem 0}
+.tag{font-style:italic;color:var(--leaf);margin:.1rem 0}
+.dims{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:2rem;width:100%}
+.dim{border-top:4px solid var(--brass)}.dim.two{border-top-color:var(--leaf)}
+.dim p,.dim li{text-align:left;hyphens:none}.dim ul{padding-left:1.1rem;margin:.5rem 0 .8rem}.dim li{margin:.3rem 0}.dim a{font-weight:600}
+.shot{width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:8px;border:1px solid var(--line);margin-bottom:.8rem;display:block}
+.gal{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:.5rem;margin-top:.6rem}.gal img{width:100%;border-radius:6px;border:1px solid var(--line);display:block}
+#adminView .shots{display:flex;flex-wrap:wrap;gap:.6rem;margin-bottom:.4rem}
+#adminView .shots label{font-weight:400;width:110px;font-size:.8rem;margin:0}
+#adminView .shots img{width:110px;height:70px;object-fit:cover;border-radius:6px;border:1px solid var(--line);display:block}
+@media(max-width:700px){.dims{grid-template-columns:1fr}}
 @media(max-width:860px){
 .shell{grid-template-columns:1fr}
 aside{position:sticky;height:auto;flex-direction:row;align-items:center;gap:.6rem;padding:.6rem 1rem;border:0;border-bottom:1px solid var(--line);background:rgba(244,247,251,.95);backdrop-filter:blur(8px);z-index:10;overflow-x:auto}
@@ -105,7 +118,7 @@ dl.facts{grid-template-columns:1fr 1fr}dl.facts div:nth-child(2){border-right:0}
 <aside>
  <a class="brand" id="pBrand" href="#home">Bethuel Sang</a>
  <nav id="nav">
-  <a href="#home">Home</a><a href="#projects">Projects</a><a href="#experience">Experience</a><a href="#skills">Skills</a><a href="#education">Education</a><a href="#contact">Contact</a>
+  <a href="#home">Home</a><a href="#about">About</a><a href="#skills">Skills</a><a href="#projects">Projects</a><a href="#experience">Experience</a><a href="#education">Education</a><a href="#contact">Contact</a>
  </nav>
  <div class="side-cta">Mombasa, Kenya</div>
 </aside>
@@ -114,57 +127,67 @@ dl.facts{grid-template-columns:1fr 1fr}dl.facts div:nth-child(2){border-right:0}
  <div class="hero">
   <div>
    <h1 id="pName">Bethuel Sang</h1>
-   <p class="lead" id="pLead">Turning data, trade intelligence and business processes into better decisions.</p>
-   <p class="muted" id="pSummary">Business &amp; Data Analyst in trade development and market intelligence. At the East African Tea Trade Association (EATTA), I analyse tea auction and market data, build Power BI dashboards and prepare management reports. Before EATTA I worked in demand planning, inventory management and sales operations. I hold a degree in Applied Statistics with Computing and I am pursuing an MBA in Strategic Management.</p>
+   <p class="role" id="pTitle"></p>
+   <p class="meta" id="pMeta"></p>
+   <p class="lead" id="pLead"></p>
    <div class="btns">
-    <a class="btn" href="assets/Bethuel_Sang_Full_Professional_CV.pdf" download="Bethuel_Sang_CV.pdf">Download CV</a>
-    <a class="btn alt" data-li href="https://www.linkedin.com/in/bethuel-sang" target="_blank" rel="noopener">LinkedIn</a>
-    <a class="btn alt" href="#skills">View my skills</a>
-    <a class="btn alt" href="#contact">Get in touch</a>
+    <a class="btn" data-li href="https://www.linkedin.com/in/bethuel-sang" target="_blank" rel="noopener">Connect on LinkedIn</a>
+    <a class="btn alt" href="#projects">View projects</a>
+    <a class="btn alt" href="#contact">Contact me</a>
    </div>
   </div>
   <img id="pImg" src="https://qmqhtpjdhaidjeqkehqq.supabase.co/storage/v1/object/public/portfolio-assets/Profiel.jpg" alt="Bethuel Sang" width="190" height="190">
  </div>
- <dl class="facts">
-  <div><dt>Current role</dt><dd>Trade Development Assistant, EATTA</dd></div>
-  <div><dt>Core tools</dt><dd><a href="#skills">Power BI, Python, SQL, Excel</a></dd></div>
-  <div><dt>Projects</dt><dd id="pc"></dd></div>
-  <div><dt>Certifications &amp; training</dt><dd id="cc"></dd></div>
- </dl>
+<div class="dims">
+ <div class="card dim"><h3 id="d1Title"></h3><p id="d1Text"></p><ul id="d1Points"></ul><a href="#projects" data-track="Trade development">See related projects</a></div>
+ <div class="card dim two"><h3 id="d2Title"></h3><p id="d2Text"></p><ul id="d2Points"></ul><a href="#projects" data-track="Data analytics">See related projects</a></div>
+</div>
+</section>
+<section id="about">
+ <h2>About</h2>
+ <p id="pBio"></p>
+ <h3 style="margin-top:1.4rem">What I’m known for</h3>
+ <ul class="known" id="pKnown"></ul>
 </section>
 
-<section id="projects">
- <h2>Projects</h2>
- <p class="muted">Analytics, automation and trade-development work built for better decisions.</p>
- <div class="filters" id="filters" role="group" aria-label="Filter projects by category"></div>
- <div class="grid" id="projectGrid"></div>
-</section>
 
-<section id="experience">
- <h2>Experience</h2>
- <div class="timeline" id="timeline"></div>
-</section>
+
+
+
+
+
+
+
 
 <section id="skills">
- <h2>Skills</h2>
+ <h2>Skills &amp; tools</h2>
  <div class="skills" id="skillGrid"></div>
  <h2 style="margin-top:2.4rem">Certifications &amp; training</h2>
  <div class="grid" id="certGrid"></div>
  <details class="more"><summary>More certifications (<span id="moreCount"></span>)</summary><ul id="moreList"></ul></details>
 </section>
-
+<section id="projects">
+ <h2>Featured projects</h2>
+ <p class="muted">Selected work, with the problem, my role and the outcome for each.</p>
+ <div class="filters" id="filters" role="group" aria-label="Filter projects by category"></div>
+ <div class="grid" id="projectGrid"></div>
+</section>
+<section id="casestudy" style="display:none"><h2 id="caseTitle">Case study</h2><div id="caseBody"></div></section>
+<section id="experience">
+ <h2>Experience</h2>
+ <div class="timeline" id="timeline"></div>
+</section>
 <section id="education">
  <h2>Education</h2>
  <div class="grid" id="eduGrid"></div>
 </section>
-
 <section id="contact" class="contact">
- <h2>Contact</h2>
+ <h2>Let’s connect</h2>
  <p id="cAvail"></p>
  <p><strong>Email</strong><br><a id="cEmail" href="#"></a></p>
  <p><strong>Phone</strong><br><a id="cPhone" href="#"></a></p>
  <p><strong>Location</strong><br><span id="cLoc"></span></p>
- <div class="btns"><a class="btn" data-li href="https://www.linkedin.com/in/bethuel-sang" target="_blank" rel="noopener">LinkedIn</a> <a class="btn alt" id="cGit" style="display:none" href="#" target="_blank" rel="noopener">GitHub</a></div>
+ <div class="btns"><a class="btn" data-li href="https://www.linkedin.com/in/bethuel-sang" target="_blank" rel="noopener">Connect on LinkedIn</a> <a class="btn alt" id="cGit" style="display:none" href="#" target="_blank" rel="noopener">GitHub</a></div>
 </section>
 <div id="adminView">
  <div class="ahead"><h2 style="margin:0">Portfolio admin</h2><div><a href="#home">Back to site</a> <button class="alt sm hide" id="out" type="button">Log out</button></div></div>
@@ -185,28 +208,28 @@ dl.facts{grid-template-columns:1fr 1fr}dl.facts div:nth-child(2){border-right:0}
 <script src="config.js"></script>
 <script>
 let projects=[
-{t:"Tea Auction Power BI Dashboard",c:"Business Intelligence",d:"Interactive dashboard for analysing tea auction performance, pricing trends, volumes, buyer activity and key market indicators.",tools:["Power BI","Power Query","Excel"],ch:"Auction and market data needed to be consolidated and presented so management could use it quickly.",s:"Built a repeatable Power BI reporting workflow with cleaned and transformed auction data.",i:"Better visibility of auction performance and faster interpretation of pricing and market trends.",link:"https://app.powerbi.com/groups/me/reports/fb294c02-d7da-4a86-8c39-00805b5a7adf/aa1b40e6591389ee7c67?experience=power-bi"},
-{t:"Weekly Tea Auction & Sale Analysis",c:"Data Analytics",d:"Weekly analysis that adds later-week outlot and private-sale activity to auction results for a more complete market view.",tools:["Excel","Power Query","Power BI"],ch:"Auction-close figures did not always show the full weekly value because sales continued later in the week.",s:"Re-analysed the weekly data after the later sales period and reconciled the results.",i:"A more complete weekly view for market and management analysis."},
-{t:"EATTA Sports Day QR Registration System",c:"Automation",d:"QR-enabled registration and verification for participant tracking, attendance, team registration and item distribution.",tools:["QR Codes","Excel","Digital Forms"],ch:"Manual registration and verification were slow and prone to duplication.",s:"Designed a QR-based workflow linked to structured participant records.",i:"Faster participant verification, tracking and event administration."},
-{t:"QR Asset Check-In / Check-Out System",c:"Automation",d:"Mobile QR workflow for recording asset check-in and check-out transactions.",tools:["Power Apps","QR Codes","Excel"],ch:"Asset movements needed a simple mobile tracking process.",s:"Designed a Power Apps QR scanning workflow linked to structured records.",i:"A more traceable and practical asset movement process."},
-{t:"Automated Email Complaint Register",c:"Automation",d:"Collects forwarded complaints and structures them into an ISO-aligned Excel complaint register.",tools:["Python","Gmail/IMAP","Excel"],ch:"Complaint emails needed manual consolidation and tracking.",s:"Built a Python workflow that retrieves and structures complaint details in one register.",i:"Less repetitive data entry and better complaint traceability."},
-{t:"Meeting Transcription Automation",c:"Automation",d:"Turns recorded meetings into text transcripts and organises the finished files.",tools:["Python","Whisper"],ch:"Recorded meetings needed manual transcription and file handling.",s:"Created a watched-folder workflow using Whisper transcription.",i:"Less manual transcription effort and consistent file handling."},
-{t:"Auction Data Quality Audit",c:"Data Analytics",d:"Finds duplicates, inconsistencies, reconciliation issues and reporting errors in auction-related data.",tools:["Excel","Power Query","Python"],ch:"Operational datasets contained duplicate and inconsistent records.",s:"Applied structured validation, reconciliation and duplicate-review checks.",i:"Improved reporting accuracy and data integrity."},
-{t:"Handwritten Document Digitization System",c:"Automation",d:"OCR and AI-assisted workflow that converts handwritten images and PDFs into structured Word or Excel files.",tools:["Python","OCR","AI Extraction"],ch:"Handwritten information was hard to digitise and reuse.",s:"Built a conversion workflow combining OCR, AI extraction and structured output.",i:"Less manual retyping and easier access to handwritten records."},
-{t:"Football Match Prediction Dashboard",c:"Data Analytics",d:"Streamlit dashboard that analyses historical football data and shows model-based match predictions.",tools:["Python","Streamlit","Statistics"],ch:"Historical match data had to be collected, structured and presented in an accessible interface.",s:"Built a Python and Streamlit workflow for analysis and dashboard presentation.",i:"An end-to-end analytics project covering data preparation, statistics and visualisation."}
+{t:"Tea Auction Power BI Dashboard",feat:1,tag:"One view of auction performance, pricing and buyer activity",role:"Developed the reporting workflow and dashboard, from data cleaning to presentation.",c:"Business Intelligence",d:"Interactive dashboard for analysing tea auction performance, pricing trends, volumes, buyer activity and key market indicators.",tools:["Power BI","Power Query","Excel"],ch:"Auction and market data needed to be consolidated and presented so management could use it quickly.",s:"Built a repeatable Power BI reporting workflow with cleaned and transformed auction data.",i:"Better visibility of auction performance and faster interpretation of pricing and market trends.",link:"https://app.powerbi.com/groups/me/reports/fb294c02-d7da-4a86-8c39-00805b5a7adf/aa1b40e6591389ee7c67?experience=power-bi"},
+{t:"Weekly Tea Auction & Sale Analysis",feat:1,tag:"A complete weekly market view, including late-week sales",role:"Re-analysed and reconciled the weekly data after the later sales period.",c:"Market Intelligence",d:"Weekly analysis that adds later-week outlot and private-sale activity to auction results for a more complete market view.",tools:["Excel","Power Query","Power BI"],ch:"Auction-close figures did not always show the full weekly value because sales continued later in the week.",s:"Re-analysed the weekly data after the later sales period and reconciled the results.",i:"A more complete weekly view for market and management analysis."},
+{t:"EATTA Sports Day QR Registration System",feat:1,tag:"QR check-in that replaced manual registration",role:"Designed the QR-based workflow and the participant records behind it.",c:"Automation",d:"QR-enabled registration and verification for participant tracking, attendance, team registration and item distribution.",tools:["QR Codes","Excel","Digital Forms"],ch:"Manual registration and verification were slow and prone to duplication.",s:"Designed a QR-based workflow linked to structured participant records.",i:"Faster participant verification, tracking and event administration."},
+{t:"QR Asset Check-In / Check-Out System",tag:"Simple mobile tracking for asset movements",role:"Designed the Power Apps QR scanning workflow.",c:"Automation",d:"Mobile QR workflow for recording asset check-in and check-out transactions.",tools:["Power Apps","QR Codes","Excel"],ch:"Asset movements needed a simple mobile tracking process.",s:"Designed a Power Apps QR scanning workflow linked to structured records.",i:"A more traceable and practical asset movement process."},
+{t:"Automated Email Complaint Register",tag:"Forwarded complaints, filed automatically",role:"Built the Python workflow that retrieves and structures complaint details.",c:"Automation",d:"Collects forwarded complaints and structures them into an ISO-aligned Excel complaint register.",tools:["Python","Gmail/IMAP","Excel"],ch:"Complaint emails needed manual consolidation and tracking.",s:"Built a Python workflow that retrieves and structures complaint details in one register.",i:"Less repetitive data entry and better complaint traceability."},
+{t:"Meeting Transcription Automation",tag:"From recording to transcript, automatically",role:"Created the watched-folder workflow using Whisper.",c:"Automation",d:"Turns recorded meetings into text transcripts and organises the finished files.",tools:["Python","Whisper"],ch:"Recorded meetings needed manual transcription and file handling.",s:"Created a watched-folder workflow using Whisper transcription.",i:"Less manual transcription effort and consistent file handling."},
+{t:"Auction Data Quality Audit",tag:"Cleaner auction data, more reliable reports",role:"Applied the validation, reconciliation and duplicate-review checks.",c:"Data Analytics",d:"Finds duplicates, inconsistencies, reconciliation issues and reporting errors in auction-related data.",tools:["Excel","Power Query","Python"],ch:"Operational datasets contained duplicate and inconsistent records.",s:"Applied structured validation, reconciliation and duplicate-review checks.",i:"Improved reporting accuracy and data integrity."},
+{t:"Handwritten Document Digitization System",tag:"Handwritten records turned into structured files",role:"Developed the OCR and AI-extraction conversion workflow.",c:"Automation",d:"OCR and AI-assisted workflow that converts handwritten images and PDFs into structured Word or Excel files.",tools:["Python","OCR","AI Extraction"],ch:"Handwritten information was hard to digitise and reuse.",s:"Built a conversion workflow combining OCR, AI extraction and structured output.",i:"Less manual retyping and easier access to handwritten records."},
+{t:"Football Match Prediction Dashboard",tag:"Historical match data, presented as predictions",role:"Built the data preparation, statistics and Streamlit dashboard.",c:"Data Analytics",d:"Streamlit dashboard that analyses historical football data and shows model-based match predictions.",tools:["Python","Streamlit","Statistics"],ch:"Historical match data had to be collected, structured and presented in an accessible interface.",s:"Built a Python and Streamlit workflow for analysis and dashboard presentation.",i:"An end-to-end analytics project covering data preparation, statistics and visualisation."}
 ];
 let jobs=[
-{r:"Trade Development Assistant",o:"East African Tea Trade Association (EATTA)",p:"June 2023 – Present",b:["Analyse tea auction, pricing and market data to find trends, performance gaps and commercial insights for management","Build Power BI and Excel dashboards on auction performance, buyer activity and market trends","Monitor regional and international tea markets and competitor activity; prepare market intelligence briefs and management reports","Coordinate with producers, buyers, brokers, warehouses, packers and regulators to support efficient trade and auction operations","Support risk identification, mitigation and compliance as Risk Champion","Use Python, Power Query and SQL to automate data processing and reporting","Support digital registration, QR verification, event-management and data-quality projects","Validate, reconcile and de-duplicate operational data to improve accuracy and integrity"]},
-{r:"Trade Development Representative",o:"Twiga Foods",p:"January 2020 – May 2023",b:["Supported vendor acquisition and contracting","Maintained accurate vendor and route information in the Data Management System","Supported adoption of the Twiga m-commerce platform and monitored order accuracy and timeliness","Supported customer retention and route growth, and communicated pricing, promotions and product updates"]},
-{r:"Demand Planner",o:"China Construction Third Engineering Bureau Co., Ltd.",p:"January 2017 – September 2019",b:["Forecast material requirements from project schedules and consumption trends","Developed material plans aligned with project timelines, contributing to a 15% reduction in delays on the Naiberi–Dry’s Girls Road Upgrade Project","Monitored inventory and supported procurement planning with procurement, engineering and site teams"]},
-{r:"Finance Attaché",o:"National Cereals & Produce Board",p:"May 2014 – August 2014",b:["Supported financial reporting and record maintenance","Verified invoices and assisted with payables and receivables reconciliation","Maintained audit-ready financial documentation"]}
+{r:"Trade Development Assistant",o:"East African Tea Trade Association (EATTA)",p:"June 2023 to Present",b:["Analyse tea auction, pricing and market data to find trends, performance gaps and commercial insights for management","Build Power BI and Excel dashboards on auction performance, buyer activity and market trends","Monitor regional and international tea markets and competitor activity; prepare market intelligence briefs and management reports","Coordinate with producers, buyers, brokers, warehouses, packers and regulators to support efficient trade and auction operations","Support risk identification, mitigation and compliance as Risk Champion","Use Python, Power Query and SQL to automate data processing and reporting","Support digital registration, QR verification, event-management and data-quality projects","Validate, reconcile and de-duplicate operational data to improve accuracy and integrity"]},
+{r:"Trade Development Representative",o:"Twiga Foods",p:"January 2020 to May 2023",b:["Supported vendor acquisition and contracting","Maintained accurate vendor and route information in the Data Management System","Supported adoption of the Twiga m-commerce platform and monitored order accuracy and timeliness","Supported customer retention and route growth, and communicated pricing, promotions and product updates"]},
+{r:"Demand Planner",o:"China Construction Third Engineering Bureau Co., Ltd.",p:"January 2017 to September 2019",b:["Forecast material requirements from project schedules and consumption trends","Developed material plans aligned with project timelines, contributing to a 15% reduction in delays on the Naiberi-Dry’s Girls Road Upgrade Project","Monitored inventory and supported procurement planning with procurement, engineering and site teams"]},
+{r:"Finance Attaché",o:"National Cereals & Produce Board",p:"May 2014 to August 2014",b:["Supported financial reporting and record maintenance","Verified invoices and assisted with payables and receivables reconciliation","Maintained audit-ready financial documentation"]}
 ];
-let skills={"Data & Business Intelligence":["Power BI","Microsoft Excel","Power Query","Dashboard Development","Data Analysis","Business Intelligence","Data Visualization","Business Reporting"],"Programming & Data":["Python","SQL","PostgreSQL","Pandas","NumPy","Data Cleaning","Data Validation","Data Reconciliation","Statistical Analysis"],"Trade & Commercial":["Market Intelligence","Trade Development","Commercial Analysis","Business Analysis","Stakeholder Management","Customer Relationship Management"],"Planning & Operations":["Demand Forecasting","Material Planning","Inventory Management","Procurement Planning","Process Improvement","Operational Analysis"],"Automation & Digital Tools":["Streamlit","Python Automation","QR Systems","Digital Registration","Workflow Automation","OCR","Whisper Transcription"],"Management":["Strategic Analysis","Risk Management","Compliance","Project Coordination","Cross-Functional Collaboration","Reporting"],"Languages":["Swahili (full professional)","English (professional working)"]};
+let skills={"Trade Development":["Market Intelligence","Stakeholder Management","Trade Development","Market Access","Customer Relationship Management","Vendor Acquisition","Digital Registration","Risk and Compliance"],"Data Analytics":["Data Analysis","Business Reporting","Dashboard Development","Data Cleaning","Data Validation","Data Reconciliation","Statistical Analysis","Demand Forecasting"],"Technical Tools":["Power BI","Power Query","Microsoft Excel","Python","SQL","PostgreSQL","Pandas","Streamlit"],"Other Tools":["Power Apps","QR Systems","OCR","Whisper Transcription","Gmail/IMAP Automation"],"Languages":["Swahili (full professional)","English (professional working)"]};
 // f = featured; u = credential link (optional)
 let certs=[
 {t:"Introduction to Cybersecurity",i:"Cisco",d:"August 2026",f:1,u:"https://www.credly.com/badges/80c9ab53-1cf8-4e9a-9a38-c3cfad61f4f8/linked_in_profile"},
 {t:"Data Analytics Training",i:"ICT Authority",d:"July 2026",f:1,u:"https://training.smartacademy.go.ke/certificate-verification/?certificate_id=ICTA-1784318933-7855-45397"},
-{t:"Introduction to Data Science",i:"Moringa School",d:"July–September 2026",f:1},
+{t:"Introduction to Data Science",i:"Moringa School",d:"July to September 2026",f:1},
 {t:"Quality Management Systems Internal Auditor Training Course",i:"SGS",d:"April 2026",f:1},
 {t:"Data Protection Workshop",i:"Office of Data Protection Commissioner",d:"August 2025",f:1,u:"https://www.odpc.go.ke/wp-content/uploads/2025/10/ODPC-DP-WORKSHOP-287-EATTA.pdf"},
 {t:"Microsoft Office Specialist: Excel Certification",i:"Coursera",d:"September 2025",f:1,u:"https://coursera.org/share/a1bbc83ea9367381a3fe092997b32d91"},
@@ -236,49 +259,62 @@ let certs=[
 {t:"Supply Chain Management Analytics",i:"Unilever",d:"",u:"https://coursera.org/share/588d21d964e1a3d77bf63f020ee34de1"}
 ];
 let edu=[
-{q:"Master of Business Administration, Strategic Management",d:"The Open University of Kenya · January 2026 – December 2027 · In progress"},
-{q:"Bachelor of Applied Statistics with Computing",d:"University of Eldoret · Mathematics and Computer Science · August 2011 – November 2015"}
+{q:"Master of Business Administration, Strategic Management",d:"The Open University of Kenya · January 2026 to December 2027 · In progress"},
+{q:"Bachelor of Applied Statistics with Computing",d:"University of Eldoret · Mathematics and Computer Science · August 2011 to November 2015"}
 ];
-let profile={name:"Bethuel Sang",hero_title:"Turning data, trade intelligence and business processes into better decisions.",summary:"Business & Data Analyst in trade development and market intelligence. At the East African Tea Trade Association (EATTA), I analyse tea auction and market data, build Power BI dashboards and prepare management reports. Before EATTA I worked in demand planning, inventory management and sales operations. I hold a degree in Applied Statistics with Computing and I am pursuing an MBA in Strategic Management.",email:"sangbethuel938@gmail.com",phone:"0702733260",location:"Mombasa County, Kenya",linkedin:"https://www.linkedin.com/in/bethuel-sang",github:"",availability:"Open to conversations about business analytics, business intelligence, market intelligence, trade development, commercial analytics and strategy.",profile_image:"https://qmqhtpjdhaidjeqkehqq.supabase.co/storage/v1/object/public/portfolio-assets/Profiel.jpg"};
+let profile={name:"Bethuel Sang",title:"Trade Development Professional & Data Analyst",positioning:"I help tea-trade and commercial teams grow trade and make better decisions, by combining stakeholder-facing trade development with data analysis in Power BI, Python, SQL and Excel.",bio:"I work where trade development and data analytics meet. As Trade Development Assistant at the East African Tea Trade Association (EATTA) in Mombasa, I support the tea trade by engaging producers, buyers, brokers, warehouses, packers and regulators, and I back that work with Power BI dashboards, auction and market analysis and management reports. Earlier, I worked in demand planning, inventory management, sales operations and vendor acquisition across construction and food supply. I hold a degree in Applied Statistics with Computing and I am completing an MBA in Strategic Management. What sets me apart is that I understand the trade relationships and I can also build the data and automation that support them.",dim1_title:"Trade Development",dim1_text:"I work with producers, buyers, brokers, warehouses, packers and regulators to make trade smoother and markets easier to access.",dim1_points:"Stakeholder engagement across the East African tea trade; Market intelligence on regional and international tea markets; Digital registration, QR verification and event systems; Vendor acquisition, retention and route growth at Twiga Foods",dim2_title:"Data & Business Analytics",dim2_text:"I turn auction, pricing and operational data into dashboards, reports and automated workflows that management can act on.",dim2_points:"Power BI and Excel dashboards on auctions, buyers and prices; Data validation, reconciliation and duplicate analysis; Python, SQL and Power Query automation; Demand forecasting and inventory analysis",known_for:"Turning messy auction and market data into clear dashboards and reports; Automating repetitive workflows with Python, Power Query and QR-based tools; Improving data quality through validation, reconciliation and duplicate checks; Building working relationships with producers, buyers, brokers and regulators",email:"sangbethuel938@gmail.com",phone:"0702733260",location:"Mombasa County, Kenya",linkedin:"https://www.linkedin.com/in/bethuel-sang",github:"",cta_text:"I’m open to conversations about business analytics, business intelligence, market intelligence and trade development roles and projects. Connect with me on LinkedIn or send me an email.",profile_image:"https://qmqhtpjdhaidjeqkehqq.supabase.co/storage/v1/object/public/portfolio-assets/Profiel.jpg",case_title:"",case_context:"",case_challenge:"",case_strategy:"",case_result:"",case_lessons:""};
 const $=id=>document.getElementById(id);
-const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const clean=s=>String(s??"").replace(/\s*\u2014\s*/g,", ").replace(/\s+\u2013\s+/g," to ").replace(/\u2013/g,"-");
+const esc=s=>clean(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const link=(u,l)=>u?`<a href="${esc(u)}" target="_blank" rel="noopener">${l}</a>`:"";
 
+let cur="All";
+const trackOf=c=>["Market Intelligence","Trade Development"].includes(c)?"Trade development":"Data analytics";
+const imgSrc=u=>/^https?:/.test(u)?u:((window.PORTFOLIO_CONFIG||{}).url||"")+"/storage/v1/object/public/"+((window.PORTFOLIO_CONFIG||{}).bucket||"portfolio-assets")+"/"+String(u).replace(/^\//,"");
+const shotImg=(u,t,cls)=>`<a href="${esc(imgSrc(u))}" target="_blank" rel="noopener"><img ${cls?`class="${cls}" `:""}loading="lazy" src="${esc(imgSrc(u))}" alt="Screenshot of ${esc(t)}"></a>`;
 function renderProfile(){
- const p=profile;
- document.title=(p.name||"Portfolio")+" | Business & Data Analyst";
- $("pName").textContent=p.name||"";$("pBrand").textContent=p.name||"";
- $("pLead").textContent=p.hero_title||"";$("pSummary").textContent=p.summary||"";
+ const p=profile,L=(u,t)=>u?`<a href="${esc(u)}" target="_blank" rel="noopener">${t}</a>`:"";
+ document.title=(p.name||"Portfolio")+(p.title?" | "+p.title.split("·")[0].trim():"");
+ $("pName").textContent=clean(p.name||"");$("pBrand").textContent=clean(p.name||"");
+ $("pTitle").textContent=clean(p.title||"");$("pLead").textContent=clean(p.positioning||"");
+ $("pMeta").innerHTML=[p.location?esc(p.location):"",p.email?`<a href="mailto:${esc(p.email)}">${esc(p.email)}</a>`:"",L(p.linkedin,"LinkedIn"),L(p.github,"GitHub")].filter(Boolean).join(" · ");
  if(/^https?:/.test(p.profile_image||""))$("pImg").src=p.profile_image;
- $("cAvail").textContent=p.availability||"";
- const em=$("cEmail");em.textContent=p.email||"";em.href=p.email?"mailto:"+p.email:"#";
- const ph=$("cPhone");ph.textContent=p.phone||"";ph.href=p.phone?"tel:"+String(p.phone).replace(/[^+\d]/g,""):"#";
- $("cLoc").textContent=p.location||"";
+ $("pBio").textContent=clean(p.bio||"");
+ $("pKnown").innerHTML=String(p.known_for||"").split(/;\s*|\n/).map(x=>x.trim()).filter(Boolean).map(x=>`<li>${esc(x)}</li>`).join("");
+ $("cAvail").textContent=clean(p.cta_text||"");
+ const em=$("cEmail");em.textContent=clean(p.email||"");em.href=p.email?"mailto:"+p.email:"#";
+ const ph=$("cPhone");ph.textContent=clean(p.phone||"");ph.href=p.phone?"tel:"+String(p.phone).replace(/[^+\d]/g,""):"#";
+ $("cLoc").textContent=clean(p.location||"");
  document.querySelectorAll("[data-li]").forEach(a=>{a.style.display=p.linkedin?"":"none";if(p.linkedin)a.href=p.linkedin});
  const g=$("cGit");g.style.display=p.github?"":"none";if(p.github)g.href=p.github;
+ const pts=t=>String(t||"").split(/;\s*|\n/).map(x=>x.trim()).filter(Boolean).map(x=>`<li>${esc(x)}</li>`).join("");
+ [1,2].forEach(n=>{$("d"+n+"Title").textContent=clean(p["dim"+n+"_title"]||"");$("d"+n+"Text").textContent=clean(p["dim"+n+"_text"]||"");$("d"+n+"Points").innerHTML=pts(p["dim"+n+"_points"]);});
+ const cs=$("casestudy");
+ if(p.case_title){
+  cs.style.display="";$("caseTitle").textContent="Case study: "+p.case_title;
+  $("caseBody").innerHTML=[["Context / background",p.case_context],["Challenge",p.case_challenge],["Strategy and steps taken",p.case_strategy],["Result",p.case_result],["Lessons learned",p.case_lessons]].filter(r=>r[1]).map(r=>`<h3 style="margin-top:1rem">${r[0]}</h3><p>${esc(r[1])}</p>`).join("");
+ }else cs.style.display="none";
 }
 function renderAll(){
  renderProfile();
-$("pc").textContent=projects.length+" projects";
-$("cc").textContent=certs.length+" credentials";
 $("yr").textContent=new Date().getFullYear();
 
 // Projects + filter
-const cats=["All",...new Set(projects.map(p=>p.c))];
-let cur="All";
+const cats=["All","Trade development","Data analytics"];
 function drawProjects(){
  $("filters").innerHTML=cats.map(c=>`<button type="button" class="${c===cur?"on":""}" aria-pressed="${c===cur}" data-c="${esc(c)}">${esc(c)}</button>`).join("");
- $("projectGrid").innerHTML=projects.filter(p=>cur==="All"||p.c===cur).map(p=>`
- <article class="card"><div class="cat">${esc(p.c)}</div><h3>${esc(p.t)}</h3><p class="muted" style="margin:.3rem 0">${esc(p.d)}</p>
+ $("projectGrid").innerHTML=[...projects].filter(p=>cur==="All"||trackOf(p.c)===cur).sort((a,b)=>(b.feat?1:0)-(a.feat?1:0)).map(p=>{
+ const row=(l,v)=>v?`<p><strong>${l}.</strong> ${esc(v)}</p>`:"";
+ return `<article class="card">${p.imgs&&p.imgs[0]?shotImg(p.imgs[0],p.t,"shot"):""}<div class="cat">${esc(p.c)}${p.feat?" · Featured":""}</div><h3>${esc(p.t)}</h3>${p.tag?`<p class="tag">${esc(p.tag)}</p>`:""}<p class="muted" style="margin:.3rem 0">${esc(p.d)}</p>
  <div class="pills">${p.tools.map(x=>`<span class="pill">${esc(x)}</span>`).join("")}</div>
  ${link(p.link,"View project")} ${link(p.code,"Code")}
- <details><summary>Case study</summary><p><strong>Challenge.</strong> ${esc(p.ch)}</p><p><strong>Solution.</strong> ${esc(p.s)}</p><p><strong>Impact.</strong> ${esc(p.i)}</p></details></article>`).join("");
+ <details><summary>Problem, role and outcome</summary>${row("Problem",p.ch)}${row("My role",p.role)}${row("Process",p.s)}${row("Outcome",p.i)}${p.imgs&&p.imgs.length>1?`<div class="gal">${p.imgs.slice(1).map(u=>shotImg(u,p.t)).join("")}</div>`:""}</details></article>`}).join("");
 }
 $("filters").onclick=e=>{const b=e.target.closest("button");if(b){cur=b.dataset.c;drawProjects();}};
-drawProjects();
+drawProjects();window.drawProjects=drawProjects;
 
 $("timeline").innerHTML=jobs.map(j=>`<div class="job"><h3>${esc(j.r)}</h3><div>${esc(j.o)}</div><div class="when">${esc(j.p)}</div><ul>${j.b.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>`).join("");
-$("skillGrid").innerHTML=Object.entries(skills).map(([g,v])=>`<div class="card"><h3>${esc(g)}</h3><p>${v.map(esc).join(", ")}</p></div>`).join("");
+$("skillGrid").innerHTML=Object.entries(skills).map(([g,v])=>`<div class="card"><h3>${esc(g)}</h3><div class="pills">${v.map(x=>`<span class="pill">${esc(x)}</span>`).join("")}</div></div>`).join("");
 $("certGrid").innerHTML=certs.filter(c=>c.f).map(c=>`<div class="card cert"><div class="iss">${esc(c.i)}</div><h3>${esc(c.t)}</h3><div class="muted">${esc(c.d)}</div>${link(c.u,"View credential")}</div>`).join("");
 const rest=certs.filter(c=>!c.f);
 $("moreCount").textContent=rest.length;
@@ -296,7 +332,7 @@ async function loadRemote(){
   if(!r.ok)return;
   const m=Object.fromEntries((await r.json()).map(x=>[x.key,x.value]));
   const ok=a=>Array.isArray(a);
-  if(ok(m.projects))projects=m.projects.filter(p=>p.status!=="Draft").map(p=>({t:p.title||"",c:p.category||"Other",d:p.description||"",tools:p.tools||[],ch:p.challenge||"",s:p.solution||"",i:p.impact||"",link:p.project_link||"",code:p.github_link||""}));
+  if(ok(m.projects))projects=m.projects.filter(p=>p.status!=="Draft").map(p=>({t:p.title||"",c:p.category||"Other",d:p.description||"",tools:p.tools||[],ch:p.challenge||"",s:p.solution||"",i:p.impact||"",tag:p.tagline||"",role:p.role||"",feat:!!p.featured,imgs:[p.cover_image,...(p.gallery||[])].filter(Boolean),link:p.project_link||"",code:p.github_link||""}));
   if(ok(m.experience))jobs=m.experience.map(x=>({r:x.role||"",o:x.company||"",p:x.period||"",b:String(x.details||"").split(/;\s*|\n/).map(t=>t.trim()).filter(Boolean)}));
   if(m.skills&&typeof m.skills==="object"&&!Array.isArray(m.skills))skills=m.skills;
   if(m.profile&&typeof m.profile==="object"&&!Array.isArray(m.profile))profile={...profile,...m.profile};
@@ -306,6 +342,8 @@ async function loadRemote(){
  }catch(e){console.warn("Supabase load failed, showing built-in content",e)}
 }
 loadRemote();
+
+document.addEventListener("click",e=>{const a=e.target.closest("[data-track]");if(a){cur=a.dataset.track;if(window.drawProjects)window.drawProjects();}});
 
 // Highlight current section in nav
 const links=[...document.querySelectorAll("#nav a")];
@@ -321,24 +359,49 @@ const CATS=["Data Analytics","Automation","Business Intelligence","Trade Develop
 // Field types: text | area | list (comma separated) | semi (one per line, stored as "a; b") | bool | select
 const SCHEMA={
  projects:{label:"Projects",title:"title",sub:r=>`${r.category||""} · ${r.status||""}${r.featured?" · Featured":""}`,idFrom:"title",
-  fields:[["title","Title"],["category","Category","select",CATS],["status","Status","select",["Published","Draft"]],["featured","Show on featured list","bool"],["description","Short description","area"],["tools","Tools (comma separated)","list"],["challenge","Challenge","area"],["solution","Solution","area"],["impact","Impact","area"],["project_link","Project / demo link (https://)"],["github_link","GitHub / code link (https://)"]]},
+  fields:[["title","Title"],["category","Category","select",CATS],["status","Status","select",["Published","Draft"]],["featured","Show on featured list","bool"],["tagline","Short tagline"],["description","Short description","area"],["role","Your role (what you specifically did)","area"],["tools","Tools (comma separated)","list"],["challenge","Problem: what challenge needed solving?","area"],["solution","Process / approach","area"],["impact","Outcome / impact (include measurable results)","area"],["project_link","Project / demo link (https://)"],["github_link","GitHub / code link (https://)"]]},
  experience:{label:"Experience",title:"role",sub:r=>`${r.company||""} · ${r.period||""}`,
-  fields:[["role","Role"],["company","Company"],["period","Period (e.g. June 2023 – Present)"],["details","Responsibilities (one per line)","semi"]]},
+  fields:[["role","Role"],["company","Company"],["period","Period (e.g. June 2023 to Present)"],["details","Responsibilities (one per line)","semi"]]},
  certifications:{label:"Certifications",title:"title",sub:r=>`${r.issuer||""} · ${r.issued||""}${r.featured?" · Featured":""}`,idFrom:"title",
   fields:[["title","Certification"],["issuer","Issuer"],["issued","Issued (e.g. May 2026)"],["credential_id","Credential ID"],["credential_url","Credential link (https://)"],["featured","Featured","bool"],["skills","Skills (comma separated)","list"]]},
  education:{label:"Education",title:"qualification",sub:r=>r.detail||"",
   fields:[["qualification","Qualification"],["detail","Institution, dates, status","area"]]},
  skills:{label:"Skills"},
- profile:{label:"Profile",fields:[["name","Name"],["hero_title","Main headline","area"],["summary","Professional summary","area"],["availability","Contact text","area"],["email","Email"],["phone","Phone"],["location","Location"],["linkedin","LinkedIn link (https://)"],["github","GitHub link (https://, leave blank to hide)"],["profile_image","Profile image URL (https://)"]]}
+ profile:{label:"Profile",fields:[["name","Name"],["title","Professional title / role"],["positioning","One-sentence positioning","area"],["bio","Short bio (3 to 5 sentences)","area"],["dim1_title","Dimension 1: title (e.g. Trade Development)"],["dim1_text","Dimension 1: summary","area"],["dim1_points","Dimension 1: points (one per line)","semi"],["dim2_title","Dimension 2: title (e.g. Data & Business Analytics)"],["dim2_text","Dimension 2: summary","area"],["dim2_points","Dimension 2: points (one per line)","semi"],["known_for","What I’m known for (one strength per line)","semi"],["location","Location"],["email","Email"],["phone","Phone"],["linkedin","LinkedIn URL (https://)"],["github","GitHub / other link (https://, blank to hide)"],["profile_image","Profile image URL (https://)"],["cta_text","Call to action message","area"],["case_title","Case study: project name (leave blank to hide the section)"],["case_context","Case study: context / background","area"],["case_challenge","Case study: challenge","area"],["case_strategy","Case study: strategy and steps taken","area"],["case_result","Case study: result","area"],["case_lessons","Case study: lessons learned","area"]]}
 };
 const data={};const seeded=new Set();let tab="projects",edit=null,user=null;
 
 function msg(t,ok=true){const m=$("msg");m.textContent=t;m.className=ok?"ok":"err";clearTimeout(msg.t);msg.t=setTimeout(()=>m.className="",5000)}
 const slug=t=>t.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"")||"item-"+Date.now();
 const jp=o=>JSON.parse(JSON.stringify(o));
+const BUCKET=C.bucket||"portfolio-assets";
+function shotsUI(rec){
+ const have=[rec.cover_image,...(rec.gallery||[])].filter(Boolean);
+ return `<label>Screenshots</label><p class="muted" style="margin:.1rem 0 .4rem">The first image is the cover. Untick a screenshot to remove it.</p>`+
+ (have.length?`<div class="shots">${have.map(u=>`<label><img src="${esc(imgSrc(u))}" alt=""><input type="checkbox" class="shotkeep" value="${esc(u)}" checked> Keep</label>`).join("")}</div>`:"")+
+ `<label for="f_shots">Add screenshots (PNG, JPG or WEBP, up to 5 MB each)</label><input type="file" id="f_shots" accept="image/png,image/jpeg,image/webp" multiple>`;
+}
+async function collectShots(rec){
+ const keep=[...document.querySelectorAll("#adminView .shotkeep")].filter(c=>c.checked).map(c=>c.value);
+ const files=[...($("f_shots").files||[])];
+ for(const f of files){
+  if(!/^image\//.test(f.type))throw new Error(f.name+" is not an image");
+  if(f.size>5*1024*1024)throw new Error(f.name+" is larger than 5 MB");
+ }
+ if(files.length)msg("Uploading screenshots");
+ const id=rec.id||slug(rec.title),out=[...keep];
+ for(const f of files){
+  const ext=(f.name.split(".").pop()||"png").toLowerCase().replace(/[^a-z0-9]/g,"")||"png";
+  const path=`projects/${id}-${Date.now()}-${Math.random().toString(36).slice(2,7)}.${ext}`;
+  const {error}=await sb.storage.from(BUCKET).upload(path,f,{contentType:f.type});
+  if(error)throw error;
+  out.push(sb.storage.from(BUCKET).getPublicUrl(path).data.publicUrl);
+ }
+ rec.cover_image=out[0]||"";rec.gallery=out.slice(1);
+}
 const SEEDNOTE='<p class="muted" style="margin-top:0">Showing your built-in content. Edit anything, then press Save: it is stored in Supabase from then on.</p>';
 const DEF={
- projects:projects.map((p,n)=>({id:slug(p.t),title:p.t,category:p.c,status:"Published",featured:n<3,description:p.d,tools:p.tools,challenge:p.ch,solution:p.s,impact:p.i,project_link:p.link||"",github_link:p.code||""})),
+ projects:projects.map((p,n)=>({id:slug(p.t),title:p.t,category:p.c,status:"Published",featured:!!p.feat,tagline:p.tag||"",description:p.d,role:p.role||"",cover_image:"",gallery:[],tools:p.tools,challenge:p.ch,solution:p.s,impact:p.i,project_link:p.link||"",github_link:p.code||""})),
  experience:jobs.map(j=>({role:j.r,company:j.o,period:j.p,details:j.b.join("; ")})),
  certifications:certs.map(c=>({id:slug(c.t),title:c.t,issuer:c.i,issued:c.d,credential_id:"",credential_url:c.u||"",skills:[],featured:!!c.f})),
  education:edu.map(e=>({qualification:e.q,detail:e.d})),
@@ -390,7 +453,7 @@ function drawForm(){
   $("formBox").innerHTML=`<label for="skillsTxt">Skill groups</label><textarea id="skillsTxt" style="min-height:260px">${esc(txt)}</textarea><p><button type="button" id="saveSkills">Save skills</button></p>`;return;
  }
  const sc=SCHEMA[tab],rec=edit===null?{status:"Published"}:data[tab][edit];
- $("formBox").innerHTML=`<h2 style="margin-top:0">${edit===null?"Add new":"Edit"} · ${sc.label}</h2>`+sc.fields.map(f=>field(f,rec[f[0]])).join("")+
+ $("formBox").innerHTML=`<h2 style="margin-top:0">${edit===null?"Add new":"Edit"} · ${sc.label}</h2>`+sc.fields.map(f=>field(f,rec[f[0]])).join("")+(tab==="projects"?shotsUI(rec):"")+
  `<p><button type="button" id="saveItem">${edit===null?"Add":"Save changes"}</button> ${edit!==null?'<button type="button" class="alt" id="cancel">Cancel</button>':""}</p>`;
 }
 function readForm(){
@@ -412,6 +475,7 @@ $("adminView").addEventListener("click",async e=>{
  if(b.id==="saveItem"){
   const rec=readForm(),t=SCHEMA[tab].title;
   if(!rec[t]){msg("Please fill in "+t+".",false);return}
+  if(tab==="projects"){try{await collectShots(rec)}catch(err){msg("Screenshot upload failed: "+(err.message||err)+". Check that you ran supabase_storage.sql.",false);return}}
   const backup=JSON.stringify(data[tab]);
   if(edit===null)data[tab].push(rec);else data[tab][edit]=rec;
   if(await save(tab)){edit=null;draw()}else data[tab]=JSON.parse(backup);
