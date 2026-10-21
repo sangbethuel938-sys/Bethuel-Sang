@@ -189,6 +189,7 @@ dl.facts{grid-template-columns:1fr 1fr}dl.facts div:nth-child(2){border-right:0}
 <section id="casestudy" style="display:none"><h2 id="caseTitle">Case study</h2><div id="caseBody"></div></section>
 <section id="experience">
  <h2>Experience</h2>
+ <p class="muted" id="expTotal"></p>
  <div class="timeline" id="timeline"></div>
 </section>
 <section id="education">
@@ -293,6 +294,26 @@ const MONTHS=["january","february","march","april","may","june","july","august",
 const startKey=p=>{const m=String(p||"").match(/([A-Za-z]+)\s+(\d{4})/);if(!m)return 0;const i=MONTHS.indexOf(m[1].toLowerCase());return +m[2]*12+(i<0?0:i)};
 const isCurrent=p=>/present|current|to date/i.test(p||"");
 const sortedJobs=()=>[...jobs].sort((a,b)=>startKey(b.p)-startKey(a.p));
+const monthNo=s=>["jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec"].indexOf(String(s).slice(0,3).toLowerCase());
+function parsePeriod(p){
+ const t=String(p||"");
+ const ms=[...t.matchAll(/([A-Za-z]{3,9})\.?\s+(\d{4})/g)].map(m=>({y:+m[2],m:monthNo(m[1])})).filter(x=>x.m>=0);
+ if(!ms.length)return null;
+ const now=new Date(),cur=now.getFullYear()*12+now.getMonth();
+ const s=ms[0].y*12+ms[0].m;
+ const e=isCurrent(t)?cur:(ms[1]?ms[1].y*12+ms[1].m:s);
+ return e>=s?[s,e+1]:null;
+}
+function totalMonths(list){
+ const iv=list.map(j=>parsePeriod(j.p)).filter(Boolean).sort((a,b)=>a[0]-b[0]);
+ let tot=0,cs=null,ce=null;
+ for(const [s,e] of iv){if(cs===null){cs=s;ce=e}else if(s<=ce){ce=Math.max(ce,e)}else{tot+=ce-cs;cs=s;ce=e}}
+ return cs===null?0:tot+ce-cs;
+}
+const fmtDur=m=>{const y=Math.floor(m/12),r=m%12;return [y?y+" yr"+(y>1?"s":""):"",r?r+" mo":""].filter(Boolean).join(" ")||"Under 1 month"};
+// Roles with "attach" or "intern" in the title are left out of the total. Change to ()=>jobs to count everything.
+const countable=()=>jobs.filter(j=>!/attach|intern/i.test(j.r));
+const roleDur=j=>{const q=parsePeriod(j.p);return q?fmtDur(q[1]-q[0]):""};
 
 let bgTimer=null;
 function setBackgrounds(list,a=.82){
@@ -313,7 +334,8 @@ function renderProfile(){
  $("pName").textContent=clean(p.name||"");$("pBrand").textContent=clean(p.name||"");
  $("pTitle").textContent=clean(p.title||"");$("pLead").textContent=clean(p.positioning||"");
  const cj=sortedJobs().find(j=>isCurrent(j.p));
- $("pMeta").innerHTML=[cj?esc(cj.r+", "+cj.o):"",p.location?esc(p.location):"",p.email?`<a href="mailto:${esc(p.email)}">${esc(p.email)}</a>`:"",L(p.linkedin,"LinkedIn"),L(p.github,"GitHub")].filter(Boolean).join(" · ");
+ const yrs=Math.floor(totalMonths(countable())/12);
+ $("pMeta").innerHTML=[cj?esc(cj.r+", "+cj.o):"",yrs?yrs+"+ years experience":"",p.location?esc(p.location):"",p.email?`<a href="mailto:${esc(p.email)}">${esc(p.email)}</a>`:"",L(p.linkedin,"LinkedIn"),L(p.github,"GitHub")].filter(Boolean).join(" · ");
  if(/^https?:/.test(p.profile_image||""))$("pImg").src=p.profile_image;
  $("pBio").textContent=clean(p.bio||"");
  $("pKnown").innerHTML=String(p.known_for||"").split(/;\s*|\n/).map(x=>x.trim()).filter(Boolean).map(x=>`<li>${esc(x)}</li>`).join("");
@@ -353,7 +375,8 @@ function drawProjects(){
 $("filters").onclick=e=>{const b=e.target.closest("button");if(b){cur=b.dataset.c;drawProjects();}};
 drawProjects();window.drawProjects=drawProjects;
 
-$("timeline").innerHTML=sortedJobs().map(j=>`<div class="job"><h3>${esc(j.r)}${isCurrent(j.p)?' <span class="pill">Current</span>':""}</h3><div>${esc(j.o)}</div><div class="when">${esc(j.p)}</div><ul>${j.b.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>`).join("");
+$("expTotal").textContent="Total professional experience: "+fmtDur(totalMonths(countable()))+", calculated from the dates below.";
+$("timeline").innerHTML=sortedJobs().map(j=>`<div class="job"><h3>${esc(j.r)}${isCurrent(j.p)?' <span class="pill">Current</span>':""}</h3><div>${esc(j.o)}</div><div class="when">${esc(j.p)}${roleDur(j)?" · "+roleDur(j):""}</div><ul>${j.b.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>`).join("");
 $("skillGrid").innerHTML=Object.entries(skills).map(([g,v])=>`<div class="card"><h3>${esc(g)}</h3><div class="pills">${v.map(x=>`<span class="pill">${esc(x)}</span>`).join("")}</div></div>`).join("");
 $("certGrid").innerHTML=certs.filter(c=>c.f).map(c=>`<div class="card cert"><div class="iss">${esc(c.i)}</div><h3>${esc(c.t)}</h3><div class="muted">${esc(c.d)}</div>${c.id?`<div class="iss">Credential ID: ${esc(c.id)}</div>`:""}${link(c.u,"View credential")}</div>`).join("");
 const rest=certs.filter(c=>!c.f);
