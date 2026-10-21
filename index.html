@@ -173,15 +173,6 @@ dl.facts{grid-template-columns:1fr 1fr}dl.facts div:nth-child(2){border-right:0}
  <ul class="known" id="pKnown"></ul>
 </section>
 
-
-
-
-
-
-
-
-
-
 <section id="skills">
  <h2>Skills &amp; tools</h2>
  <div class="skills" id="skillGrid"></div>
@@ -248,37 +239,37 @@ let jobs=[
 {r:"Finance Attaché",o:"National Cereals & Produce Board",p:"May 2014 to August 2014",b:["Supported financial reporting and record maintenance","Verified invoices and assisted with payables and receivables reconciliation","Maintained audit-ready financial documentation"]}
 ];
 let skills={"Trade Development":["Market Intelligence","Stakeholder Management","Trade Development","Market Access","Customer Relationship Management","Vendor Acquisition","Digital Registration","Risk and Compliance"],"Data Analytics":["Data Analysis","Business Reporting","Dashboard Development","Data Cleaning","Data Validation","Data Reconciliation","Statistical Analysis","Demand Forecasting"],"Technical Tools":["Power BI","Power Query","Microsoft Excel","Python","SQL","PostgreSQL","Pandas","Streamlit"],"Other Tools":["Power Apps","QR Systems","OCR","Whisper Transcription","Gmail/IMAP Automation"],"Languages":["Swahili (full professional)","English (professional working)"]};
-// f = featured; u = credential link (optional)
+// f = featured; u = credential link (optional); id = credential ID (optional)
 let certs=[
 {t:"Introduction to Cybersecurity",i:"Cisco",d:"August 2026",f:1,u:"https://www.credly.com/badges/80c9ab53-1cf8-4e9a-9a38-c3cfad61f4f8/linked_in_profile"},
-{t:"Data Analytics Training",i:"ICT Authority",d:"July 2026",f:1,u:"https://training.smartacademy.go.ke/certificate-verification/?certificate_id=ICTA-1784318933-7855-45397"},
+{t:"Data Analytics Training",i:"ICT Authority",d:"July 2026",f:1,id:"ICTA-1784318933-7855-45397",u:"https://training.smartacademy.go.ke/certificate-verification/?certificate_id=ICTA-1784318933-7855-45397"},
 {t:"Introduction to Data Science",i:"Moringa School",d:"July to September 2026",f:1},
-{t:"Quality Management Systems Internal Auditor Training Course",i:"SGS",d:"April 2026",f:1},
-{t:"Data Protection Workshop",i:"Office of Data Protection Commissioner",d:"August 2025",f:1,u:"https://www.odpc.go.ke/wp-content/uploads/2025/10/ODPC-DP-WORKSHOP-287-EATTA.pdf"},
+{t:"Quality Management Systems Internal Auditor Training Course",i:"SGS",d:"April 2026",f:1,u:"https://learning.sgs.com/lmt/!clmscertificate.prVerify?site=sgsssc&in_region=ke&in_token=ODRBQkQxODQ5MzI4NzJGNURGNTI2QjkzRDA5MkNDOEUwMkRENjk2QTdBNUNEMjM3MjdDMzcwMDNGNTJENUFEMA=="},
+{t:"Data Protection Workshop",i:"Office of Data Protection Commissioner",d:"August 2025",f:1,id:"DP/0825-287/004",u:"https://www.odpc.go.ke/wp-content/uploads/2025/10/ODPC-DP-WORKSHOP-287-EATTA.pdf"},
 {t:"Microsoft Office Specialist: Excel Certification",i:"Coursera",d:"September 2025",f:1,u:"https://coursera.org/share/a1bbc83ea9367381a3fe092997b32d91"},
-{t:"Career Essentials in Generative AI by Microsoft and LinkedIn",i:"LinkedIn",d:"September 2025",f:1},
-{t:"Integrated Customs Management System",i:"KESRA",d:"April 2024",f:1},
-{t:"Microsoft Power BI Desktop for Business Intelligence",i:"Udemy",d:"September 2024",f:1,u:"https://www.udemy.com/certificate/UC-6c61eb4c-eaec-4e4c-86f5-06a82914339c/"},
-{t:"Strategic Pause for Leaders",i:"Open University of Kenya",d:"May 2026"},
-{t:"Business Modeling for Entrepreneurs",i:"Open University of Kenya",d:"May 2026"},
-{t:"Mental Health Awareness",i:"Open University of Kenya",d:"May 2026"},
+{t:"Career Essentials in Generative AI by Microsoft and LinkedIn",i:"LinkedIn",d:"September 2025",f:1,u:"https://www.linkedin.com/learning/certificates/c85b8aaf5852406769adb04f2463da0cb09a656e093a5719fae3271d60ee80f6/?trk=share_certificate"},
+{t:"Integrated Customs Management System",i:"KESRA",d:"April 2024",f:1,id:"KESRA/040487",u:"https://www.linkedin.com/in/bethuel-sang/overlay/Certifications/1897472047/treasury/?profileId=ACoAADtaRHcBAI7CnG3nKfpwYNDt8BdcU1cSDnY"},
+{t:"Microsoft Power BI Desktop for Business Intelligence",i:"Udemy",d:"September 2024",f:1,id:"UC-6c61eb4c-eaec-4e4c-86f5-06a82914339c",u:"https://www.udemy.com/certificate/UC-6c61eb4c-eaec-4e4c-86f5-06a82914339c/"},
+{t:"Strategic Pause for Leaders",i:"Open University of Kenya",d:"May 2026",u:"https://www.linkedin.com/in/bethuel-sang/overlay/Certifications/1334580857/treasury/?profileId=ACoAADtaRHcBAI7CnG3nKfpwYNDt8BdcU1cSDnY"},
+{t:"Business Modeling for Entrepreneurs",i:"Open University of Kenya",d:"May 2026",u:"https://www.linkedin.com/in/bethuel-sang/overlay/Certifications/1235652180/treasury/?profileId=ACoAADtaRHcBAI7CnG3nKfpwYNDt8BdcU1cSDnY"},
+{t:"Mental Health Awareness",i:"Open University of Kenya",d:"May 2026",u:"https://www.linkedin.com/in/bethuel-sang/overlay/Certifications/1152873046/treasury/?profileId=ACoAADtaRHcBAI7CnG3nKfpwYNDt8BdcU1cSDnY"},
 {t:"Marketing Channel Benefits",i:"Coursera",d:"September 2025",u:"https://coursera.org/share/c9f3b3bc40d9ef16e18e2dc2d0f74cc5"},
 {t:"Automation for Everyone: Tech Benefits Unleashed",i:"Coursera",d:"September 2025",u:"https://coursera.org/share/2d842119b0ad20953f04adb2fe3cc6de"},
-{t:"Conflict Resolution Foundations",i:"LinkedIn",d:"September 2025"},
-{t:"Client Management and Relationships",i:"LinkedIn",d:"September 2025"},
-{t:"Key Account Management",i:"LinkedIn",d:"September 2025"},
-{t:"Building Rapport with Customers",i:"LinkedIn",d:"September 2025"},
-{t:"Account Management: Maintaining Relationships",i:"LinkedIn",d:"September 2025"},
-{t:"Using Customer Surveys to Improve Service",i:"LinkedIn",d:"September 2025"},
-{t:"Creating Positive Conversations with Challenging Customers",i:"LinkedIn",d:"September 2025"},
-{t:"Developing a Service Mindset",i:"LinkedIn",d:"September 2025"},
-{t:"Problem-Solving and Troubleshooting",i:"LinkedIn",d:"September 2025"},
-{t:"Zendesk Customer Service Professional",i:"LinkedIn",d:"September 2025"},
-{t:"Social Media Marketing Strategy: TikTok and Instagram Reels",i:"LinkedIn",d:"September 2025"},
-{t:"Managing Teams",i:"LinkedIn",d:"August 2025"},
-{t:"Developing Your Emotional Intelligence",i:"LinkedIn",d:"August 2025"},
-{t:"AI in Project Management",i:"LinkedIn",d:"August 2025"},
-{t:"Project Management Professional (PMP)",i:"Computer Pride",d:"August 2025"},
+{t:"Conflict Resolution Foundations",i:"LinkedIn",d:"September 2025",u:"https://www.linkedin.com/learning/certificates/98f4497630fb32422bb1f4432e0197cbb62ed843a0e02ba2af6a45190ec4103c/?trk=share_certificate"},
+{t:"Client Management and Relationships",i:"LinkedIn",d:"September 2025",u:"https://www.linkedin.com/learning/certificates/d3795c4c8c3ba987fc18e34ad7ba3dd7c9808538eea3268b02fd2801d677c42e/?trk=share_certificate"},
+{t:"Key Account Management",i:"LinkedIn",d:"September 2025",u:"https://www.linkedin.com/learning/certificates/05b6e4a5bc89e8f8d45702dfafd546cf8c926993ec5dc30a2e0c77684cb83e79/?trk=share_certificate"},
+{t:"Building Rapport with Customers",i:"LinkedIn",d:"September 2025",u:"https://www.linkedin.com/learning/certificates/a914e9ede6a5c741f86f4b25232376bcef86cca60f1db3811ae3f387bd4d9764/?trk=share_certificate"},
+{t:"Account Management: Maintaining Relationships",i:"LinkedIn",d:"September 2025",u:"https://www.linkedin.com/learning/certificates/6b3bc28f6121e842f81a3d3fb468f26f16028013c6b9bd00ea01d173bc71daf9/?trk=share_certificate"},
+{t:"Using Customer Surveys to Improve Service",i:"LinkedIn",d:"September 2025",u:"https://www.linkedin.com/learning/certificates/244b8022d747c6c368ab82f7790e3b4ebf9a9a36b9caa5712b1bb6a10e8e1e5f/?trk=share_certificate"},
+{t:"Creating Positive Conversations with Challenging Customers",i:"LinkedIn",d:"September 2025",u:"https://www.linkedin.com/learning/certificates/fec4d27ec53cce46d3246443bb3531a7c3af87a7deaf809cdcfb8d49d9876bfb?trk=share_certificate"},
+{t:"Developing a Service Mindset",i:"LinkedIn",d:"September 2025",u:"https://www.linkedin.com/learning/certificates/57cc7a814d4fc0d440216b9068fb40fcc818157499ccaa3c06bbeb76be872b55?trk=share_certificate"},
+{t:"Problem-Solving and Troubleshooting",i:"LinkedIn",d:"September 2025",u:"https://www.linkedin.com/learning/certificates/885b8f45647bd2d339acc9e24c66e439c272ccd98be7aa3ccf1049071537d377/?trk=share_certificate"},
+{t:"Zendesk Customer Service Professional",i:"LinkedIn",d:"September 2025",u:"https://www.linkedin.com/learning/certificates/37ac195f4375a17e08f7a9f66c98c5f60f797d68d2ca82eb90b4bb4a0c4ca155/?trk=share_certificate"},
+{t:"Social Media Marketing Strategy: TikTok and Instagram Reels",i:"LinkedIn",d:"September 2025",u:"https://www.linkedin.com/learning/certificates/1abdc92e3e01f7bfa1b8be90067c9d2ce01d60e49219a12690194ac5ad703339/?trk=share_certificate"},
+{t:"Managing Teams",i:"LinkedIn",d:"August 2025",u:"https://www.linkedin.com/learning/certificates/d8c05f1d5d047a4b62379a9992cab8de73d99e461055fddcabad7922b5436860/"},
+{t:"Developing Your Emotional Intelligence",i:"LinkedIn",d:"August 2025",u:"https://www.linkedin.com/learning/certificates/5356e9908c1344fa9b28f1cbff904f1e79f856200756cb7e13927129b8715631/"},
+{t:"AI in Project Management",i:"LinkedIn",d:"August 2025",u:"https://www.linkedin.com/in/bethuel-sang/overlay/Certifications/1708266319/treasury/?profileId=ACoAADtaRHcBAI7CnG3nKfpwYNDt8BdcU1cSDnY"},
+{t:"Project Management Professional (PMP)",i:"Computer Pride",d:"August 2025",u:"https://www.linkedin.com/in/bethuel-sang/overlay/Certifications/1181202977/treasury/?profileId=ACoAADtaRHcBAI7CnG3nKfpwYNDt8BdcU1cSDnY"},
 {t:"Supply Chain Management Analytics",i:"Unilever",d:"",u:"https://coursera.org/share/588d21d964e1a3d77bf63f020ee34de1"}
 ];
 let edu=[
@@ -296,6 +287,13 @@ const trackOf=c=>["Market Intelligence","Trade Development"].includes(c)?"Trade 
 const imgSrc=u=>/^https?:/.test(u)?u:((window.PORTFOLIO_CONFIG||{}).url||"")+"/storage/v1/object/public/"+((window.PORTFOLIO_CONFIG||{}).bucket||"portfolio-assets")+"/"+String(u).replace(/^\//,"");
 const shotImg=(u,t,cls)=>`<a href="${esc(imgSrc(u))}" target="_blank" rel="noopener"><img ${cls?`class="${cls}" `:""}loading="lazy" src="${esc(imgSrc(u))}" alt="Screenshot of ${esc(t)}"></a>`;
 const bgList=r=>Array.isArray(r.hero_backgrounds)&&r.hero_backgrounds.length?r.hero_backgrounds:(r.hero_background?[r.hero_background]:[]);
+
+// Experience helpers: newest role first (by start date in "period"), current role detected from "Present"
+const MONTHS=["january","february","march","april","may","june","july","august","september","october","november","december"];
+const startKey=p=>{const m=String(p||"").match(/([A-Za-z]+)\s+(\d{4})/);if(!m)return 0;const i=MONTHS.indexOf(m[1].toLowerCase());return +m[2]*12+(i<0?0:i)};
+const isCurrent=p=>/present|current|to date/i.test(p||"");
+const sortedJobs=()=>[...jobs].sort((a,b)=>startKey(b.p)-startKey(a.p));
+
 let bgTimer=null;
 function setBackgrounds(list,a=.82){
  clearInterval(bgTimer);
@@ -314,7 +312,8 @@ function renderProfile(){
  document.title=(p.name||"Portfolio")+(p.title?" | "+p.title.split("·")[0].trim():"");
  $("pName").textContent=clean(p.name||"");$("pBrand").textContent=clean(p.name||"");
  $("pTitle").textContent=clean(p.title||"");$("pLead").textContent=clean(p.positioning||"");
- $("pMeta").innerHTML=[p.location?esc(p.location):"",p.email?`<a href="mailto:${esc(p.email)}">${esc(p.email)}</a>`:"",L(p.linkedin,"LinkedIn"),L(p.github,"GitHub")].filter(Boolean).join(" · ");
+ const cj=sortedJobs().find(j=>isCurrent(j.p));
+ $("pMeta").innerHTML=[cj?esc(cj.r+", "+cj.o):"",p.location?esc(p.location):"",p.email?`<a href="mailto:${esc(p.email)}">${esc(p.email)}</a>`:"",L(p.linkedin,"LinkedIn"),L(p.github,"GitHub")].filter(Boolean).join(" · ");
  if(/^https?:/.test(p.profile_image||""))$("pImg").src=p.profile_image;
  $("pBio").textContent=clean(p.bio||"");
  $("pKnown").innerHTML=String(p.known_for||"").split(/;\s*|\n/).map(x=>x.trim()).filter(Boolean).map(x=>`<li>${esc(x)}</li>`).join("");
@@ -354,16 +353,20 @@ function drawProjects(){
 $("filters").onclick=e=>{const b=e.target.closest("button");if(b){cur=b.dataset.c;drawProjects();}};
 drawProjects();window.drawProjects=drawProjects;
 
-$("timeline").innerHTML=jobs.map(j=>`<div class="job"><h3>${esc(j.r)}</h3><div>${esc(j.o)}</div><div class="when">${esc(j.p)}</div><ul>${j.b.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>`).join("");
+$("timeline").innerHTML=sortedJobs().map(j=>`<div class="job"><h3>${esc(j.r)}${isCurrent(j.p)?' <span class="pill">Current</span>':""}</h3><div>${esc(j.o)}</div><div class="when">${esc(j.p)}</div><ul>${j.b.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>`).join("");
 $("skillGrid").innerHTML=Object.entries(skills).map(([g,v])=>`<div class="card"><h3>${esc(g)}</h3><div class="pills">${v.map(x=>`<span class="pill">${esc(x)}</span>`).join("")}</div></div>`).join("");
-$("certGrid").innerHTML=certs.filter(c=>c.f).map(c=>`<div class="card cert"><div class="iss">${esc(c.i)}</div><h3>${esc(c.t)}</h3><div class="muted">${esc(c.d)}</div>${link(c.u,"View credential")}</div>`).join("");
+$("certGrid").innerHTML=certs.filter(c=>c.f).map(c=>`<div class="card cert"><div class="iss">${esc(c.i)}</div><h3>${esc(c.t)}</h3><div class="muted">${esc(c.d)}</div>${c.id?`<div class="iss">Credential ID: ${esc(c.id)}</div>`:""}${link(c.u,"View credential")}</div>`).join("");
 const rest=certs.filter(c=>!c.f);
 $("moreCount").textContent=rest.length;
-$("moreList").innerHTML=rest.map(c=>`<li><strong>${esc(c.t)}</strong>, ${esc(c.i)}${c.d?" · "+esc(c.d):""} ${link(c.u,"View credential")}</li>`).join("");
+$("moreList").innerHTML=rest.map(c=>`<li><strong>${esc(c.t)}</strong>, ${esc(c.i)}${c.d?" · "+esc(c.d):""}${c.id?" · ID: "+esc(c.id):""} ${link(c.u,"View credential")}</li>`).join("");
 $("eduGrid").innerHTML=edu.map(e=>`<div class="card"><h3>${esc(e.q)}</h3><p class="muted" style="margin:.2rem 0 0">${esc(e.d)}</p></div>`).join("");
 
 }
 renderAll();
+
+// Built-in certifications act as a lookup so links and credential IDs are filled in even if the saved data lacks them
+const BUILTIN_CERTS=certs.map(c=>({...c}));
+const certKey=t=>String(t||"").toLowerCase().replace(/[^a-z0-9]+/g,"");
 
 // Load live content from Supabase (falls back to the built-in content above)
 async function loadRemote(){
@@ -377,7 +380,10 @@ async function loadRemote(){
   if(ok(m.experience))jobs=m.experience.map(x=>({r:x.role||"",o:x.company||"",p:x.period||"",b:String(x.details||"").split(/;\s*|\n/).map(t=>t.trim()).filter(Boolean)}));
   if(m.skills&&typeof m.skills==="object"&&!Array.isArray(m.skills))skills=m.skills;
   if(m.profile&&typeof m.profile==="object"&&!Array.isArray(m.profile))profile={...profile,...m.profile};
-  if(ok(m.certifications))certs=m.certifications.map(x=>({t:x.title||"",i:x.issuer||"",d:x.issued||"",f:x.featured?1:0,u:x.credential_url||""}));
+  if(ok(m.certifications))certs=m.certifications.map(x=>{
+   const b=BUILTIN_CERTS.find(y=>certKey(y.t)===certKey(x.title))||{};
+   return {t:x.title||"",i:x.issuer||b.i||"",d:x.issued||b.d||"",f:x.featured?1:0,u:x.credential_url||b.u||"",id:x.credential_id||b.id||""};
+  });
   if(ok(m.education))edu=m.education.map(x=>({q:x.qualification||"",d:x.detail||""}));
   renderAll();
  }catch(e){console.warn("Supabase load failed, showing built-in content",e)}
@@ -459,7 +465,7 @@ const SEEDNOTE='<p class="muted" style="margin-top:0">Showing your built-in cont
 const DEF={
  projects:projects.map((p,n)=>({id:slug(p.t),title:p.t,category:p.c,status:"Published",featured:!!p.feat,tagline:p.tag||"",description:p.d,role:p.role||"",cover_image:"",gallery:[],tools:p.tools,challenge:p.ch,solution:p.s,impact:p.i,project_link:p.link||"",github_link:p.code||""})),
  experience:jobs.map(j=>({role:j.r,company:j.o,period:j.p,details:j.b.join("; ")})),
- certifications:certs.map(c=>({id:slug(c.t),title:c.t,issuer:c.i,issued:c.d,credential_id:"",credential_url:c.u||"",skills:[],featured:!!c.f})),
+ certifications:certs.map(c=>({id:slug(c.t),title:c.t,issuer:c.i,issued:c.d,credential_id:c.id||"",credential_url:c.u||"",skills:[],featured:!!c.f})),
  education:edu.map(e=>({qualification:e.q,detail:e.d})),
  skills:jp(skills),profile:jp(profile)
 };
