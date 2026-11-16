@@ -332,7 +332,7 @@ const certKey=t=>String(t||"").toLowerCase().replace(/[^a-z0-9]+/g,"");
 async function loadRemote(){
  const c=window.PORTFOLIO_CONFIG; if(!c||!c.url||!c.key||c.url.includes("YOUR-PROJECT"))return;
  try{
-  const r=await fetch(c.url+"/rest/v1/portfolio_store?select=key,value",{headers:{apikey:c.key,Authorization:"Bearer "+c.key}});
+  const r=await fetch(c.url+"/rest/v1/portfolio_store?select=key,value",{headers:{apikey:c.key,...(c.key.startsWith("sb_")?{}:{Authorization:"Bearer "+c.key})}});
   if(!r.ok)return;
   const m=Object.fromEntries((await r.json()).map(x=>[x.key,x.value])),ok=Array.isArray;
   if(ok(m.projects))projects=m.projects.filter(p=>p.status!=="Draft").map(p=>({t:p.title||"",c:p.category||"Other",d:p.description||"",tools:p.tools||[],ch:p.challenge||"",s:p.solution||"",i:p.impact||"",tag:p.tagline||"",role:p.role||"",feat:!!p.featured,imgs:[p.cover_image,...(p.gallery||[])].filter(Boolean),link:p.project_link||"",code:p.github_link||""}));
@@ -359,12 +359,14 @@ $("form").onsubmit=async e=>{
  btn.disabled=true;out.className="text-sm text-mute";out.textContent="Sending...";
  try{
   if(!c||!c.url||!c.key||c.url.includes("YOUR-PROJECT"))throw new Error("not configured");
-  const r=await fetch(c.url+"/rest/v1/contact_messages",{method:"POST",headers:{apikey:c.key,Authorization:"Bearer "+c.key,"Content-Type":"application/json",Prefer:"return=minimal"},body:JSON.stringify(rec)});
+  const r=await fetch(c.url+"/rest/v1/contact_messages",{method:"POST",headers:{apikey:c.key,...(c.key.startsWith("sb_")?{}:{Authorization:"Bearer "+c.key}),"Content-Type":"application/json",Prefer:"return=minimal"},body:JSON.stringify(rec)});
   if(!r.ok)throw new Error(await r.text());
   out.className="text-sm text-accent";out.textContent="Thank you, your message was sent. I will reply soon.";$("form").reset();
  }catch(err){
-  out.className="text-sm text-mute";out.textContent="Could not send directly, opening your email app instead.";
-  location.href="mailto:"+(profile.email||"")+"?subject="+encodeURIComponent("Portfolio enquiry from "+rec.name)+"&body="+encodeURIComponent(rec.message+"\n\n"+rec.name+" ("+rec.email+")");
+  console.warn("Contact form error",err);
+  const why=String(err&&err.message||err).replace(/\s+/g," ").slice(0,140);
+  out.className="text-sm text-mute";out.textContent="Could not send directly ("+why+"). Opening your email app instead...";
+  setTimeout(()=>{location.href="mailto:"+(profile.email||"")+"?subject="+encodeURIComponent("Portfolio enquiry from "+rec.name)+"&body="+encodeURIComponent(rec.message+"\n\n"+rec.name+" ("+rec.email+")")},3500);
  }
  btn.disabled=false;
 };
@@ -475,7 +477,7 @@ function drawTabs(){
 async function drawMessages(){
  $("list").innerHTML='<h2 style="margin:0">Messages</h2><p class="muted">Loading...</p>';
  const {data:rows,error}=await sb.from("contact_messages").select("*").order("created_at",{ascending:false});
- if(error){$("list").innerHTML='<h2 style="margin:0">Messages</h2><p class="muted">Could not load: '+esc(error.message)+'. Run supabase_messages.sql first.</p>';return}
+ if(error){$("list").innerHTML='<h2 style="margin:0">Messages</h2><p class="muted">Could not load: '+esc(error.message)+'. Run supabase_setup.sql first.</p>';return}
  $("list").innerHTML=`<h2 style="margin:0 0 .5rem">Messages (${rows.length})</h2>`+(rows.length?rows.map(r=>`<div class="row" style="align-items:flex-start"><div><div class="t">${esc(r.name)} · <a href="mailto:${esc(r.email)}">${esc(r.email)}</a></div><div class="s">${esc(new Date(r.created_at).toLocaleString())}</div><p style="margin:.4rem 0 0;white-space:pre-wrap">${esc(r.message)}</p></div><div class="acts"><button class="del sm" data-mid="${esc(r.id)}">Delete</button></div></div>`).join(""):'<p class="muted">No messages yet.</p>');
 }
 function drawList(){
