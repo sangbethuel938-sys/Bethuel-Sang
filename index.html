@@ -364,9 +364,8 @@ $("form").onsubmit=async e=>{
   out.className="text-sm text-accent";out.textContent="Thank you, your message was sent. I will reply soon.";$("form").reset();
  }catch(err){
   console.warn("Contact form error",err);
-  const why=String(err&&err.message||err).replace(/\s+/g," ").slice(0,140);
-  out.className="text-sm text-mute";out.textContent="Could not send directly ("+why+"). Opening your email app instead...";
-  setTimeout(()=>{location.href="mailto:"+(profile.email||"")+"?subject="+encodeURIComponent("Portfolio enquiry from "+rec.name)+"&body="+encodeURIComponent(rec.message+"\n\n"+rec.name+" ("+rec.email+")")},3500);
+  out.className="text-sm text-mute";out.textContent="Sorry, your message could not be sent right now. Opening your email app instead...";
+  setTimeout(()=>{location.href="mailto:"+(profile.email||"")+"?subject="+encodeURIComponent("Portfolio enquiry from "+rec.name)+"&body="+encodeURIComponent(rec.message+"\n\n"+rec.name+" ("+rec.email+")")},2500);
  }
  btn.disabled=false;
 };
