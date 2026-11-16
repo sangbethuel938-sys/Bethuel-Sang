@@ -529,7 +529,7 @@ $("adminView").addEventListener("click",async e=>{
  if(b.id==="saveItem"){
   const rec=readForm(),t=SCHEMA[tab].title;
   if(!rec[t]){msg("Please fill in "+t+".",false);return}
-  if(tab==="projects"){try{await collectShots(rec)}catch(err){msg("Screenshot upload failed: "+(err.message||err)+". Check that you ran supabase_storage.sql.",false);return}}
+  if(tab==="projects"){try{await collectShots(rec)}catch(err){msg("Screenshot upload failed: "+(err.message||err)+". Check that you ran supabase_setup.sql.",false);return}}
   const backup=JSON.stringify(data[tab]);
   if(edit===null)data[tab].push(rec);else data[tab][edit]=rec;
   if(await save(tab)){edit=null;draw()}else data[tab]=JSON.parse(backup);
@@ -541,7 +541,7 @@ $("adminView").addEventListener("click",async e=>{
   const pic=$("f_picfile")&&$("f_picfile").files[0];
   if(pic){
    try{msg("Uploading profile picture");rec.profile_image=await uploadImage(pic,"site/profile-picture")}
-   catch(err){msg("Upload failed: "+(err.message||err)+". Check that you ran supabase_storage.sql.",false);return}
+   catch(err){msg("Upload failed: "+(err.message||err)+". Check that you ran supabase_setup.sql.",false);return}
   }
   const old=data.profile;data.profile=rec;if(await save("profile"))draw();else data.profile=old;return;
  }
