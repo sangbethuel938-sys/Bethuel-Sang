@@ -403,13 +403,15 @@ mb.onclick=()=>{const o=mm.classList.toggle("hidden");mb.setAttribute("aria-expa
 mm.querySelectorAll("a").forEach(a=>a.onclick=()=>{mm.classList.add("hidden");mb.setAttribute("aria-expanded","false")});
 $("copy").onclick=async()=>{const o=$("copied");try{await navigator.clipboard.writeText($("cEmail").textContent);o.textContent="Copied"}catch{o.textContent="Press Ctrl+C"}setTimeout(()=>o.textContent="",2500)};
 
-/* Contact form: saves to Supabase (shown in admin Messages) AND emails a copy to your inbox via Web3Forms.
-   Succeeds if at least one of the two works. Set web3formsKey in config.js. */
+/* Contact form: independently reports database storage and email notification.
+   Email replies can be sent directly to the visitor using the reply-to field. */
 $("form").onsubmit=async e=>{
  e.preventDefault();
- if($("website").value)return; /* spam trap */
- const rec={name:$("n").value.trim(),email:$("e").value.trim(),message:$("m").value.trim()},out=$("formMsg"),btn=$("sendBtn"),c=window.PORTFOLIO_CONFIG||{};
- btn.disabled=true;out.className="text-sm text-mute";out.textContent="Sending...";
+ if($("website").value)return;
+ const rec={name:$("n").value.trim(),email:$("e").value.trim(),message:$("m").value.trim()};
+ const out=$("formMsg"),btn=$("sendBtn"),c=window.PORTFOLIO_CONFIG||{};
+ if(!rec.name||!rec.email||!rec.message)return;
+ btn.disabled=true;out.className="text-sm text-mute";out.textContent="Sending your message...";
  const saveMsg=async()=>{
   if(!c.url||!c.key||c.url.includes("YOUR-PROJECT"))return false;
   const r=await fetch(c.url+"/rest/v1/contact_messages",{method:"POST",headers:{apikey:c.key,...(c.key.startsWith("sb_")?{}:{Authorization:"Bearer "+c.key}),"Content-Type":"application/json",Prefer:"return=minimal"},body:JSON.stringify(rec)});
@@ -417,17 +419,28 @@ $("form").onsubmit=async e=>{
  };
  const mailMsg=async()=>{
   if(!c.web3formsKey)return false;
-  const r=await fetch("https://api.web3forms.com/submit",{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify({access_key:c.web3formsKey,subject:"Portfolio message from "+rec.name,from_name:"Portfolio website",name:rec.name,email:rec.email,message:rec.message})});
-  return r.ok;
+  const r=await fetch("https://api.web3forms.com/submit",{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify({access_key:c.web3formsKey,subject:"Portfolio message from "+rec.name,from_name:"Bethuel Sang Portfolio",name:rec.name,email:rec.email,replyto:rec.email,message:rec.message})});
+  if(!r.ok)return false;
+  const result=await r.json().catch(()=>null);
+  return !!(result&&result.success===true);
  };
  try{
   const [saved,mailed]=await Promise.all([saveMsg().catch(()=>false),mailMsg().catch(()=>false)]);
-  if(!saved&&!mailed)throw new Error("send failed");
-  out.className="text-sm text-accent";out.textContent="Thank you, your message was sent. I will reply soon.";$("form").reset();
+  if(saved||mailed){
+   out.className="text-sm text-accent";
+   out.textContent=mailed&&saved
+    ?"Message saved and email notification sent. Thank you — I will reply soon."
+    :mailed
+     ?"Email notification sent. Thank you — I will reply soon."
+     :"Message saved, but email notification is not configured. I will need to enable email notifications.";
+   $("form").reset();
+  }else{
+   throw new Error("Neither message storage nor email delivery succeeded.");
+  }
  }catch(err){
-  console.warn("Contact form error",err);
-  out.className="text-sm text-mute";out.textContent="Sorry, your message could not be sent right now. Opening your email app instead...";
-  setTimeout(()=>{location.href="mailto:"+(profile.email||"")+"?subject="+encodeURIComponent("Portfolio enquiry from "+rec.name)+"&body="+encodeURIComponent(rec.message+"\n\n"+rec.name+" ("+rec.email+")")},2500);
+  console.warn("Contact form delivery error",err);
+  out.className="text-sm text-mute";
+  out.textContent="We could not confirm delivery. Please email me directly using the address shown on this page.";
  }
  btn.disabled=false;
 };
