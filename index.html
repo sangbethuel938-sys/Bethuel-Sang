@@ -40,6 +40,7 @@ body.admin-mode main>section,body.admin-mode footer{display:none}
 #adminView button.alt{background:transparent;color:#F1F5F9;border-color:#334155}
 #adminView button.del{background:transparent;color:#FCA5A5;border-color:#F87171}
 #adminView button.sm{padding:.25rem .6rem;font-size:.85rem}#adminView button:disabled{opacity:.4;cursor:default}
+#adminView a.replybtn{display:inline-block;padding:.25rem .6rem;font-size:.85rem;font-weight:600;border-radius:8px;border:1px solid #06B6D4;background:#06B6D4;color:#0B1120;text-decoration:none}
 #adminView .tabs{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1rem}
 #adminView .tabs button{background:transparent;color:#94A3B8;border-color:#334155}#adminView .tabs button.on{background:#06B6D4;color:#0B1120;border-color:#06B6D4}
 #adminView .row{display:flex;align-items:center;justify-content:space-between;gap:.8rem;padding:.7rem 0;border-bottom:1px solid #334155}#adminView .row:last-child{border:0}
@@ -352,15 +353,27 @@ const mb=$("menuBtn"),mm=$("mobileMenu");
 mb.onclick=()=>{const o=mm.classList.toggle("hidden");mb.setAttribute("aria-expanded",String(!o))};
 mm.querySelectorAll("a").forEach(a=>a.onclick=()=>{mm.classList.add("hidden");mb.setAttribute("aria-expanded","false")});
 $("copy").onclick=async()=>{const o=$("copied");try{await navigator.clipboard.writeText($("cEmail").textContent);o.textContent="Copied"}catch{o.textContent="Press Ctrl+C"}setTimeout(()=>o.textContent="",2500)};
+
+/* Contact form: saves to Supabase (shown in admin Messages) AND emails a copy to your inbox via Web3Forms.
+   Succeeds if at least one of the two works. Set web3formsKey in config.js. */
 $("form").onsubmit=async e=>{
  e.preventDefault();
  if($("website").value)return; /* spam trap */
- const rec={name:$("n").value.trim(),email:$("e").value.trim(),message:$("m").value.trim()},out=$("formMsg"),btn=$("sendBtn"),c=window.PORTFOLIO_CONFIG;
+ const rec={name:$("n").value.trim(),email:$("e").value.trim(),message:$("m").value.trim()},out=$("formMsg"),btn=$("sendBtn"),c=window.PORTFOLIO_CONFIG||{};
  btn.disabled=true;out.className="text-sm text-mute";out.textContent="Sending...";
- try{
-  if(!c||!c.url||!c.key||c.url.includes("YOUR-PROJECT"))throw new Error("not configured");
+ const saveMsg=async()=>{
+  if(!c.url||!c.key||c.url.includes("YOUR-PROJECT"))return false;
   const r=await fetch(c.url+"/rest/v1/contact_messages",{method:"POST",headers:{apikey:c.key,...(c.key.startsWith("sb_")?{}:{Authorization:"Bearer "+c.key}),"Content-Type":"application/json",Prefer:"return=minimal"},body:JSON.stringify(rec)});
-  if(!r.ok)throw new Error(await r.text());
+  return r.ok;
+ };
+ const mailMsg=async()=>{
+  if(!c.web3formsKey)return false;
+  const r=await fetch("https://api.web3forms.com/submit",{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify({access_key:c.web3formsKey,subject:"Portfolio message from "+rec.name,from_name:"Portfolio website",name:rec.name,email:rec.email,message:rec.message})});
+  return r.ok;
+ };
+ try{
+  const [saved,mailed]=await Promise.all([saveMsg().catch(()=>false),mailMsg().catch(()=>false)]);
+  if(!saved&&!mailed)throw new Error("send failed");
   out.className="text-sm text-accent";out.textContent="Thank you, your message was sent. I will reply soon.";$("form").reset();
  }catch(err){
   console.warn("Contact form error",err);
@@ -473,11 +486,15 @@ async function save(key){
 function drawTabs(){
  $("tabs").innerHTML=Object.entries(SCHEMA).map(([k,v])=>`<button type="button" class="${k===tab?"on":""}" data-k="${k}">${v.label}</button>`).join("");
 }
+/* Reply link: opens a Gmail compose window addressed to the sender, with their message quoted below */
+const replyHref=r=>"https://mail.google.com/mail/?view=cm&fs=1&to="+encodeURIComponent(r.email||"")
+ +"&su="+encodeURIComponent("Re: your message via my portfolio")
+ +"&body="+encodeURIComponent("Hi "+(r.name||"")+",\n\nThank you for your message.\n\n\n\n--- Your message ---\n"+(r.message||""));
 async function drawMessages(){
  $("list").innerHTML='<h2 style="margin:0">Messages</h2><p class="muted">Loading...</p>';
  const {data:rows,error}=await sb.from("contact_messages").select("*").order("created_at",{ascending:false});
  if(error){$("list").innerHTML='<h2 style="margin:0">Messages</h2><p class="muted">Could not load: '+esc(error.message)+'. Run supabase_setup.sql first.</p>';return}
- $("list").innerHTML=`<h2 style="margin:0 0 .5rem">Messages (${rows.length})</h2>`+(rows.length?rows.map(r=>`<div class="row" style="align-items:flex-start"><div><div class="t">${esc(r.name)} · <a href="mailto:${esc(r.email)}">${esc(r.email)}</a></div><div class="s">${esc(new Date(r.created_at).toLocaleString())}</div><p style="margin:.4rem 0 0;white-space:pre-wrap">${esc(r.message)}</p></div><div class="acts"><button class="del sm" data-mid="${esc(r.id)}">Delete</button></div></div>`).join(""):'<p class="muted">No messages yet.</p>');
+ $("list").innerHTML=`<h2 style="margin:0 0 .5rem">Messages (${rows.length})</h2>`+(rows.length?rows.map(r=>`<div class="row" style="align-items:flex-start"><div><div class="t">${esc(r.name)} · <a href="mailto:${esc(r.email)}">${esc(r.email)}</a></div><div class="s">${esc(new Date(r.created_at).toLocaleString())}</div><p style="margin:.4rem 0 0;white-space:pre-wrap">${esc(r.message)}</p></div><div class="acts"><a class="replybtn" href="${replyHref(r).replace(/&/g,"&amp;")}" target="_blank" rel="noopener">Reply</a><button class="del sm" data-mid="${esc(r.id)}">Delete</button></div></div>`).join(""):'<p class="muted">No messages yet.</p>');
 }
 function drawList(){
  if(tab==="messages"){drawMessages();return}
