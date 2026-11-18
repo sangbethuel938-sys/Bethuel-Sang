@@ -1,0 +1,9 @@
+{
+  "name": "bethuel-sang-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Portfolio site Netlify Functions dependencies",
+  "dependencies": {
+    "nodemailer": "^6.10.1"
+  }
+}
