@@ -60,14 +60,14 @@
 <script src="https://cdn.tailwindcss.com/3.4.17"></script>
 <script>
 /* 60-30-10 palette: bg 60%, surface 30%, accent 10% */
-tailwind.config={theme:{extend:{colors:{bg:'#0B1120',surface:'#1E293B',line:'#334155',ink:'#F1F5F9',mute:'#94A3B8',accent:'#06B6D4'},
+tailwind.config={theme:{extend:{colors:{bg:'#F8FAFC',surface:'#FFFFFF',line:'#DCE4EE',ink:'#FFFFFF',mute:'#64748B',accent:'#0D9488'},
 fontFamily:{head:['"Space Grotesk"','sans-serif'],sans:['Inter','system-ui','sans-serif'],mono:['"JetBrains Mono"','monospace']}}}}
 </script>
 <style>
 body{font-size:16px;line-height:1.6}
 h1,h2,h3{font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:-.02em}
 .tag{font-family:'JetBrains Mono',monospace;font-size:12px;line-height:1.2;text-transform:uppercase;letter-spacing:.08em}
-:focus-visible{outline:2px solid #06B6D4;outline-offset:3px;border-radius:6px}
+:focus-visible{outline:2px solid #0D9488;outline-offset:3px;border-radius:6px}
 summary{cursor:pointer}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 
@@ -80,55 +80,55 @@ main li.tag,#pTitle,#pMeta,#formMsg,#copied,#expTotal,#adminView p,#adminView li
 body.admin-mode main>section,body.admin-mode footer{display:none}
 #adminView .hide{display:none!important}
 #adminView .ahead{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;margin-bottom:1rem}
-#adminView .card{background:#1E293B;border:1px solid #334155;border-radius:16px;padding:1.2rem;margin-bottom:1rem}
-#adminView .muted{color:#94A3B8}#adminView a{color:#06B6D4}
+#adminView .card{background:#FFFFFF;border:1px solid #DCE4EE;border-radius:16px;padding:1.2rem;margin-bottom:1rem}
+#adminView .muted{color:#64748B}#adminView a{color:#0D9488}
 #adminView label{display:block;font-weight:600;font-size:.9rem;margin:.8rem 0 .25rem}
-#adminView input,#adminView select,#adminView textarea{width:100%;font:inherit;padding:.55rem .7rem;border:1px solid #334155;border-radius:8px;background:#0B1120;color:#F1F5F9}
+#adminView input,#adminView select,#adminView textarea{width:100%;font:inherit;padding:.55rem .7rem;border:1px solid #DCE4EE;border-radius:8px;background:#F8FAFC;color:#1E293B}
 #adminView textarea{min-height:90px;resize:vertical}#adminView input[type=checkbox]{width:auto;margin-right:.4rem}
-#adminView button{font:inherit;font-weight:600;padding:.5rem .9rem;border-radius:8px;border:1px solid #06B6D4;background:#06B6D4;color:#0B1120;cursor:pointer}
-#adminView button.alt{background:transparent;color:#F1F5F9;border-color:#334155}
+#adminView button{font:inherit;font-weight:600;padding:.5rem .9rem;border-radius:8px;border:1px solid #0D9488;background:#0D9488;color:#F8FAFC;cursor:pointer}
+#adminView button.alt{background:transparent;color:#1E293B;border-color:#DCE4EE}
 #adminView button.del{background:transparent;color:#FCA5A5;border-color:#F87171}
 #adminView button.sm{padding:.25rem .6rem;font-size:.85rem}#adminView button:disabled{opacity:.4;cursor:default}
-#adminView a.replybtn{display:inline-block;padding:.25rem .6rem;font-size:.85rem;font-weight:600;border-radius:8px;border:1px solid #06B6D4;background:#06B6D4;color:#0B1120;text-decoration:none}
+#adminView a.replybtn{display:inline-block;padding:.25rem .6rem;font-size:.85rem;font-weight:600;border-radius:8px;border:1px solid #0D9488;background:#0D9488;color:#F8FAFC;text-decoration:none}
 #adminView .tabs{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1rem}
-#adminView .tabs button{background:transparent;color:#94A3B8;border-color:#334155}#adminView .tabs button.on{background:#06B6D4;color:#0B1120;border-color:#06B6D4}
-#adminView .row{display:flex;align-items:center;justify-content:space-between;gap:.8rem;padding:.7rem 0;border-bottom:1px solid #334155}#adminView .row:last-child{border:0}
-#adminView .row .t{font-weight:600}#adminView .row .s{font-size:.85rem;color:#94A3B8}#adminView .acts{display:flex;gap:.35rem;flex-shrink:0}
+#adminView .tabs button{background:transparent;color:#64748B;border-color:#DCE4EE}#adminView .tabs button.on{background:#0D9488;color:#F8FAFC;border-color:#0D9488}
+#adminView .row{display:flex;align-items:center;justify-content:space-between;gap:.8rem;padding:.7rem 0;border-bottom:1px solid #DCE4EE}#adminView .row:last-child{border:0}
+#adminView .row .t{font-weight:600}#adminView .row .s{font-size:.85rem;color:#64748B}#adminView .acts{display:flex;gap:.35rem;flex-shrink:0}
 #adminView .shots{display:flex;flex-wrap:wrap;gap:.6rem;margin-bottom:.4rem}
 #adminView .shots label{font-weight:400;width:110px;font-size:.8rem;margin:0}
-#adminView .shots img{width:110px;height:70px;object-fit:cover;border-radius:6px;border:1px solid #334155;display:block}
+#adminView .shots img{width:110px;height:70px;object-fit:cover;border-radius:6px;border:1px solid #DCE4EE;display:block}
 #adminView #msg{position:sticky;top:4rem;z-index:5;padding:.6rem .9rem;border-radius:8px;margin-bottom:1rem;display:none;font-weight:600}
 #adminView #msg.ok{display:block;background:#064E3B;color:#A7F3D0}#adminView #msg.err{display:block;background:#7F1D1D;color:#FECACA}
 
 /* Chat-style message inbox */
-#adminView .chat-inbox{display:grid;grid-template-columns:minmax(230px,310px) minmax(0,1fr);min-height:590px;border:1px solid #334155;border-radius:14px;overflow:hidden;background:#0B1120}
+#adminView .chat-inbox{display:grid;grid-template-columns:minmax(230px,310px) minmax(0,1fr);min-height:590px;border:1px solid #DCE4EE;border-radius:14px;overflow:hidden;background:#F8FAFC}
 #adminView .chat-inbox-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:.8rem}
-#adminView .chat-people{border-right:1px solid #334155;min-width:0}
-#adminView .chat-people-title{padding:.9rem 1rem;font-weight:700;border-bottom:1px solid #334155;display:flex;justify-content:space-between}
-#adminView .chat-contact{width:100%;display:flex;align-items:center;gap:.7rem;text-align:left;padding:.85rem .75rem;border:0;border-bottom:1px solid #263449;border-radius:0;background:transparent;color:#F1F5F9}
-#adminView .chat-contact:hover,#adminView .chat-contact.active{background:#1E293B}
-#adminView .chat-avatar{width:40px;height:40px;flex:0 0 40px;border-radius:50%;display:grid;place-items:center;background:#164E63;color:#A5F3FC;font-weight:700}
+#adminView .chat-people{border-right:1px solid #DCE4EE;min-width:0}
+#adminView .chat-people-title{padding:.9rem 1rem;font-weight:700;border-bottom:1px solid #DCE4EE;display:flex;justify-content:space-between}
+#adminView .chat-contact{width:100%;display:flex;align-items:center;gap:.7rem;text-align:left;padding:.85rem .75rem;border:0;border-bottom:1px solid #E2E8F0;border-radius:0;background:transparent;color:#1E293B}
+#adminView .chat-contact:hover,#adminView .chat-contact.active{background:#FFFFFF}
+#adminView .chat-avatar{width:40px;height:40px;flex:0 0 40px;border-radius:50%;display:grid;place-items:center;background:#0F766E;color:#CCFBF1;font-weight:700}
 #adminView .chat-contact-copy{min-width:0;display:flex;flex-direction:column;flex:1}
 #adminView .chat-contact-copy strong,#adminView .chat-contact-copy small,#adminView .chat-preview{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-#adminView .chat-contact-copy small{font-size:.75rem;color:#94A3B8}
-#adminView .chat-preview{font-size:.8rem;color:#94A3B8;max-width:100%}
-#adminView .chat-contact time{font-size:.68rem;color:#94A3B8;white-space:nowrap;align-self:flex-start}
+#adminView .chat-contact-copy small{font-size:.75rem;color:#64748B}
+#adminView .chat-preview{font-size:.8rem;color:#64748B;max-width:100%}
+#adminView .chat-contact time{font-size:.68rem;color:#64748B;white-space:nowrap;align-self:flex-start}
 #adminView .chat-conversation{display:flex;flex-direction:column;min-width:0;min-height:590px}
-#adminView .chat-panel-head{padding:.9rem 1rem;border-bottom:1px solid #334155;display:flex;align-items:center;gap:.8rem}
+#adminView .chat-panel-head{padding:.9rem 1rem;border-bottom:1px solid #DCE4EE;display:flex;align-items:center;gap:.8rem}
 #adminView .chat-panel-head>div{flex:1;min-width:0}
 #adminView .chat-back{display:none}
 #adminView .chat-history{padding:1rem;display:flex;flex-direction:column;gap:.75rem;flex:1;overflow-y:auto;max-height:480px}
 #adminView .chat-line{display:flex;width:100%}
 #adminView .chat-line.incoming{justify-content:flex-start}
 #adminView .chat-line.outgoing{justify-content:flex-end}
-#adminView .chat-bubble{max-width:min(82%,520px);padding:.7rem .9rem;border-radius:13px;background:#1E293B;border:1px solid #334155;overflow-wrap:anywhere}
+#adminView .chat-bubble{max-width:min(82%,520px);padding:.7rem .9rem;border-radius:13px;background:#FFFFFF;border:1px solid #DCE4EE;overflow-wrap:anywhere}
 #adminView .chat-line.incoming .chat-bubble{border-bottom-left-radius:3px}
-#adminView .chat-line.outgoing .chat-bubble{background:#164E63;border-color:#0E7490;border-bottom-right-radius:3px}
+#adminView .chat-line.outgoing .chat-bubble{background:#0F766E;border-color:#115E59;border-bottom-right-radius:3px}
 #adminView .chat-body{margin-top:.35rem;white-space:pre-wrap}
 #adminView .chat-delete{text-align:right;margin-top:.35rem}
-#adminView .chat-compose{padding:.8rem 1rem;border-top:1px solid #334155}
+#adminView .chat-compose{padding:.8rem 1rem;border-top:1px solid #DCE4EE}
 #adminView .chat-compose textarea{min-height:72px}
-#adminView .chat-empty{margin:auto;text-align:center;padding:2rem;color:#F1F5F9}
+#adminView .chat-empty{margin:auto;text-align:center;padding:2rem;color:#1E293B}
 #adminView .chat-empty p{max-width:280px;margin:.4rem auto}
 @media(max-width:700px){
  #adminView .chat-inbox{display:block;min-height:540px}
@@ -140,10 +140,30 @@ body.admin-mode main>section,body.admin-mode footer{display:none}
  #adminView .chat-history{max-height:none;min-height:320px}
  #adminView .chat-bubble{max-width:90%}
 }
-\n#adminView .chat-head-actions{display:flex;align-items:center;gap:.5rem;flex-shrink:0}\n#adminView .chat-head-actions button{white-space:nowrap}\n@media(max-width:480px){#adminView .chat-panel-head{flex-wrap:wrap}#adminView .chat-head-actions{margin-left:auto}}\n</style>
+\n#adminView .chat-head-actions{display:flex;align-items:center;gap:.5rem;flex-shrink:0}\n#adminView .chat-head-actions button{white-space:nowrap}\n@media(max-width:480px){#adminView .chat-panel-head{flex-wrap:wrap}#adminView .chat-head-actions{margin-left:auto}}\n
+/* Navy, white and teal visual refresh */
+body{background:#F8FAFC;color:#1E293B}
+header{background:rgba(255,255,255,.94)!important;box-shadow:0 2px 14px rgba(15,23,42,.045)}
+main>section:nth-of-type(even){background:#F1F5F9}
+#adminView .chat-line.outgoing .chat-bubble{color:#fff;background:#0F766E;border-color:#0F766E}
+#adminView .chat-line.incoming .chat-bubble{background:#fff;color:#1E293B;border-color:#DCE4EE}
+#adminView .chat-inbox{background:#fff;border-color:#DCE4EE}
+#adminView .chat-history{background:#F8FAFC}
+#adminView .chat-contact{color:#1E293B;border-bottom-color:#E2E8F0}
+#adminView .chat-contact:hover,#adminView .chat-contact.active{background:#F1F5F9}
+#adminView .chat-people-title,#adminView .chat-panel-head,#adminView .chat-compose{border-color:#DCE4EE}
+#adminView .chat-avatar{background:#CCFBF1;color:#115E59}
+#adminView .card{box-shadow:0 8px 28px rgba(15,23,42,.045)}
+#adminView input,#adminView select,#adminView textarea{background:#fff;color:#1E293B;border-color:#CBD5E1}
+#adminView button{color:#fff}
+#adminView button.alt{background:#fff;color:#1E293B;border-color:#CBD5E1}
+#adminView .tabs button{background:#fff;color:#64748B;border-color:#DCE4EE}
+#adminView .tabs button.on{background:#0D9488;color:#fff;border-color:#0D9488}
+
+</style>
 </head>
 <body class="bg-bg text-ink font-sans antialiased">
-<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:bg-accent focus:text-bg focus:px-3 focus:py-2 focus:rounded">Skip to content</a>
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:bg-accent focus:text-white focus:px-3 focus:py-2 focus:rounded">Skip to content</a>
 
 <header class="sticky top-0 z-40 border-b border-line bg-bg/90 backdrop-blur">
  <nav class="mx-auto flex max-w-6xl items-center justify-between px-5 py-3" aria-label="Main">
@@ -155,7 +175,7 @@ body.admin-mode main>section,body.admin-mode footer{display:none}
    <a class="text-mute transition-colors hover:text-ink" href="#experience">Experience</a>
    <a class="text-mute transition-colors hover:text-ink" href="#education">Education</a>
    <a class="text-mute transition-colors hover:text-ink" href="#contact">Contact</a>
-   <a href="#contact" class="rounded-lg bg-accent px-4 py-2 font-semibold text-bg transition hover:brightness-110">Hire me</a>
+   <a href="#contact" class="rounded-lg bg-accent px-4 py-2 font-semibold text-white transition hover:brightness-110">Hire me</a>
   </div>
   <button id="menuBtn" class="rounded-lg border border-line p-2 md:hidden" aria-expanded="false" aria-controls="mobileMenu" aria-label="Toggle menu">
    <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
@@ -164,7 +184,7 @@ body.admin-mode main>section,body.admin-mode footer{display:none}
  <div id="mobileMenu" class="hidden border-t border-line px-5 pb-4 md:hidden">
   <a class="block py-3 text-mute" href="#about">About</a><a class="block py-3 text-mute" href="#skills">Skills</a><a class="block py-3 text-mute" href="#projects">Projects</a>
   <a class="block py-3 text-mute" href="#experience">Experience</a><a class="block py-3 text-mute" href="#education">Education</a><a class="block py-3 text-mute" href="#contact">Contact</a>
-  <a href="#contact" class="mt-2 block rounded-lg bg-accent px-4 py-3 text-center font-semibold text-bg">Hire me</a>
+  <a href="#contact" class="mt-2 block rounded-lg bg-accent px-4 py-3 text-center font-semibold text-white">Hire me</a>
  </div>
 </header>
 
@@ -177,7 +197,7 @@ body.admin-mode main>section,body.admin-mode footer{display:none}
    <p id="pLead" class="mt-5 max-w-prose text-xl text-ink">I help tea-trade and commercial teams grow trade and make better decisions by combining stakeholder-facing trade development with data analysis in Power BI, Python, SQL and Excel.</p>
    <p id="pMeta" class="mt-4 text-sm text-mute"></p>
    <div class="mt-7 flex flex-wrap gap-3">
-    <a href="#projects" class="rounded-lg bg-accent px-6 py-3 font-semibold text-bg transition hover:brightness-110">View Projects</a>
+    <a href="#projects" class="rounded-lg bg-accent px-6 py-3 font-semibold text-white transition hover:brightness-110">View Projects</a>
     <a data-li href="https://www.linkedin.com/in/bethuel-sang" target="_blank" rel="noopener" class="rounded-lg border border-line px-6 py-3 font-semibold transition hover:border-accent hover:text-accent">LinkedIn</a>
    </div>
   </div>
@@ -249,7 +269,7 @@ body.admin-mode main>section,body.admin-mode footer{display:none}
    <div><label for="e" class="tag text-mute">Email</label><input id="e" type="email" required class="mt-1 w-full rounded-lg border border-line bg-bg px-3 py-2.5 text-ink"></div>
    <div><label for="m" class="tag text-mute">Message</label><textarea id="m" rows="4" required class="mt-1 w-full rounded-lg border border-line bg-bg px-3 py-2.5 text-ink"></textarea></div>
    <input id="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="absolute -left-[9999px] h-0 w-0 opacity-0">
-   <button id="sendBtn" class="w-full rounded-lg bg-accent px-6 py-3 font-semibold text-bg transition hover:brightness-110 disabled:opacity-60">Send message</button>
+   <button id="sendBtn" class="w-full rounded-lg bg-accent px-6 py-3 font-semibold text-white transition hover:brightness-110 disabled:opacity-60">Send message</button>
    <p id="formMsg" class="text-sm" role="status" aria-live="polite"></p>
   </form>
  </div>
@@ -368,7 +388,7 @@ const roleDur=j=>{const q=parsePeriod(j.p);return q?fmtDur(q[1]-q[0]):""};
 const card="rounded-2xl border border-line bg-surface p-5";
 function drawProjects(){
  const cats=["All","Trade development","Data analytics"];
- $("filters").innerHTML=cats.map(c=>`<button type="button" data-c="${esc(c)}" aria-pressed="${c===flt}" class="rounded-full border px-4 py-1.5 text-sm transition ${c===flt?"border-accent bg-accent font-semibold text-bg":"border-line text-mute hover:border-accent hover:text-ink"}">${esc(c)}</button>`).join("");
+ $("filters").innerHTML=cats.map(c=>`<button type="button" data-c="${esc(c)}" aria-pressed="${c===flt}" class="rounded-full border px-4 py-1.5 text-sm transition ${c===flt?"border-accent bg-accent font-semibold text-white":"border-line text-mute hover:border-accent hover:text-ink"}">${esc(c)}</button>`).join("");
  const row=(l,v)=>v?`<p class="mt-2"><strong class="text-ink">${l}.</strong> ${esc(v)}</p>`:"";
  $("grid").innerHTML=[...projects].filter(p=>flt==="All"||trackOf(p.c)===flt).sort((a,b)=>(b.feat?1:0)-(a.feat?1:0)).map(p=>`
 <article class="flex flex-col overflow-hidden rounded-2xl border border-line bg-surface transition duration-200 hover:-translate-y-1 hover:border-accent">
