@@ -1,3 +1,5 @@
+const nodemailer = require("nodemailer");
+
 const ADMIN_EMAIL = "sangbethuel938@gmail.com";
 
 const json = (statusCode, payload) => ({
@@ -34,7 +36,7 @@ exports.handler = async (event) => {
   const email = cleanText(input.email, 320);
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-  if (!process.env.RESEND_API_KEY || !process.env.RESEND_FROM_EMAIL) {
+  if (!process.env.GMAIL_USER || !process.env.GMAIL_APP_PASSWORD) {
     return json(503, { error: "Email service is not configured yet. Please contact the site owner." });
   }
 
@@ -93,29 +95,26 @@ exports.handler = async (event) => {
   }
 
   try {
-    const sendResponse = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        Authorization: "Bearer " + process.env.RESEND_API_KEY,
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        from: process.env.RESEND_FROM_EMAIL,
-        to: [to],
-        reply_to: replyTo,
-        subject,
-        text: textBody,
-        html: htmlBody
-      })
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.GMAIL_USER,
+        pass: process.env.GMAIL_APP_PASSWORD
+      }
     });
-    const result = await sendResponse.json().catch(() => null);
-    if (!sendResponse.ok) {
-      console.error("Resend API error:", result);
-      return json(502, { error: result && result.message ? result.message : "The email provider rejected the message." });
-    }
-    return json(200, { success: true, id: result && result.id ? result.id : null });
+
+    const result = await transporter.sendMail({
+      from: "Bethuel Sang <" + process.env.GMAIL_USER + ">",
+      to,
+      replyTo,
+      subject,
+      text: textBody,
+      html: htmlBody
+    });
+
+    return json(200, { success: true, id: result.messageId || null });
   } catch (error) {
-    console.error("Email delivery error:", error);
-    return json(502, { error: "Could not connect to the email provider. Please try again." });
+    console.error("Gmail SMTP delivery error:", error && error.message ? error.message : "Unknown error");
+    return json(502, { error: "Gmail could not send the email. Please check the email settings and try again." });
   }
 };
