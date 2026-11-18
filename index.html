@@ -220,7 +220,10 @@ body.admin-mode main>section,body.admin-mode footer{display:none}
   <h3 class="text-xl">Sign in</h3>
   <label for="em">Email</label><input id="em" type="email" autocomplete="username">
   <label for="pw">Password</label><input id="pw" type="password" autocomplete="current-password">
-  <p style="margin-top:1rem"><button id="go" type="button">Sign in</button></p>
+  <p style="margin-top:1rem;display:flex;gap:.6rem;align-items:center;flex-wrap:wrap">
+   <button id="go" type="button">Sign in</button>
+   <button id="forgot" class="alt" type="button">Forgot password?</button>
+  </p>
  </div>
  <div id="app" class="hide"><div class="tabs" id="tabs"></div><div id="list" class="card"></div><div id="formBox" class="card"></div></div>
 </div>
@@ -660,9 +663,23 @@ async function enter(){
  await loadAll();draw();
 }
 $("go").onclick=async()=>{
+ if(!sb){msg("Admin login is not ready. Please reload the page.",false);return}
  const {error}=await sb.auth.signInWithPassword({email:$("em").value.trim(),password:$("pw").value});
  if(error){msg("Sign-in failed: "+error.message,false);return}
  await enter();
+};
+$("forgot").onclick=async()=>{
+ const email=$("em").value.trim();
+ if(!email){msg("Enter your admin email address first, then select Forgot password.",false);$("em").focus();return}
+ if(!sb){msg("Admin login is not ready. Please reload the page.",false);return}
+ const btn=$("forgot");btn.disabled=true;btn.textContent="Sending...";
+ try{
+  const redirectTo=window.location.origin+"/reset-password.html";
+  const {error}=await sb.auth.resetPasswordForEmail(email,{redirectTo});
+  if(error)throw error;
+  msg("If this email belongs to an admin account, a password-reset link has been sent. Check your inbox and spam folder.");
+ }catch(err){msg("Could not send the reset email: "+(err.message||"Please try again."),false)}
+ finally{btn.disabled=false;btn.textContent="Forgot password?"}
 };
 $("pw").addEventListener("keydown",e=>{if(e.key==="Enter")$("go").click()});
 $("out").onclick=async()=>{await sb.auth.signOut();location.reload()};
