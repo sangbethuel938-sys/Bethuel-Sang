@@ -551,15 +551,27 @@ async function save(key){
 function drawTabs(){
  $("tabs").innerHTML=Object.entries(SCHEMA).map(([k,v])=>`<button type="button" class="${k===tab?"on":""}" data-k="${k}">${v.label}</button>`).join("");
 }
-/* Reply link: opens a Gmail compose window addressed to the sender, with their message quoted below */
-const replyHref=r=>"https://mail.google.com/mail/?view=cm&fs=1&to="+encodeURIComponent(r.email||"")
- +"&su="+encodeURIComponent("Re: your message via my portfolio")
- +"&body="+encodeURIComponent("Hi "+(r.name||"")+",\n\nThank you for your message.\n\n\n\n--- Your message ---\n"+(r.message||""));
 async function drawMessages(){
- $("list").innerHTML='<h2 style="margin:0">Messages</h2><p class="muted">Loading...</p>';
+ $("list").innerHTML='<h2 style="margin:0">Messages</h2><p class="muted">Loading conversations...</p>';
  const {data:rows,error}=await sb.from("contact_messages").select("*").order("created_at",{ascending:false});
- if(error){$("list").innerHTML='<h2 style="margin:0">Messages</h2><p class="muted">Could not load: '+esc(error.message)+'. Run supabase_setup.sql first.</p>';return}
- $("list").innerHTML=`<h2 style="margin:0 0 .5rem">Messages (${rows.length})</h2>`+(rows.length?rows.map(r=>`<div class="row" style="align-items:flex-start"><div><div class="t">${esc(r.name)} · <a href="mailto:${esc(r.email)}">${esc(r.email)}</a></div><div class="s">${esc(new Date(r.created_at).toLocaleString())}</div><p style="margin:.4rem 0 0;white-space:pre-wrap">${esc(r.message)}</p></div><div class="acts"><a class="replybtn" href="${replyHref(r).replace(/&/g,"&amp;")}" target="_blank" rel="noopener">Reply</a><button class="del sm" data-mid="${esc(r.id)}">Delete</button></div></div>`).join(""):'<p class="muted">No messages yet.</p>');
+ if(error){$("list").innerHTML='<h2 style="margin:0">Messages</h2><p class="muted">Could not load: '+esc(error.message)+'. Check your Supabase setup.</p>';return}
+ const {data:replies, error:replyError}=await sb.from("contact_replies").select("*").order("created_at",{ascending:true});
+ if(replyError){$("list").innerHTML='<h2 style="margin:0">Messages</h2><p class="muted">Your messages loaded, but the reply history table is not ready. Run the updated supabase_setup.sql in Supabase SQL Editor.</p>';return}
+ const grouped={};(replies||[]).forEach(x=>(grouped[x.message_id]??=[]).push(x));
+ $("list").innerHTML=`<h2 style="margin:0 0 .5rem">Messages (${rows.length})</h2>`+(rows.length?rows.map(r=>`<article style="padding:1rem 0;border-bottom:1px solid #334155">
+  <div class="t">${esc(r.name)} · <a href="mailto:${esc(r.email)}">${esc(r.email)}</a></div>
+  <div class="s">${esc(new Date(r.created_at).toLocaleString())}</div>
+  <p style="margin:.5rem 0;white-space:pre-wrap">${esc(r.message)}</p>
+  <div style="margin:.7rem 0 0 1rem;padding-left:.8rem;border-left:2px solid #334155">
+   ${(grouped[r.id]||[]).map(x=>`<div style="margin:.6rem 0"><div class="s">Your reply · ${esc(new Date(x.created_at).toLocaleString())} · ${esc(x.status||"Saved")}</div><p style="margin:.2rem 0;white-space:pre-wrap">${esc(x.body)}</p></div>`).join("")}
+  </div>
+  <label for="reply-${esc(r.id)}">Write a reply</label>
+  <textarea id="reply-${esc(r.id)}" rows="3" placeholder="Write your response to ${esc(r.name)}..."></textarea>
+  <div class="acts" style="justify-content:flex-end;margin-top:.5rem">
+   <button type="button" class="sm" data-save-reply="${esc(r.id)}">Save reply</button>
+   <button type="button" class="del sm" data-mid="${esc(r.id)}">Delete message</button>
+  </div>
+ </article>`).join(""):'<p class="muted">No messages yet.</p>');
 }
 function drawList(){
  if(tab==="messages"){drawMessages();return}
