@@ -140,7 +140,7 @@ body.admin-mode main>section,body.admin-mode footer{display:none}
  #adminView .chat-history{max-height:none;min-height:320px}
  #adminView .chat-bubble{max-width:90%}
 }
-</style>
+\n#adminView .chat-head-actions{display:flex;align-items:center;gap:.5rem;flex-shrink:0}\n#adminView .chat-head-actions button{white-space:nowrap}\n@media(max-width:480px){#adminView .chat-panel-head{flex-wrap:wrap}#adminView .chat-head-actions{margin-left:auto}}\n</style>
 </head>
 <body class="bg-bg text-ink font-sans antialiased">
 <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:bg-accent focus:text-bg focus:px-3 focus:py-2 focus:rounded">Skip to content</a>
@@ -632,7 +632,7 @@ async function drawMessages(){
  const conversation=selected?`<div class="chat-panel-head">
    <button type="button" class="alt sm chat-back" data-show-contacts>← People</button>
    <div><strong>${esc(selected.name)}</strong><div class="s">${esc(selected.email)}</div></div>
-   <a href="mailto:${esc(selected.email)}">Email</a>
+   <div class="chat-head-actions"><a href="mailto:${esc(selected.email)}">Email</a><button type="button" class="del sm" data-delete-contact="${esc(selected.key)}">Delete chat</button></div>
   </div>
   <div class="chat-history">
    ${selected.events.map(ev=>ev.kind==="incoming"?`<div class="chat-line incoming"><div class="chat-bubble"><div class="s">${esc(ev.record.name||selected.name)} · ${esc(new Date(ev.date).toLocaleString())}</div><div class="chat-body">${esc(ev.record.message)}</div><div class="chat-delete"><button type="button" class="del sm" data-mid="${esc(ev.record.id)}">Delete</button></div></div></div>`:`<div class="chat-line outgoing"><div class="chat-bubble"><div class="s">You · ${esc(new Date(ev.date).toLocaleString())} · ${esc(ev.record.status||"Sent")}</div><div class="chat-body">${esc(ev.record.body)}</div></div></div>`).join("")}
@@ -690,6 +690,19 @@ function draw(){drawTabs();drawList();drawForm()}
 $("adminView").addEventListener("click",async e=>{
  const b=e.target.closest("button");if(!b)return;
  if(b.dataset.k){tab=b.dataset.k;edit=null;draw();return}
+ if(b.dataset.deleteContact){
+  const personKey=b.dataset.deleteContact;
+  const {data:contactRows,error:loadError}=await sb.from("contact_messages").select("id,email");
+  if(loadError){msg("Could not identify this conversation: "+loadError.message,false);return}
+  const ids=contactRows.filter(r=>(String(r.email||"").trim().toLowerCase()||("message-"+r.id))===personKey).map(r=>r.id);
+  if(!ids.length){msg("No messages remain in this conversation.",false);drawMessages();return}
+  if(!confirm("Permanently delete this entire conversation, including all "+ids.length+" received messages and saved replies? This cannot be undone."))return;
+  const {error:replyDeleteError}=await sb.from("contact_replies").delete().in("message_id",ids);
+  if(replyDeleteError){msg("Could not delete saved replies: "+replyDeleteError.message,false);return}
+  const {error:messageDeleteError}=await sb.from("contact_messages").delete().in("id",ids);
+  if(messageDeleteError){msg("Could not delete messages: "+messageDeleteError.message,false);return}
+  selectedContactKey=null;msg("Conversation deleted.");drawMessages();return;
+ }
  if(b.dataset.openContact){selectedContactKey=b.dataset.openContact;drawMessages();return}
  if(b.hasAttribute("data-show-contacts")){selectedContactKey=null;drawMessages();return}
  if(b.id==="addNew"){edit=null;drawForm();$("formBox").scrollIntoView({behavior:"smooth"});return}
