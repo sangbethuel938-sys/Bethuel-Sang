@@ -102,4 +102,24 @@ create policy "Service role manages portfolio assets" on storage.objects
   using (bucket_id = 'portfolio-assets') with check (bucket_id = 'portfolio-assets');
 
 -- Refresh the API so the new tables are visible immediately.
-notify pgrst, 'reload schema';
+notify pgrst, 'reload schema';\n
+-- 4) Admin reply history ------------------------------------------------
+create table if not exists public.contact_replies (
+  id bigint generated always as identity primary key,
+  message_id bigint not null references public.contact_messages(id) on delete cascade,
+  body text not null check (char_length(body) between 1 and 5000),
+  status text not null default 'saved' check (status in ('saved','sent')),
+  created_at timestamptz not null default now()
+);
+alter table public.contact_replies enable row level security;
+drop policy if exists "owner can read replies" on public.contact_replies;
+drop policy if exists "owner can create replies" on public.contact_replies;
+drop policy if exists "owner can delete replies" on public.contact_replies;
+create policy "owner can read replies" on public.contact_replies
+  for select to authenticated using ((auth.jwt() ->> 'email') = 'sangbethuel938@gmail.com');
+create policy "owner can create replies" on public.contact_replies
+  for insert to authenticated with check ((auth.jwt() ->> 'email') = 'sangbethuel938@gmail.com');
+create policy "owner can delete replies" on public.contact_replies
+  for delete to authenticated using ((auth.jwt() ->> 'email') = 'sangbethuel938@gmail.com');
+grant select, insert, delete on public.contact_replies to authenticated;
+grant all on public.contact_replies to service_role;
