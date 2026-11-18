@@ -643,7 +643,16 @@ $("adminView").addEventListener("click",async e=>{
   for(const line of $("skillsTxt").value.split("\n")){const i=line.indexOf(":");if(i<1)continue;const g=line.slice(0,i).trim(),v=line.slice(i+1).split(",").map(x=>x.trim()).filter(Boolean);if(g)out[g]=v}
   const old=data.skills;data.skills=out;if(!await save("skills"))data.skills=old;return;
  }
- if(b.dataset.mid){if(!confirm("Delete this message?"))return;const {error}=await sb.from("contact_messages").delete().eq("id",b.dataset.mid);if(error){msg("Delete failed: "+error.message,false);return}drawList();return}
+ if(b.dataset.saveReply){
+  const messageId=b.dataset.saveReply,area=$("reply-"+messageId),body=area&&area.value.trim();
+  if(!body){msg("Write your reply before saving.",false);return}
+  b.disabled=true;b.textContent="Saving...";
+  const {error}=await sb.from("contact_replies").insert({message_id:messageId,body,status:"saved"});
+  if(error){msg("Could not save reply: "+error.message,false);b.disabled=false;b.textContent="Save reply";return}
+  msg("Reply saved in this conversation. Email sending will be enabled after the email service is configured.");
+  drawList();return;
+ }
+ if(b.dataset.mid){if(!confirm("Delete this message and its saved replies?"))return;const {error}=await sb.from("contact_messages").delete().eq("id",b.dataset.mid);if(error){msg("Delete failed: "+error.message,false);return}drawList();return}
  const a=b.dataset.a;if(!a)return;
  const i=+b.dataset.i,arr=data[tab],backup=JSON.stringify(arr);
  if(a==="edit"){edit=i;drawForm();$("formBox").scrollIntoView({behavior:"smooth"});return}
