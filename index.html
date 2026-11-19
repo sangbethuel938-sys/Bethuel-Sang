@@ -847,5 +847,20 @@ function route(){
 addEventListener("hashchange",route);route();
 
 </script>
+
+<!-- Floating WhatsApp contact button -->
+<style>
+#whatsappFloat{position:fixed;right:22px;bottom:22px;z-index:9999;display:inline-flex;align-items:center;gap:10px;padding:13px 18px;border-radius:999px;background:#25D366;color:#fff;text-decoration:none;font:600 15px/1.2 Inter,system-ui,sans-serif;box-shadow:0 8px 24px rgba(0,0,0,.2);transition:transform .2s ease,box-shadow .2s ease}
+#whatsappFloat:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(0,0,0,.24)}
+#whatsappFloat:focus-visible{outline:3px solid #0F766E;outline-offset:4px}
+#whatsappFloat svg{width:25px;height:25px;flex:0 0 25px}
+@media(max-width:600px){#whatsappFloat{right:16px;bottom:16px;padding:14px;border-radius:50%;width:56px;height:56px;justify-content:center}#whatsappFloat .wa-label{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}}
+@media(prefers-reduced-motion:reduce){#whatsappFloat{transition:none}}
+</style>
+<a id="whatsappFloat" href="https://wa.me/254702733260?text=Hello%20Bethuel%2C%20I%20visited%20your%20portfolio%20and%20would%20like%20to%20connect%20with%20you." target="_blank" rel="noopener noreferrer" aria-label="Chat with Bethuel on WhatsApp">
+ <svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16.04 3C8.87 3 3.04 8.76 3.04 15.86c0 2.28.61 4.51 1.77 6.47L3 29l6.86-1.78a13.1 13.1 0 0 0 6.18 1.56h.01c7.16 0 13-5.77 13-12.87 0-3.44-1.35-6.67-3.8-9.1A13 13 0 0 0 16.04 3zm0 23.6h-.01a10.9 10.9 0 0 1-5.54-1.5l-.4-.24-4.07 1.06 1.09-3.95-.26-.4a10.65 10.65 0 0 1-1.66-5.71c0-5.91 4.88-10.72 10.87-10.72 2.9 0 5.63 1.12 7.68 3.15a10.57 10.57 0 0 1 3.19 7.57c0 5.91-4.88 10.72-10.89 10.72zm5.97-8.03c-.33-.16-1.96-.96-2.26-1.07-.3-.1-.52-.16-.74.16-.22.32-.85 1.07-1.04 1.29-.19.21-.38.24-.71.08-.33-.16-1.39-.51-2.65-1.62-.98-.86-1.64-1.92-1.83-2.25-.19-.32-.02-.5.14-.66.15-.14.33-.38.49-.57.16-.19.22-.32.33-.54.11-.21.06-.4-.03-.56-.08-.16-.74-1.76-1.01-2.41-.27-.63-.54-.55-.74-.56h-.63c-.22 0-.57.08-.87.4-.3.32-1.14 1.1-1.14 2.68s1.17 3.11 1.33 3.33c.16.21 2.3 3.48 5.57 4.88.78.33 1.39.53 1.87.68.79.25 1.5.22 2.06.13.63-.09 1.96-.8 2.24-1.57.27-.77.27-1.43.19-1.57-.08-.14-.3-.22-.63-.38z"/></svg>
+ <span class="wa-label">Chat on WhatsApp</span>
+</a>
+
 </body>
 </html>
